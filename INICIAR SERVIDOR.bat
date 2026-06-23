@@ -1,5 +1,5 @@
-AJ — Servidor de Producao
-=========================
+AJ — Servidor Rede Local
+========================
 Clique duplo para iniciar o servidor na rede local.
 
 @echo off
@@ -8,7 +8,7 @@ cd /d "%~dp0"
 
 echo.
 echo ==========================================
-echo   AJ — Iniciando servidor de producao...
+echo   AJ — Iniciando servidor...
 echo ==========================================
 
 for /f "tokens=2 delims=:" %%a in ('ipconfig ^| findstr /i "IPv4" ^| findstr /v "169.254"') do (
@@ -25,7 +25,8 @@ echo.
 echo   Ctrl+C para encerrar
 echo.
 
-set DJANGO_SETTINGS_MODULE=config.settings.production
+set DJANGO_SETTINGS_MODULE=config.settings.localnetwork
+set ALLOWED_HOSTS=localhost,127.0.0.1,%LOCAL_IP%
 .\venv\Scripts\python.exe manage.py collectstatic --noinput --clear 2>nul
 .\venv\Scripts\python.exe manage.py migrate
 .\venv\Scripts\python.exe -m waitress --host=0.0.0.0 --port=8080 --threads=6 config.wsgi:application
