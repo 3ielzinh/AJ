@@ -4,6 +4,9 @@ Banco de dados: SQLite.
 E-mail: exibido no console.
 """
 from .base import *  # noqa: F401, F403
+from decouple import config
+
+SECRET_KEY = config("SECRET_KEY", default="django-insecure-dev-only-nao-use-em-producao")
 
 DEBUG = True
 

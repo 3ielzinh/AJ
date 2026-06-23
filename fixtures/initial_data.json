@@ -1,0 +1,1986 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 3,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 3,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 3,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 3,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 2,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 2,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 2,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 2,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add Demanda",
+    "content_type": 7,
+    "codename": "add_demanda"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change Demanda",
+    "content_type": 7,
+    "codename": "change_demanda"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete Demanda",
+    "content_type": 7,
+    "codename": "delete_demanda"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view Demanda",
+    "content_type": 7,
+    "codename": "view_demanda"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$TjxoEdTAApLU8KOJAudSuP$SH0e45a9DLb7hlinE8/NA8YMnid7VWHlKFK8NDPfGMk=",
+    "last_login": "2026-06-23T20:07:52.448Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "gabriel.jorge@gestao.gov.br",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-06-23T17:34:06.536Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "monitoramento",
+    "model": "demanda"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xdk6n0ok5airiqdv5bweuzsttfshqixh",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAQAP-yNbLwER8p6fMGy-td4wBypDipEH9HkVJAOzOaN8S0bzXundc4E4wg4fLLMOUnt0PQI7X7IvLStnVGcSTitF1MC_HrdrZ_g5p6hREyos2mBG9ysl7aopMkJKXJ8ZBDQW2CHnxRzl_ZBdTGo-NiFAWvuCB8vgAeOIM:1wc7PU:Iso8awVxnMaWrlabybmiQCoHC6Dky8tZNQQJ9X2ikNo",
+    "expire_date": "2026-07-07T20:07:52.457Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 1,
+  "fields": {
+    "nome": "Automatização dos reajustes gerais para rubricas judiciais AJ",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2025-07-15",
+    "data_conclusao": null,
+    "processo_sei": "19975.021080/2025-12",
+    "processo_relacionado": "19975.007007/2026-19\n19975.018690/2025-21",
+    "alm": "-",
+    "localizacao": "CGGSP - DESIN -SGP",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 19,
+    "observacoes": "Encaminhado à Desin/SGP em 15/7/2025 solicitação para iniciar demanda. Em reunião realizada com Desin e SERPRO foi proposta nova funcionalidade de registro de reajuste remuneratório em ações judiciais no Módulo AJ/SIGEPE, a fim de possibilitar a inclusão dos dados referentes aos reajustes de abril/2026. Solicitada informação sobre o andamento da implementação da nova funcionalidade, bem assim alertado sobre a urgência de atendimento para disponibilização na folha de abril - 17/3/26. Reiteração realizada pela DIGJU nos Processos n. 19975.007007/2026-19 e 19975.021080/2025-12 em 27/05/2026. ATUALIZADO EM 27/05/2026\n- 19975.021080/2025-12: evolução sistêmica, com a automatização das rubricas judiciais impactadas por reajutes gerais ou específicos concedidos aos servidores e empregados públicos, ou alterações remuneratórias decorrentes da estrutura das carreiras, a fim de otimizar o controle sobre as ações judiciais e mitigar erros no pagamento de tais rubricas.\n- 19975.007007/2026-19: proposta de desenvolvimento de nova funcionalidade destinada ao registro de reajustes remuneratórios aplicáveis a rubricas judiciais parametrizadas por valor informado (cálculo 21).\n- 19975.018690/2025-21: proposta da DECIPEX para desenvolvimento de solução sistêmica que permita a atualização automática das rubricas judiciais pagas via Módulo de Ações Judiciais (AJ/SIGEPE) sempre que houver reajustes gerais, reajustes específicos de carreira ou correções legais aplicáveis aos servidores ativos, aposentados e pensionistas.",
+    "criado_em": "2026-06-23T18:08:30.959Z",
+    "atualizado_em": "2026-06-23T19:31:45.839Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 2,
+  "fields": {
+    "nome": "Automatização das rubricas judiciais pagas via Módulo de Ações Judiciais (AJ/SIGEPE) sempre que houver reajustes gerais, reajustes específicos de carreira ou correções legais aplicáveis aos servidores ativos, aposentados e pensionistas.",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2025-07-15",
+    "data_conclusao": null,
+    "processo_sei": "19975.021080/2025-12",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 20,
+    "observacoes": "Solicitação da DECIPEX de automatização, analisada e submetida à Desin para avaliação da viabilidade técnica de implementação de solução sistêmica que permita a atualização automática das rubricas judiciais impactadas por reajustes remuneratórios, com solicitação de inclusão e priorização da presente demanda no planejamento estratégico para evolução dos sistemas estruturantes de gestão de pessoas. Para fins de racionalização de análise, foi sugerida a análise conjunta com a proposição constante do processo 19975.021080/2025-12",
+    "criado_em": "2026-06-23T18:08:30.964Z",
+    "atualizado_em": "2026-06-23T19:31:45.842Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 3,
+  "fields": {
+    "nome": "Automatização de reajustes de parcela judicial no AJ/SIGEPE, com consulta sobre a possibilidade de unificação dos pagamentos das rubricas administrativa e judicial de mesma natureza, conforme determinação judicial.",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2026-02-19",
+    "data_conclusao": null,
+    "processo_sei": "19975.004356/2026-71",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 21,
+    "observacoes": "Processo encaminhado à DESIN com consulta sobre a possibilidade de implementação de pagamento em rubrica única, conforme determinado judicialmente, a exemplo do SEI 90849.001674/2025-17 e 90849.003297/2025-42; bem como para análise de viabilidade de desenvolvimento de funcionalidade que possibilite a incidência automática de reajustes sobre parcelas judiciais dessa natureza. Reiteração realizada pela DIGJU em 27/05/2026. ATUALIZADO EM 27/05/2026\nDemanda intrinsecamente relacionada à demanda SEI 19975.021080/2025-12 (Automatização dos reajustes gerais para rubricas judiciais AJ).",
+    "criado_em": "2026-06-23T18:08:30.965Z",
+    "atualizado_em": "2026-06-23T19:31:45.844Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 4,
+  "fields": {
+    "nome": "Automatização do pagamento do objeto VANTAGEM DO ART. 192 LEI Nº 8.112/90",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2024-10-29",
+    "data_conclusao": null,
+    "processo_sei": "14022.081297/2024-38",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 22,
+    "observacoes": "Processo encaminhado a DESIN para cumprimento de decisão judicial com a finalidade de criação ou indicação de rubrica judicial específica e autônoma relativa à Vantagem do art. 192 Lei 8.112/90. Em resposta, informou-se a criação de rubrica especifica vinculada ao objeto adequado. Encaminhado para a CGGSP, para parametrização de pagamento automático referente à vantagem supracitada. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.966Z",
+    "atualizado_em": "2026-06-23T19:31:45.845Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 5,
+  "fields": {
+    "nome": "Automatização do pagamento do objeto GDASS",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2025-08-12",
+    "data_conclusao": null,
+    "processo_sei": "00695.001068/2024-11",
+    "processo_relacionado": "35014.155853/2025-70 14021.016326/2025-81",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 23,
+    "observacoes": "Necessidade de criar objeto específico, com rubrica individualizada e parametrizada com cálculo automático. Processo 14021.016326/2025-81 e 35014.155853/2025-70 não possui andamentos abertos.\nDesin já se manifestou sobre a viabilidade técnica da automação, informando, porém, a necessidade de  análise da priorização. Reiterada solicitação em 16/7/2025 (00695.001068/2024-11). Demanda reiterada pela DIGJU em 27/05/2026 (00695.001068/2024-11). ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.968Z",
+    "atualizado_em": "2026-06-23T19:31:45.846Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 6,
+  "fields": {
+    "nome": "Automatização de rotina descontos por afastamento legal no auxílio-transporte",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2025-07-01",
+    "data_conclusao": null,
+    "processo_sei": "10580.100145/2022-01",
+    "processo_relacionado": "14021.049940/2025-20",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 24,
+    "observacoes": "10580.100145/2022-01;  (processos sobrestados aguardando a janela para inclusão no planejamento de entregas de 2025). Desin já se manifestou informando a necessidade de inserção da demanda no planejamento de entregas 2025. Demanda reiterada pela DIGJU em 28/05/2026. 14021.049940/2025-20 (processo não possui andamentos abertos) ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.969Z",
+    "atualizado_em": "2026-06-23T19:31:45.847Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 7,
+  "fields": {
+    "nome": "Automatização do lançamento na folha de pagamento das rubricas judiciais de auxílio-alimentação incidente na gratificação natalina e nas férias",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2025-04-25",
+    "data_conclusao": null,
+    "processo_sei": "19975.012667/2025-22",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 25,
+    "observacoes": "AUX. ALIMENTAÇÃO NA BASE CALC. 1/3 FÉRIAS E GRAT. NATALINA. A demanda trata da necessidade de evolução sistêmica para viabilizar o pagamento automático de parcelas judiciais de auxílio-alimentação incidentes sobre férias e gratificação natalina, diante de dificuldades operacionais e inadequação do objeto único para eventos distintos. Constatou-se a necessidade de segregação de objetos, criação e ajuste de rubricas judiciais específicas e eventual parametrização ou criação de assunto de cálculo próprio, de modo a assegurar lançamento automático apenas quando da ocorrência dos respectivos eventos.",
+    "criado_em": "2026-06-23T18:08:30.969Z",
+    "atualizado_em": "2026-06-23T19:31:45.848Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 8,
+  "fields": {
+    "nome": "Automatização do lançamento na folha de pagamento das rubricas judiciais de Bônus de eficiência incidente na gratificação natalina e nas férias",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2026-05-07",
+    "data_conclusao": null,
+    "processo_sei": "19975.012367/2026-24",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 26,
+    "observacoes": "Processo encaminhado a CGGSP/DESIN para análise técnica e adoção de providências quanto aos ajustes necessários relacionadas aos objetos e suas rubricas judiciais. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.970Z",
+    "atualizado_em": "2026-06-23T19:31:45.850Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 9,
+  "fields": {
+    "nome": "Automatização do pagamento da gratificação semestral do Decreto-Lei nº 7.175/44. Objetos GRATIFICAÇÃO SEMESTRAL D. LEI N 7.175/44 e GRATIFICAÇÃO SEMESTRAL D. LEI N 7.175/44 – PENSIONISTAS.",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2023-08-07",
+    "data_conclusao": null,
+    "processo_sei": "00688.006201/2023-33",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 27,
+    "observacoes": "Solicitada avaliação da viabilidade de desenvolvimento de solução sistêmica que contemple a automatização do pagamento da gratificação semestral do Decreto-Lei nº 7.175/44, de modo compatível com os fluxos vigentes de confirmação e envio das informações à folha, e observando estritamente as premissas estruturantes do Módulo AJ. Obs. Processo foi encaminhado diretamente à Desin, que submeteu ao crivo da DIPAS para verificação da pertinência e conveniência da solicitação realizada pela Decipex.",
+    "criado_em": "2026-06-23T18:08:30.971Z",
+    "atualizado_em": "2026-06-23T19:31:45.851Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 10,
+  "fields": {
+    "nome": "Automação sistêmica para o cálculo e lançamento das parcelas relacionadas à Gratificação Especial no Módulo de Ações Judiciais (AJ-SIGEPE).",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2026-05-29",
+    "data_conclusao": null,
+    "processo_sei": "19975.014904/2026-71",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 28,
+    "observacoes": "Análise de viabilidade de uma solução sistêmica que possibilite a implementação da Gratificação Especial (Resolução CNPq nº 05/75) aos exequentes com base de cálculo equivalente a 1/12 da remuneração, vedada a sua substituição por VPNI. Tal medida visa eliminar a necessidade de lançamentos manuais, buscando a automação do cálculo conforme as regras de incidência das rubricas administrativas, garantindo, assim, a padronização, a integridade dos reflexos financeiros e a consistência cadastral no sistema.",
+    "criado_em": "2026-06-23T18:08:30.972Z",
+    "atualizado_em": "2026-06-23T19:31:45.853Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 11,
+  "fields": {
+    "nome": "Automação para afastar a aplicação do teto previsto no teto previsto no Decreto  n. 11.545, de 5 de junho de 2023 para pagamento do bônus de eficiência",
+    "tipo": "evolutiva",
+    "classificacao": "Automação",
+    "status": "em_andamento",
+    "data_inicio": "2026-05-08",
+    "data_conclusao": null,
+    "processo_sei": "90849.004641/2026-00",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 29,
+    "observacoes": "Considerando que o Bônus de Eficiência possui natureza variável e é apurado mensalmente, tal parâmetro não pode ser fixo, demandando atualização contínua. Essa dinâmica inviabiliza a automatização do cálculo no âmbito do AJ/SIGEPE, uma vez que o sistema não se encontra estruturado para realizar a leitura e atualização periódica de valores variáveis, tampouco para operar com parâmetros dinâmicos necessários à correta apuração das diferenças. Registra-se, por oportuno, que, embora essa seja a sistemática atualmente adotada, sugere-se o encaminhamento de consulta à Diretoria de Soluções Digitais (DESIN), a fim de avaliar a viabilidade de implementação de mecanismo automatizado no âmbito do AJ/SIGEPE que contemple a leitura de parâmetros variáveis, com vistas ao aprimoramento do tratamento sistêmico da matéria. Obs. A espécie da obrigação não contraria a lógica sistêmica, não havendo justificativa para que seu cumprimento ocorra fora do AJ.",
+    "criado_em": "2026-06-23T18:08:30.973Z",
+    "atualizado_em": "2026-06-23T19:31:45.854Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 12,
+  "fields": {
+    "nome": "Tarefa tomar ciência",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2025-02-06",
+    "data_conclusao": null,
+    "processo_sei": "19975.002139/2025-65",
+    "processo_relacionado": "",
+    "alm": "5162697",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 4,
+    "observacoes": "ALM nº 3817556, aberta em  13/06/23. Houve a conclusão da demanda no dia 02/05/24, porém foram identificadas algumas tarefas ainda constando para o MEC, anteriores ao dia do evento. A situação foi encaminhada à DESIN - 04/02/25\nNova demanda registrada no ALM (nº 5162697) para correção de duplicidade de notificações e saneamento do passivo de tarefas 'Tomar Ciência'. A CGFIS/DESIN autorizou a limpeza em lote do passivo via banco de dados e instruiu o Serpro a ajustar as regras de negócio para eliminar notificações redundantes. O item foi classificado como manutenção corretiva prioritária. O processo ficará sobrestado na CPJU (encontra-se aberto na CGFIS) aguardando a implementação das providências técnicas e a conclusão do cronograma de sustentação pelo Serpro. 16/3/26. Demanda reiterada pela DIGJU em 27/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.974Z",
+    "atualizado_em": "2026-06-23T19:31:45.855Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 13,
+  "fields": {
+    "nome": "Aperfeiçoamento do processo de encerramento e substituição de objetos vinculados a pagamentos ativos, visando à integridade dos dados e à conformidade.",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2025-11-03",
+    "data_conclusao": null,
+    "processo_sei": "19975.035753/2025-11",
+    "processo_relacionado": "",
+    "alm": "5152383",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-26",
+    "priorizacao": 8,
+    "observacoes": "Processo encaminhado a DESIN para evolução sistêmica com o objetivo de aperfeiçoamento do processo de encerramento de objetos vinculados a ações judiciais ativas. Em resposta, informou-se o registro da solicitação junto ALM, sob o nº 5152383 (IB: 5164060) à unidade responsável pelo processamento sistêmico, bem como que a demanda seria atendida da maneira que foi proposta. Na sequência, o processo retornou a esta CGPJU, tendo sido encaminhado despacho devolutivo à CGGSP/DESIN, considerando que, embora a solicitação tenha sido formalmente registrada, a demanda sistêmica ainda não foi efetivamente implementada. ATUALIZADO EM 25/05/2026",
+    "criado_em": "2026-06-23T18:08:30.975Z",
+    "atualizado_em": "2026-06-23T19:31:45.856Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 14,
+  "fields": {
+    "nome": "Alteração individualizada de parâmetros de pagamento em ação coletiva AJ",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "nao_iniciada",
+    "data_inicio": null,
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "4060034",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 36,
+    "observacoes": "ALM nº 4060034, aberta em 06/12/2023.\nSegundo informações da área técnica, o time técnico que atua no módulo AJ-Sigepe está “emprestado”, atuando para atender as demandas do Sigepe benefícios.   \nSolicitada à Desin atualização da demanda. \nNão encontrado nenhum registro no SEI. \nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "criado_em": "2026-06-23T18:08:30.977Z",
+    "atualizado_em": "2026-06-23T19:31:45.858Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 15,
+  "fields": {
+    "nome": "Integração do AJ com SAPIENS",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "nao_iniciada",
+    "data_inicio": "2025-06-04",
+    "data_conclusao": null,
+    "processo_sei": "19975.017822/2025-05",
+    "processo_relacionado": "19975.130527/2022-92",
+    "alm": "-",
+    "localizacao": "MGI-SRT-DIPAS-CGPJU",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 10,
+    "observacoes": "Início da demanda: SEI 19975.130527/2022-92\nSegundo informações da área técnica, o time técnico que atua no módulo AJ-Sigepe está \"emprestado\", atuando para atender as demandas do Sigepe benefícios.  Solicitada à Desin atualização da demanda. Instruir processo único somente para integração AJ-SAPIENS (correlacionar o processo da GGU).                                                                     \nDemanda será retomada no Processo SEI 19975.017822/2025-05. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.979Z",
+    "atualizado_em": "2026-06-23T19:31:45.860Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 16,
+  "fields": {
+    "nome": "Tabela SICAU",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "nao_iniciada",
+    "data_inicio": null,
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "4157642",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 5,
+    "observacoes": "ALM n.º 4157642, de 29/02/2024.\n\nO SERPRO se manifestou da demanda informando que o SICAU está desativado, fora do ar, não sendo possível concluir a demanda de forma satisfatória. \nAmpliar a demanda (criar/instruir processo SEI), para ajustar toda a tabela de acordo com as informações do SICAU. \nSolicitada atualização da demanda.",
+    "criado_em": "2026-06-23T18:08:30.981Z",
+    "atualizado_em": "2026-06-23T19:31:45.861Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 17,
+  "fields": {
+    "nome": "Atualização da tabela de Juízos/Unidades Judiciárias no Módulo AJ/SIGEPE (Tabela SICAU)",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2025-11-24",
+    "data_conclusao": null,
+    "processo_sei": "19975.039220/2025-09",
+    "processo_relacionado": "",
+    "alm": "5162775",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-27",
+    "priorizacao": 6,
+    "observacoes": "Processo encaminhado à DESIN para atualização sistêmica da tabela de Juízos/Unidades Judiciárias do AJ/SIGEPE. Solicitação registrada junto ao SERPRO, ALM sob o nº 5162775 (IB 5164062), com realização de reunião técnica envolvendo a Advocacia-Geral da União e o SERPRO para tratamento da demanda. Processo devolvido à CGGSP/DESIN em razão da ausência de implementação efetiva da solução sistêmica. ATUALIZADO EM 26/05/2026",
+    "criado_em": "2026-06-23T18:08:30.983Z",
+    "atualizado_em": "2026-06-23T19:31:45.862Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 18,
+  "fields": {
+    "nome": "Atualização do campo classe da ação (Tabela SICAU)",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "nao_iniciada",
+    "data_inicio": null,
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "4157642",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 7,
+    "observacoes": "ALM n.º 4157642, de 29/02/2024.\nO SERPRO se manifestou da demanda informando que a Tabela SICAU está desativado, fora do ar, não sendo possível concluir a demanda de forma satisfatória – 04/02/25\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "criado_em": "2026-06-23T18:08:30.984Z",
+    "atualizado_em": "2026-06-23T19:31:45.863Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 19,
+  "fields": {
+    "nome": "Inclusão de beneficiários por carga em lote",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2025-08-28",
+    "data_conclusao": null,
+    "processo_sei": "19975.026949/2025-15",
+    "processo_relacionado": "19975.043155/2025-16",
+    "alm": "5305888",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-26",
+    "priorizacao": 9,
+    "observacoes": "Nota Informativa encaminhada à DESIN em 28/08/2025. Em resposta, foram encaminhadas informações preliminares no sentido de que a solicitação foi registrada ALM n° 5305888 e enviada ao setor competente. Contudo, a evolução sistêmica demandada ainda não foi implementada.\nDessa forma, encaminha-se o presente processo à CGGSP para prosseguimento das providências necessárias ao atendimento da demanda, ou, caso constatada eventual inviabilidade técnica, para apresentação de manifestação conclusiva devidamente fundamentada. ATUALIZADO EM 20/05/2026",
+    "criado_em": "2026-06-23T18:08:30.985Z",
+    "atualizado_em": "2026-06-23T19:31:45.864Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 20,
+  "fields": {
+    "nome": "Evolução Sistêmica para criação de assunto de cálculo próprio para cumprimento de decisão judicial relativa à contribuição previdenciária sobre pensões por morte pagas pelo RPPS da União",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2025-12-23",
+    "data_conclusao": null,
+    "processo_sei": "19975.043155/2025-16",
+    "processo_relacionado": "19975.026949/2025-15\n12221.006867/2025-10",
+    "alm": "5305888",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 30,
+    "observacoes": "Objeto cadastral e assunto de cálculo já criados. Desin e Decipex decidiram pelo cumprimento da decisão diretamente no SIAPE (ação ajuizada pelo SINDFISCO NACIONAL), tendo em vista a dificuldade de inclusão de beneficiários em lote. Reiteração realizada pela DIGJU em 27/05/2026. ATUALIZADO EM 29/05/2026\nDemanda dependente da demanda SEI 19975.026949/2025-15 (Inclusão de beneficiários por carga em lote).",
+    "criado_em": "2026-06-23T18:08:30.987Z",
+    "atualizado_em": "2026-06-23T19:31:45.865Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 21,
+  "fields": {
+    "nome": "Abstenção da retenção do IRPF sobre o Benefício Especial previsto no art. 3º da Lei nº 12.618, de 2012 (cumprimento decisão UNAFISCO).",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2026-04-28",
+    "data_conclusao": null,
+    "processo_sei": "12221.000286/2026-55",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 31,
+    "observacoes": "Questionamento acerca da existência de funcionalidade no SIAPE que possibilite a exclusão da verba “Benefício Especial” da base de cálculo do IRPF de forma parametrizada e restrita aos beneficiários alcançados pela decisão judicial, sugerindo-se, em caráter alternativo, as seguintes possibilidades para o efetivo cumprimento da determinação: (i) caso haja viabilidade sistêmica, a retirada da parcela da base de cálculo do IRPF por meio do desligamento de parâmetro específico no SIAPE, aplicável exclusivamente aos substituídos da ação, conforme lista constante dos autos (57203486); ou (ii) inexistindo tal funcionalidade, a criação, por essa DESIN, de rubrica administrativa específica, de natureza semelhante à rubrica ordinária atualmente utilizada para o pagamento do Benefício Especial, porém sem incidência de IRPF, a ser lançada pelo órgão executor diretamente na folha administrativa dos beneficiários da ação.",
+    "criado_em": "2026-06-23T18:08:30.988Z",
+    "atualizado_em": "2026-06-23T19:31:45.866Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 22,
+  "fields": {
+    "nome": "Descentralização de competências e aprimoramento de Regras de Negócio do Módulo de Ações Judiciais (AJ-SIGEPE)",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2025-08-27",
+    "data_conclusao": null,
+    "processo_sei": "19975.026934/2025-49",
+    "processo_relacionado": "",
+    "alm": "5299405",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-27",
+    "priorizacao": 32,
+    "observacoes": "Processo encaminhado a DESIN para análise e revisão das atuais regras de negócio relacionadas à autonomia funcional das UPAGs no fluxo de complementação de informações. Em resposta, a DESIN informou o registro da solicitação junto ao SERPRO, bem como a previsão de implementação da funcionalidade requerida. Processo devolvido à CGGSP/DESIN em razão da ausência de implementação efetiva da solução sistêmica. ATUALIZADO EM 26/05/2026",
+    "criado_em": "2026-06-23T18:08:30.990Z",
+    "atualizado_em": "2026-06-23T19:31:45.867Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 23,
+  "fields": {
+    "nome": "Alteração nas Regras de Negócio de Movimentação de Beneficiários entre UPAGs",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2025-08-28",
+    "data_conclusao": null,
+    "processo_sei": "19975.026997/2025-03",
+    "processo_relacionado": "",
+    "alm": "5170933",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-27",
+    "priorizacao": 11,
+    "observacoes": "Nota Informativa encaminhada à DESIN em 28/08/2025. Em resposta, foram encaminhadas informações preliminares acerca de funcionalidades a serem incorporadas ao Módulo AJ/SIGEPE, voltadas à adequação e evolução sistêmica da solução demandada. Ressalta-se que a DESIN informou que a solicitação foi registrada ALM, sob o nº 5170933 (IB: 5172827) e encaminhada ao setor competente. Contudo, a evolução sistêmica demandada ainda não foi implementada. Dessa forma, encaminha-se o presente processo à CGGSP para prosseguimento das providências necessárias ao atendimento da demanda ou, caso constatada eventual inviabilidade técnica, para apresentação de manifestação conclusiva devidamente fundamentada. ATUALIZADO EM 20/05/2026",
+    "criado_em": "2026-06-23T18:08:30.991Z",
+    "atualizado_em": "2026-06-23T19:31:45.868Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 24,
+  "fields": {
+    "nome": "Solicitação de Evolução Sistêmica no Módulo de Ações Judiciais (AJ) do SIGEPE para implementação de regra de integridade de dados e prevenção de pagamentos em duplicidade.",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2025-11-21",
+    "data_conclusao": null,
+    "processo_sei": "19975.038870/2025-29",
+    "processo_relacionado": "",
+    "alm": "5299628",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-26",
+    "priorizacao": 12,
+    "observacoes": "Processo encaminhado a DESIN para implementação de evolução sistêmica no AJ/SIGEPE voltada à integridade de dados e à prevenção de pagamentos em duplicidade. Em resposta, informou-se a abertura de solicitação para desenvolvimento da solução sistêmica, com posterior realização de testes de viabilidade técnica, bem como o registro da demanda no ALM nº 5299628. Na sequência, a CGPJU encaminhou despacho devolutivo em razão da ausência de atendimento conclusivo da demanda pela CGGSP. ATUALIZADO EM 19/05/2026",
+    "criado_em": "2026-06-23T18:08:30.993Z",
+    "atualizado_em": "2026-06-23T19:31:45.869Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 25,
+  "fields": {
+    "nome": "Alerta Crítico para pagamento em duplicidade de parcelas de idêntica natureza",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2026-04-08",
+    "data_conclusao": null,
+    "processo_sei": "19975.009128/2026-97",
+    "processo_relacionado": "",
+    "alm": "5301450",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 13,
+    "observacoes": "Processo encaminhado à DESIN para solução sistêmica no Módulo AJ/SIGEPE, com vistas a assegurar o adequado cumprimento das ações judiciais e prevenir a duplicidade de registros financeiros decorrente da concomitância de rubricas de natureza administrativa e judicial referentes a parcelas da mesma espécie; demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.995Z",
+    "atualizado_em": "2026-06-23T19:31:45.870Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 26,
+  "fields": {
+    "nome": "Alerta Crítico relacionada à inclusão de pagamentos retroativos potencialmente realizados em desconformidade com o regime constitucional de precatórios/RPV",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2025-11-21",
+    "data_conclusao": null,
+    "processo_sei": "19975.035676/2025-91",
+    "processo_relacionado": "",
+    "alm": "5162598",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-26",
+    "priorizacao": 14,
+    "observacoes": "Processo encaminhado à DESIN para implementação de funcionalidade de alertas críticos no AJ/SIGEPE relacionados à inclusão de pagamentos retroativos em desconformidade com o regime de precatórios e RPVs. Solicitação registrada no ALM nº 5162598 junto ao setor competente, com previsão de atendimento da demanda. Processo devolvido à CGGSP/DESIN em razão da ausência de implementação efetiva da solução sistêmica. ATUALIZADO EM 22/05/2026",
+    "criado_em": "2026-06-23T18:08:30.996Z",
+    "atualizado_em": "2026-06-23T19:31:45.871Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 27,
+  "fields": {
+    "nome": "Limite de pagamento retroativo AJ",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2025-07-14",
+    "data_conclusao": null,
+    "processo_sei": "19975.129313/2022-73",
+    "processo_relacionado": "",
+    "alm": "V-4060028",
+    "localizacao": "CGGSP - DESIN -SGP",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 33,
+    "observacoes": "ALM n.º 4060028, aberta em 06/12/23.  Saber o status\nSegundo informações da área técnica, o time do AJ está “emprestado” atuando para atender as demandas do Sigepe benefícios.\nSolicitada à Desin atualização da demanda. \nProcesso SEI Reencaminhado à Desin 14/7/2025, informando que referida demanda já se encontra no planejamento de entregas 2025, solicitando a retomada. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:30.998Z",
+    "atualizado_em": "2026-06-23T19:31:45.872Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 28,
+  "fields": {
+    "nome": "Evolução Sistêmica para mitigar riscos de pagamentos indevidos a servidores inativos ou pensionistas, especialmente nos casos de alteração da situação funcional dos beneficiários.",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2025-10-22",
+    "data_conclusao": null,
+    "processo_sei": "19975.033084/2025-35",
+    "processo_relacionado": "",
+    "alm": "5167274",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-27",
+    "priorizacao": 15,
+    "observacoes": "Processo encaminhado à DESIN para implementação de funcionalidade no AJ/SIGEPE destinada à notificação de alteração da situação funcional do beneficiário e adequação de vantagens judiciais não extensíveis a aposentados e pensionistas.\nSolicitação ALM, sob o nº 5167274 (IB: 5169062), com previsão de atendimento da área técnica. Processo devolvido à CGGSP/DESIN em razão da ausência de implementação efetiva da solução sistêmica ATUALIZADO EM 25/05/2026",
+    "criado_em": "2026-06-23T18:08:30.999Z",
+    "atualizado_em": "2026-06-23T19:31:45.873Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 29,
+  "fields": {
+    "nome": "Impossibilidade sistêmica de registro de informações superiores a 500 caracteres no campo “OBSERVAÇÕES” do Módulo AJ/SIGEPE",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2024-09-02",
+    "data_conclusao": null,
+    "processo_sei": "19975.030025/2024-24",
+    "processo_relacionado": "",
+    "alm": "5157118",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-05-26",
+    "priorizacao": 16,
+    "observacoes": "Processo encaminhado à DESIN para solicitação de ampliação do limite de caracteres do campo \"OBSERVAÇÕES\" no AJ/SIGEPE. A demanda foi registrada no ALM nº 5157118 (IB: 5157149) e encaminhada ao SERPRO para adoção das providências necessárias à correção sistêmica. A CGPJU reiterou o pedido de implementação da correção sistêmica demandada ou, caso constatada eventual impossibilidade técnica de atendimento, para apresentação de manifestação conclusiva devidamente fundamentada. ATUALIZADO EM 21/05/2026",
+    "criado_em": "2026-06-23T18:08:31.000Z",
+    "atualizado_em": "2026-06-23T19:31:45.874Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 30,
+  "fields": {
+    "nome": "Reestruturação da modelagem sistêmica para cumprimento de decisões judiciais de não incidência ou isenção tributária no Módulo AJ/SIGEPE. Objetos relacionados à Devolução de PSS (Solicitação de Auditoria nº 10/2026)",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2026-04-08",
+    "data_conclusao": null,
+    "processo_sei": "19975.009050/2026-19",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": 17,
+    "observacoes": "Processo encaminhado a DESIN para evolução sistêmica destinada ao adequado cumprimento das ações judiciais que determinam a não incidência ou isenção de tributos (especialmente contribuição previdenciários - PSS). Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:31.001Z",
+    "atualizado_em": "2026-06-23T19:31:45.875Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 31,
+  "fields": {
+    "nome": "Incidência de contribuição previdenciária sobre os valores retroativos no Módulo de Ações Judiciais – AJ/SIGEPE. PSS com apuração mensal das parcelas retroativas",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2026-04-01",
+    "data_conclusao": null,
+    "processo_sei": "19975.005323/2026-48",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 34,
+    "observacoes": "Necessidade de adequação sistêmica, a fim de que o cálculo da contribuição ao PSS passe a observar corretamente o regime de competência, com apuração mensal das parcelas retroativas, em conformidade com a orientação da Receita Federal e com a legislação previdenciária aplicável.",
+    "criado_em": "2026-06-23T18:08:31.002Z",
+    "atualizado_em": "2026-06-23T19:31:45.876Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 32,
+  "fields": {
+    "nome": "Devolução de Abate-Teto. Aplicação do Assunto de Cálculo 41 (abate-teto). Necessidade de adequação sistêmica.",
+    "tipo": "evolutiva",
+    "classificacao": "Conformidade",
+    "status": "em_andamento",
+    "data_inicio": "2026-04-30",
+    "data_conclusao": null,
+    "processo_sei": "19975.010849/2026-40",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 35,
+    "observacoes": "Necessidade de solução que permita o efetivo cumprimento da decisão judicial no âmbito sistêmico, preferencialmente mediante tratamento diferenciado na base de cálculo do teto constitucional, restrito aos beneficiários da ação e devidamente registrado no Módulo AJ. Alternativamente, possível solução operacional consistente na atuação direta sobre os parâmetros de composição da base de cálculo do teto no SIAPE, especificamente com o desligamento da pensão da composição da remuneração extra-SIAPE, a de modo a impedir, para a beneficiária alcançada pela decisão judicial, a agregação de rendimentos oriundos de outras fontes, hipótese que deverá ser avaliada quanto à sua viabilidade técnica, riscos associados e aderência às regras estruturais do sistema.",
+    "criado_em": "2026-06-23T18:08:31.003Z",
+    "atualizado_em": "2026-06-23T19:31:45.877Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 33,
+  "fields": {
+    "nome": "Proposta de criação de Regra de Negócio no Módulo AJ/SIGEPE para disciplinar a pausa e a retomada da absorção salarial de objeto financeiro, em complemento à RN 611859.",
+    "tipo": "evolutiva",
+    "classificacao": "Modernização",
+    "status": "em_andamento",
+    "data_inicio": "2026-06-01",
+    "data_conclusao": null,
+    "processo_sei": "19975.014851/2026-98",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 18,
+    "observacoes": "Análise e a viabilidade técnica da proposta pela equipe da DESIN, com vistas à criação de nova Regra de Negócio, complementar e tendo como base a RN 611859 – Regras Para Absorção Salarial de Objeto Financeiro (que permanecerá inalterada), bem como à respectiva implementação no Módulo AJ/SIGEPE, de modo a incorporar à normativa do sistema a disciplina expressa do ciclo de pausa e retomada da absorção com preservação do saldo absorvido acumulado.",
+    "criado_em": "2026-06-23T18:08:31.003Z",
+    "atualizado_em": "2026-06-23T19:31:45.877Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 34,
+  "fields": {
+    "nome": "Tarefa presa no perfil confirmador - erro interno",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2023-04-17",
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "3737925",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "ALM nº 3737925, aberta 17/04/23.\nA demanda está na fila do AJ no SERPRO. Vai precisar de uma evolução no AJ. Segundo informações da área técnica, o time do SERPRO está atuando no Sigepe Benefícios - 04/02/25 \nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "criado_em": "2026-06-23T18:08:31.006Z",
+    "atualizado_em": "2026-06-23T19:31:45.880Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 35,
+  "fields": {
+    "nome": "Alteração regra de absorção",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-05-23",
+    "data_conclusao": null,
+    "processo_sei": "19975.015654/2025-13",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2025-07-21",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado à DESIN para análise e adoção de providências relacionadas à absorção de rubricas judiciais decorrentes de decisões transitadas em julgado referentes às vantagens oriundas dos denominados \"Planos Econômicos\". Posteriormente, a demanda foi reiterada, sendo o processo devolvido em 18/07/2025 à DESIN, com a finalidade de obter esclarecimentos acerca da efetiva implementação da parametrização da absorção das referidas rubricas, bem como do andamento das providências anteriormente indicadas nos autos. ATUALIZADO EM 08/06/2026",
+    "criado_em": "2026-06-23T18:08:31.007Z",
+    "atualizado_em": "2026-06-23T19:31:45.881Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 36,
+  "fields": {
+    "nome": "Verificação de inconsistência na rotina de absorção",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-09-03",
+    "data_conclusao": null,
+    "processo_sei": "19975.027587/2025-71",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SRT-DIPAS-CGPJU-DIGJU",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T18:08:31.008Z",
+    "atualizado_em": "2026-06-23T19:31:45.883Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 37,
+  "fields": {
+    "nome": "Correção Sistêmica acerca das regras de negócio atualmente vigente relacionadas ao fluxo de cumprimento das ações judiciais descentralizadas, especialmente nas situações que demandem nova confirmação processual",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-07-28",
+    "data_conclusao": null,
+    "processo_sei": "19975.023066/2025-45",
+    "processo_relacionado": "",
+    "alm": "5167244",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado à DESIN para ajuste sistêmico no fluxo de nova confirmação de ações judiciais. Solicitação registrada ALM, sob o nº 5167244 (IB: 5168089) junto ao SERPRO para implementação de obrigatoriedade de validação pelo perfil Homologador em casos de aumento do valor final. Processo devolvido à CGGSP/DESIN em razão da ausência de implementação efetiva da solução sistêmica. ATUALIZADO EM 26/05/2026",
+    "criado_em": "2026-06-23T18:08:31.010Z",
+    "atualizado_em": "2026-06-23T19:31:45.883Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 38,
+  "fields": {
+    "nome": "Impossibilidade sistêmica de registrar a atividade de solicitação de retirada de críticas para beneficiários sem vínculo ativo.",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2026-05-19",
+    "data_conclusao": null,
+    "processo_sei": "19975.013825/2026-42",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGCAD",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado a CGCAD e CGDIP para avaliação das regras de negócio do Módulo AJ/SIGEPE, para possível revisão acerca da inserção de dados de cumprimento para beneficiários sem vínculo ativo, situação que ocasiona alertas críticos. ATUALIZADO EM 27/05/2026",
+    "criado_em": "2026-06-23T18:08:31.012Z",
+    "atualizado_em": "2026-06-23T19:31:45.884Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 39,
+  "fields": {
+    "nome": "Inconsistência na devolução do IR",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2021-04-16",
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "2630451",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "ALM n.º 2630451, aberta em 16/04/2021. \n  Caso concreto: Ação nº 1005455-1420174013800. \nA demanda está com a equipe da folha. A área técnica sugeriu analisar a necessidade da demanda (urgência) para sinalizar a DESIN – 03/02/25\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "criado_em": "2026-06-23T18:08:31.013Z",
+    "atualizado_em": "2026-06-23T19:31:45.885Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 40,
+  "fields": {
+    "nome": "Inconsistência no processamento da devolução de Imposto de Renda incidente sobre abono de permanência (valor automaticamente devolvido superou o montante efetivamente retido - divergência indica potencial falha na regra de negócio do assunto de cálculo utilizado)",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2026-03-26",
+    "data_conclusao": null,
+    "processo_sei": "19975.007961/2026-01",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "Encaminhamento à Diretoria de Soluções Digitais – DESIN, para avaliação específica da consistência do processamento da devolução por meio do Assunto de Cálculo 46 (DEVOL.IR S/ABONO PERM.JUDICIAL), com vistas à verificação de eventual falha de regra de negócio e, se for o caso, à adoção das medidas corretivas necessárias.",
+    "criado_em": "2026-06-23T18:08:31.014Z",
+    "atualizado_em": "2026-06-23T19:31:45.886Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 41,
+  "fields": {
+    "nome": "Multiplicidade de solicitações de reativação de trâmite.",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2026-03-17",
+    "data_conclusao": null,
+    "processo_sei": "19975.007077/2026-69",
+    "processo_relacionado": "",
+    "alm": "5302874",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado a CGGSP/DESIN para análise e adoção de providências cabíveis relacionadas a inconsistências operacionais decorrentes de multiplicidade de solicitações de reativação em trâmite. Demanda reiterada pela DIGJU em 27/05/2026. ATUALIZADO EM 27/05/2026",
+    "criado_em": "2026-06-23T18:08:31.015Z",
+    "atualizado_em": "2026-06-23T19:31:45.887Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 42,
+  "fields": {
+    "nome": "Replicação indevida de valores de uma matrícula noutra matrícula (DEVOLUÇÃO DE ABATE-TETO NA PENSÃO)",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2023-12-06",
+    "data_conclusao": null,
+    "processo_sei": "19975.134282/2023-53",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado à DESIN para solução sistêmica com vistas a correção das inconsistências apresentadas no objeto \"Devolução de Abate-Teto na Pensão\".\nA demanda está na fila da Folha para ser verificada - 04/02/25. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:31.016Z",
+    "atualizado_em": "2026-06-23T19:31:45.888Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 43,
+  "fields": {
+    "nome": "Falha sistêmica na validação de campos obrigatórios do Assunto de Cálculo 26 e reporte de pagamentos indevidos (DEVOLUÇÃO DE PSS SOBRE OUTRAS PARCELAS ESPECÍFICAS) – pagamento sem indicação de valor, fração ou percentual.",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2026-03-25",
+    "data_conclusao": null,
+    "processo_sei": "19975.007756/2026-38",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado à DESIN para análise e adoção das providências cabíveis relacionadas ao objeto “DEVOLUÇÃO DE PSS SOBRE OUTRAS PARCELAS ESPECÍFICAS”, tendo em vista a ocorrência de inconsistências sistêmicas quando o objeto é cadastrado sem valor, fração ou percentual. Demanda reiterada pela DIGJU em 27/05/2026. ATUALIZADO EM 27/05/2026",
+    "criado_em": "2026-06-23T18:08:31.017Z",
+    "atualizado_em": "2026-06-23T19:31:45.889Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 44,
+  "fields": {
+    "nome": "Objeto DIFERENÇA DE 1/3 DE FÉRIAS SOBRE ABONO não está lendo o percentual informado",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-12-12",
+    "data_conclusao": null,
+    "processo_sei": "19975.041775/2025-11",
+    "processo_relacionado": "17175.000065/2025-12",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado à DESIN para análise e correção de inconsistência identificada no Módulo AJ/SIGEPE, referente aos objetos “Diferença de 1/3 de Férias sobre Abono” e “Diferença de Gratificação Natalina sobre Abono”. Em resposta, informou-se a necessidade de realização de testes no ambiente de Homologação, por parte da CGPJU, para validação dos parâmetros ou, caso não fosse possível, a orientação à DESIN para viabilizar a replicação do cenário. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:31.018Z",
+    "atualizado_em": "2026-06-23T19:31:45.890Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 45,
+  "fields": {
+    "nome": "DIFERENÇA DE 1/3 DE FÉRIAS SOBRE ABONO. Duplicidade de pgto. Necessidade de ajustes na parametrização da rubrica judicial 01430 ADICIONAL 1/3 FERIAS JUDICIAL, de modo a impedir a concessão automática de novo adicional de férias judicial quando se tratar de mera complementação de valores de férias já processadas",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-09-28",
+    "data_conclusao": null,
+    "processo_sei": "17175.000065/2025-12",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "A demanda decorre de inconsistência no processamento da rubrica judicial de adicional de férias, em que o sistema passou a tratar complementações de valores já pagos como novo evento de férias, gerando duplicidade de pagamento. A situação indica falha na lógica sistêmica de identificação dos eventos e demanda ajuste de parametrização para distinguir corretamente férias efetivas de meras diferenças apuradas.",
+    "criado_em": "2026-06-23T18:08:31.019Z",
+    "atualizado_em": "2026-06-23T19:31:45.891Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 46,
+  "fields": {
+    "nome": "Inconsistência no cálculo do terço constitucional de férias incidente sobre abono, no caso de antecipação de férias",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-12-31",
+    "data_conclusao": null,
+    "processo_sei": "19975.043480/2025-71",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "Sistema passou a utilizar o valor do PSS majorado pela antecipação de férias para fins de cálculo do adicional de 1/3 de férias pago em rubrica judicial, o que resultou na majoração do montante apurado. A demanda decorre de inconsistência no cálculo de parcelas judiciais quando a base considerada pelo sistema é impactada por verbas transitórias, como antecipação de férias, posteriormente estornadas. Tal situação tem ocasionado majoração indevida do valor apurado para o terço constitucional de férias incidente sobre o abono de permanência, indicando a necessidade de ajuste sistêmico para excluir parcelas de natureza provisória da base de cálculo judicial.",
+    "criado_em": "2026-06-23T18:08:31.020Z",
+    "atualizado_em": "2026-06-23T19:31:45.892Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 47,
+  "fields": {
+    "nome": "Pagamento não gerado em ação judicial confirmada",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2024-05-17",
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "4278147",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "ALM n.º 4278147, aberta em 17/05/2024.\nCaso concreto: Ação nº 0013278-9220184014100. Houve a homologação em 2023 e só foi feita a confirmação em 2024. O que provavelmente gerou pagamento de exercicios anteriores. Serpro sugeriu que a ação voltasse para o Executor. Verificar junto ao órgão visto que a ação está sendo paga com rubrica administrativa.\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "criado_em": "2026-06-23T18:08:31.021Z",
+    "atualizado_em": "2026-06-23T19:31:45.893Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 48,
+  "fields": {
+    "nome": "Criar objeto para que o desconto do redutor gerado seja devolvido",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "nao_iniciada",
+    "data_inicio": null,
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "Demanda da DESIN (4494944).\nSolicitar que o órgão faça o cadastramento da ação para o beneficiário (pensionista). Falar com o Decipex para cadastrar a ação para a pensionista. Objeto criado. DEVOLUÇÃO DO REDUTOR – EMENDA 41/03 - 03/02",
+    "criado_em": "2026-06-23T18:08:31.023Z",
+    "atualizado_em": "2026-06-23T19:31:45.895Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 49,
+  "fields": {
+    "nome": "Individualização da rubrica judicial do objeto de RETRIBUIÇÃO DE TITULAÇÃO",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-11-25",
+    "data_conclusao": null,
+    "processo_sei": "19975.037833/2025-01",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado a CGGSP/DESIN para análise técnica e adoção de providências relacionadas à padronização e individualização do objeto \"Retribuição de Titulação\". Em resposta, informou-se a criação das rubricas solicitadas. Na sequência, esta CGPJU solicitou a renomeação de determinadas rubricas judiciais, com vistas à melhor uniformização do objeto e das respectivas rubricas. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:31.024Z",
+    "atualizado_em": "2026-06-23T19:31:45.896Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 50,
+  "fields": {
+    "nome": "Criação de rubricas específicas e exclusivas para cada objeto de caráter financeiro no AJ",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-03-26",
+    "data_conclusao": null,
+    "processo_sei": "19975.007767/2025-37",
+    "processo_relacionado": "",
+    "alm": "5098662",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-10",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado a DESIN com a finalidade de criação ou alteração das rubricas judiciais relacionadas aos objetos cadastrados no Módulo AJ/SIGEPE. Demanda reiterada pela DIGJU em 27/05/2026. ATUALIZADO EM 29/05/2026",
+    "criado_em": "2026-06-23T18:08:31.025Z",
+    "atualizado_em": "2026-06-23T19:31:45.897Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 51,
+  "fields": {
+    "nome": "Padronização e consolidação de objetos – Retribuição por Titulação no Módulo AJ/SIGEPE",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "em_andamento",
+    "data_inicio": "2025-11-25",
+    "data_conclusao": null,
+    "processo_sei": "19975.037833/2025-01",
+    "processo_relacionado": "",
+    "alm": "-",
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-08",
+    "priorizacao": null,
+    "observacoes": "Processo encaminhado à DESIN para adequação das rubricas judiciais relacionadas à Retribuição por Titulação, com vistas à consolidação dos objetos atualmente existentes e à criação de objeto único para operacionalização da parcela no Módulo AJ/SIGEPE. Reiteração realizada pela DIGJU em 08/06/2026. ATUALIZADO EM 08/06/2026",
+    "criado_em": "2026-06-23T18:08:31.026Z",
+    "atualizado_em": "2026-06-23T19:31:45.898Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 53,
+  "fields": {
+    "nome": "Cálculo para pagamento de valor variável de rubrica judicial 20065 DECISÃO JUD NÃO TRANS BONUS EF",
+    "tipo": "evolutiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-08-08",
+    "data_conclusao": "2024-09-19",
+    "processo_sei": "00745.006404/2022-17",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 1,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.902Z",
+    "atualizado_em": "2026-06-23T19:31:45.902Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 54,
+  "fields": {
+    "nome": "Descentralização do módulo AJ",
+    "tipo": "evolutiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": null,
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 3,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.903Z",
+    "atualizado_em": "2026-06-23T19:31:45.903Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 55,
+  "fields": {
+    "nome": "Data Lake do AJ",
+    "tipo": "evolutiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-01-14",
+    "data_conclusao": "2026-06-17",
+    "processo_sei": "19975.030024/2024-80",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "MGI-SGP-DIGID",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": 2,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.904Z",
+    "atualizado_em": "2026-06-23T19:31:45.904Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 56,
+  "fields": {
+    "nome": "Inconsistência na rotina de absorção das rubricas judiciais",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-11-17",
+    "data_conclusao": "2025-06-25",
+    "processo_sei": "19975.135930/2023-99",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.906Z",
+    "atualizado_em": "2026-06-23T19:31:45.906Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 57,
+  "fields": {
+    "nome": "Absorção de retroativos",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-07-14",
+    "data_conclusao": "2025-09-08",
+    "processo_sei": "19975.020594/2025-42",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.906Z",
+    "atualizado_em": "2026-06-23T19:31:45.906Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 58,
+  "fields": {
+    "nome": "Ação não encontrada pelo Autorizador",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": null,
+    "data_conclusao": null,
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.908Z",
+    "atualizado_em": "2026-06-23T19:31:45.908Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 59,
+  "fields": {
+    "nome": "Ações judiciais que não foram localizadas na área de tarefa do Executor",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-08-23",
+    "data_conclusao": "2024-11-19",
+    "processo_sei": "19975.029604/2024-24",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "MGI-SGP-DESIN-CGDIP",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.909Z",
+    "atualizado_em": "2026-06-23T19:31:45.909Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 60,
+  "fields": {
+    "nome": "Ações judiciais que não foram localizadas na área de tarefa do Homologador",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-08-23",
+    "data_conclusao": "2025-07-28",
+    "processo_sei": "19975.029236/2024-14",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.910Z",
+    "atualizado_em": "2026-06-23T19:31:45.910Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 61,
+  "fields": {
+    "nome": "AESP para o MEC - Tarefa tomar ciência",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-06-13",
+    "data_conclusao": "2024-05-02",
+    "processo_sei": "NÃO LOCALIZADO",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.910Z",
+    "atualizado_em": "2026-06-23T19:31:45.910Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 62,
+  "fields": {
+    "nome": "Alteração e Diferença de Jornada de Trabalho.",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-03-18",
+    "data_conclusao": "2024-11-05",
+    "processo_sei": "35014.232157/2022-41",
+    "processo_relacionado": "18220.000350/2024-22",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.911Z",
+    "atualizado_em": "2026-06-23T19:31:45.911Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 63,
+  "fields": {
+    "nome": "Atualização de Objeto ADICIONAL NOTURNO VARIÁVEL/DIFERENÇA DIVISOR 240/200",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-12-19",
+    "data_conclusao": "2024-10-02",
+    "processo_sei": "14021.127118/2023-45",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.912Z",
+    "atualizado_em": "2026-06-23T19:31:45.912Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 64,
+  "fields": {
+    "nome": "Desaparecimento de documentos na aba Arquivos do AJ",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-08-27",
+    "data_conclusao": "2025-11-25",
+    "processo_sei": "19975.026816/2025-31",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.913Z",
+    "atualizado_em": "2026-06-23T19:31:45.913Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 65,
+  "fields": {
+    "nome": "Ação judicial indisponível na área de tarefas do Executor para inclusão de dados de cumprimento",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-08-23",
+    "data_conclusao": "2024-10-11",
+    "processo_sei": "19975.028984/2024-80",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.914Z",
+    "atualizado_em": "2026-06-23T19:31:45.914Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 66,
+  "fields": {
+    "nome": "Incidência do abono de permanência na base de cálculo da aposentadoria especial",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-06-17",
+    "data_conclusao": "2025-07-16",
+    "processo_sei": "19973.019352/2024-45",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.915Z",
+    "atualizado_em": "2026-06-23T19:31:45.915Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 67,
+  "fields": {
+    "nome": "Incidente no Gerenciador Eletrônico de Documentos (GED) do Sistema de Gestão de Pessoas do Executivo Federal - SIGEPE",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-09-21",
+    "data_conclusao": "2024-06-26",
+    "processo_sei": "19975.126640/2023-54",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.916Z",
+    "atualizado_em": "2026-06-23T19:31:45.916Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 68,
+  "fields": {
+    "nome": "Inconsistência na rubrica judicial de devolução de PSS sobre gratificação natalina",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-11-27",
+    "data_conclusao": "2025-02-18",
+    "processo_sei": "19975.137351/2023-81",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.917Z",
+    "atualizado_em": "2026-06-23T19:31:45.917Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 69,
+  "fields": {
+    "nome": "O objeto INDENIZAÇÃO DE CAMPO não realizou o cancelamento automático como o padrão",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-08-23",
+    "data_conclusao": "2024-12-30",
+    "processo_sei": "19975.029113/2024-83",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.917Z",
+    "atualizado_em": "2026-06-23T19:31:45.917Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 70,
+  "fields": {
+    "nome": "Regras de negócios",
+    "tipo": "corretiva",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-07-30",
+    "data_conclusao": "2025-09-04",
+    "processo_sei": "19975.024513/2025-83",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.919Z",
+    "atualizado_em": "2026-06-23T19:31:45.919Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 71,
+  "fields": {
+    "nome": "Criar assunto de cálculo para automatizar rubrica judicial incidente sobre VPNI",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-10-04",
+    "data_conclusao": "2023-10-04",
+    "processo_sei": "19958.200620/2023-61",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.920Z",
+    "atualizado_em": "2026-06-23T19:31:45.920Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 72,
+  "fields": {
+    "nome": "Criar rubrica de auxilio moradia para servidor com subsídio",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2024-09-24",
+    "data_conclusao": "2024-10-09",
+    "processo_sei": "19975.035093/2024-80",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.920Z",
+    "atualizado_em": "2026-06-23T19:31:45.920Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 73,
+  "fields": {
+    "nome": "Criação de assunto de cálculo para devolução do PSS",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-08-08",
+    "data_conclusao": "2025-08-08",
+    "processo_sei": "14021.031229/2025-19",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.921Z",
+    "atualizado_em": "2026-06-23T19:31:45.921Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 74,
+  "fields": {
+    "nome": "Criar assunto de cálculo  para automatizar rubrica judicial para pagamento de GEINMET",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-02-13",
+    "data_conclusao": "2025-04-02",
+    "processo_sei": "90849.001674/2025-17",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "6",
+    "criado_em": "2026-06-23T19:31:45.922Z",
+    "atualizado_em": "2026-06-23T19:31:45.922Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 75,
+  "fields": {
+    "nome": "Criar assunto de cálculo para automatizar rubrica judicial incidente de VPE e a criação de rubricas judiciais ao respectivo objeto.",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2023-10-29",
+    "data_conclusao": "2025-08-14",
+    "processo_sei": "19975.133498/2023-00",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "",
+    "criado_em": "2026-06-23T19:31:45.923Z",
+    "atualizado_em": "2026-06-23T19:31:45.923Z"
+  }
+},
+{
+  "model": "monitoramento.demanda",
+  "pk": 76,
+  "fields": {
+    "nome": "Criar assunto de cálculo  para automatizar rubrica judicial para pagamento da GDPGPE",
+    "tipo": "indicacao_rubrica",
+    "classificacao": "",
+    "status": "concluida",
+    "data_inicio": "2025-03-28",
+    "data_conclusao": "2025-04-25",
+    "processo_sei": "90849.003297/2025-42",
+    "processo_relacionado": "",
+    "alm": "",
+    "localizacao": "SEM ANDAMENTO",
+    "reiterada": false,
+    "data_reiteracao": null,
+    "priorizacao": null,
+    "observacoes": "7",
+    "criado_em": "2026-06-23T19:31:45.924Z",
+    "atualizado_em": "2026-06-23T19:31:45.924Z"
+  }
+}
+]

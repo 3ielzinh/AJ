@@ -1,5 +1,6 @@
 from django.views.generic import ListView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -12,7 +13,7 @@ from .models import Demanda, TipoDemanda, StatusDemanda
 from .forms import DemandaForm
 
 
-class DemandaListView(ListView):
+class DemandaListView(LoginRequiredMixin, ListView):
     """
     Lista de demandas do monitoramento, com filtros por tipo, status e busca.
     Pode ser usada de duas formas:
@@ -149,7 +150,7 @@ class ConcluídasListView(DemandaListView):
 
 # Dashboard --------------------------------------------------------------
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
         hoje = date.today()
 
@@ -257,7 +258,7 @@ class DashboardView(View):
 
 # CRUD -------------------------------------------------------------------
 
-class DemandaCreateView(CreateView):
+class DemandaCreateView(LoginRequiredMixin, CreateView):
     model         = Demanda
     form_class    = DemandaForm
     template_name = "monitoramento/form.html"
@@ -273,7 +274,7 @@ class DemandaCreateView(CreateView):
         return ctx
 
 
-class DemandaUpdateView(UpdateView):
+class DemandaUpdateView(LoginRequiredMixin, UpdateView):
     model         = Demanda
     form_class    = DemandaForm
     template_name = "monitoramento/form.html"
@@ -290,7 +291,7 @@ class DemandaUpdateView(UpdateView):
         return ctx
 
 
-class DemandaDeleteView(DeleteView):
+class DemandaDeleteView(LoginRequiredMixin, DeleteView):
     model         = Demanda
     template_name = "monitoramento/confirmar_exclusao.html"
 
@@ -304,7 +305,7 @@ class DemandaDeleteView(DeleteView):
         return ctx
 
 
-class ReordenarPrioridadeView(View):
+class ReordenarPrioridadeView(LoginRequiredMixin, View):
     """
     GET  → página com lista drag-and-drop de todas as demandas com priorização.
     POST → recebe JSON {"ordem": [pk1, pk2, ...]} e reatribui prioridades 1, 2, 3…
