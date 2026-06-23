@@ -1,0 +1,17 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}Início — AJ{% endblock %}
+
+{% block content %}
+<div class="container section">
+    <div class="hero">
+        <p class="eyebrow">Sistema AJ</p>
+        <h1 class="hero__title">Bem-vindo ao AJ</h1>
+        <p class="hero__subtitle">Base estrutural do projeto. Pronta para crescer.</p>
+        <div class="hero__actions">
+            {% include 'components/button.html' with label='Ver Design System' href='/design-system/' %}
+            {% include 'components/button.html' with label='Administração' href='/admin/' variant='ghost' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AJ{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+    <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+{# ── Barra de progresso topo ── #}
+<div id="aj-progress"></div>
+
+{# ── Toasts ── #}
+<div id="aj-toasts" aria-live="polite"></div>
+
+{# ── Topbar ── #}
+<header class="topbar">
+    <div class="container topbar-inner">
+        <a href="{% url 'core:home' %}" class="brand">
+            <span class="brand-icon">⚖️</span>
+            <span class="brand-name">AJ</span>
+        </a>
+
+        <button id="menu-toggle" class="btn btn-ghost btn-icon" type="button" aria-label="Abrir menu" aria-expanded="false">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+        <nav id="main-nav" class="main-nav" role="navigation">
+            <a href="{% url 'core:home' %}" class="nav-link {% if request.path == '/' %}nav-link--active{% endif %}">Início</a>
+            <a href="{% url 'monitoramento:lista' %}" class="nav-link {% if '/monitoramento' in request.path %}nav-link--active{% endif %}">Monitoramento</a>
+            <a href="{% url 'core:design_system' %}" class="nav-link {% if '/design-system' in request.path %}nav-link--active{% endif %}">Design System</a>
+            <a href="/admin/" class="nav-link">Admin</a>
+        </nav>
+
+        {% if user.is_authenticated %}
+        <div class="topbar-user">
+            <span class="user-name">{{ user.get_full_name|default:user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-ghost btn-sm">Sair</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</header>
+
+{# ── Conteudo principal ── #}
+<main id="main-content" class="main-content">
+    {% if messages %}
+    <div class="container messages-container">
+        {% for message in messages %}
+        <div class="alert alert--{{ message.tags }}">
+            <span>{{ message }}</span>
+            <button class="alert-close" type="button" aria-label="Fechar">✕</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</main>
+
+{# ── Rodape ── #}
+<footer class="footer">
+    <div class="container">
+        <span class="footer-text">AJ &mdash; Sistema interno</span>
+    </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,321 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}Monitoramento — {{ tipo_display }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header__content">
+    <div>
+      <p class="page-header__eyebrow">CGPJU · Monitoramento</p>
+      <h1 class="page-header__title">{{ tipo_display }}</h1>
+      <p class="page-header__subtitle">
+        {% if total == 1 %}1 demanda{% else %}{{ total }} demandas{% endif %}
+        {% if filtro_status or filtro_tipo or q %} · filtros ativos{% endif %}
+      </p>
+    </div>
+
+    <a href="{% url 'monitoramento:dashboard' %}" class="btn btn-ghost" style="white-space:nowrap;flex-shrink:0;">
+      ◎ Dashboard
+    </a>
+    <a href="{% url 'monitoramento:criar' %}" class="btn btn-primary" style="white-space:nowrap;flex-shrink:0;">
+      + Nova demanda
+    </a>
+    <a href="{% url 'monitoramento:reordenar' %}" class="btn btn-ghost" style="white-space:nowrap;flex-shrink:0;">
+      ↕ Reordenar
+    </a>
+
+    {# Tabs por categoria #}
+    <nav class="tab-nav" aria-label="Categorias">
+      <a href="{% url 'monitoramento:lista' %}"
+         class="tab-nav__item {% if not tipo_fixo and not filtro_tipo and not is_concluidas %}tab-nav__item--active{% endif %}">
+        Todas
+        <span class="tab-nav__count">{{ contadores.evolutiva|add:contadores.corretiva|add:contadores.indicacao_rubrica|add:contadores.criacao_objeto }}</span>
+      </a>
+      <a href="{% url 'monitoramento:evolutivas' %}"
+         class="tab-nav__item {% if tipo_fixo == 'evolutiva' %}tab-nav__item--active{% endif %}">
+        Evolutivas
+        <span class="tab-nav__count">{{ contadores.evolutiva }}</span>
+      </a>
+      <a href="{% url 'monitoramento:corretivas' %}"
+         class="tab-nav__item {% if tipo_fixo == 'corretiva' %}tab-nav__item--active{% endif %}">
+        Corretivas
+        <span class="tab-nav__count">{{ contadores.corretiva }}</span>
+      </a>
+      <a href="{% url 'monitoramento:indicacao_rubrica' %}"
+         class="tab-nav__item {% if tipo_fixo == 'indicacao_rubrica' %}tab-nav__item--active{% endif %}">
+        Ind. Rubrica
+        <span class="tab-nav__count">{{ contadores.indicacao_rubrica }}</span>
+      </a>
+      <a href="{% url 'monitoramento:criacao_objeto' %}"
+         class="tab-nav__item {% if tipo_fixo == 'criacao_objeto' %}tab-nav__item--active{% endif %}">
+        Criação Objeto
+        <span class="tab-nav__count">{{ contadores.criacao_objeto }}</span>
+      </a>
+      <a href="{% url 'monitoramento:concluidas' %}"
+         class="tab-nav__item {% if is_concluidas %}tab-nav__item--active{% endif %}"
+         style="{% if is_concluidas %}{% else %}color:var(--color-text-muted);{% endif %}">
+        ✓ Concluídas
+        <span class="tab-nav__count" style="background:#dcfce7;color:#166534;">{{ contadores.concluidas }}</span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+{# Filtros #}
+<div class="filters-bar">
+  <form method="get" class="filters-bar__form" role="search">
+    {% if tipo_fixo %}
+      {# Preserva tipo quando a view é de tipo fixo #}
+    {% endif %}
+
+    <div class="filters-bar__search">
+      <span class="filters-bar__icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input
+        type="search"
+        name="q"
+        value="{{ q }}"
+        placeholder="Buscar por nome, processo SEI ou observações…"
+        class="filters-bar__input"
+        aria-label="Busca"
+      >
+    </div>
+
+    {% if not tipo_fixo %}
+    <select name="tipo" class="filters-bar__select" aria-label="Tipo">
+      <option value="">Todos os tipos</option>
+      {% for val, label in tipos %}
+        <option value="{{ val }}" {% if filtro_tipo == val %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+
+    <select name="status" class="filters-bar__select" aria-label="Status">
+      <option value="">Todos os status</option>
+      {% for val, label in statuses %}
+        <option value="{{ val }}" {% if filtro_status == val %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn--primary btn--sm">Filtrar</button>
+    {% if q or filtro_status or filtro_tipo %}
+      <a href="{{ request.path }}" class="btn btn--ghost btn--sm">Limpar</a>
+    {% endif %}
+  </form>
+</div>
+
+{# Tabela de demandas #}
+{% if demandas %}
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        {% if not tipo_fixo %}<th style="width:110px">Tipo</th>{% endif %}
+        <th>Demanda</th>
+        <th style="width:130px">Status</th>
+        <th style="width:170px">Processo SEI</th>
+        <th class="data-table__th--num" style="width:70px">Dias</th>
+        <th style="width:80px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in demandas %}
+
+      {# ── Linha principal ── #}
+      <tr class="data-table__row" id="row-{{ d.pk }}">
+
+        {% if not tipo_fixo %}
+        <td>
+          {% if d.tipo == 'evolutiva' %}
+            <span class="badge badge--info">Evolutiva</span>
+          {% elif d.tipo == 'corretiva' %}
+            <span class="badge badge--danger">Corretiva</span>
+          {% elif d.tipo == 'indicacao_rubrica' %}
+            <span class="badge badge--warning">Ind. Rubrica</span>
+          {% else %}
+            <span class="badge badge--default">{{ d.get_tipo_display }}</span>
+          {% endif %}
+        </td>
+        {% endif %}
+
+        <td class="data-table__td--main">
+          {% if d.priorizacao and not is_concluidas %}
+          <span class="demand-prior">{{ d.priorizacao }}</span>
+          {% endif %}
+          <span class="demand-name">{{ d.nome }}</span>
+        </td>
+
+        <td>
+          {% if d.status == 'em_andamento' %}
+            <span class="badge badge--warning">Em Andamento</span>
+          {% elif d.status == 'concluida' %}
+            <span class="badge badge--success">Concluída</span>
+          {% else %}
+            <span class="badge badge--default">Não Iniciada</span>
+          {% endif %}
+        </td>
+
+        <td class="data-table__td--mono">{{ d.processo_sei|default:"—" }}</td>
+
+        <td class="data-table__td--num{% if d.dias_espera and d.dias_espera > 365 %} data-table__td--alert{% endif %}">
+          {% if d.dias_espera is not None %}{{ d.dias_espera }}<small>dias</small>{% else %}—{% endif %}
+        </td>
+
+        <td class="data-table__td--expand">
+          <div style="display:flex;gap:var(--space-1);align-items:center;justify-content:center;">
+            <a href="{% url 'monitoramento:editar' d.pk %}"
+               class="expand-toggle"
+               title="Editar demanda"
+               style="color:var(--color-primary);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </a>
+            <button type="button"
+                    class="expand-toggle"
+                    aria-expanded="false"
+                    aria-controls="detail-{{ d.pk }}"
+                    title="Expandir detalhes">
+              <svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      {# ── Linha de detalhe (oculta por padrão) ── #}
+      <tr class="detail-row" id="detail-{{ d.pk }}" hidden>
+        <td colspan="{% if not tipo_fixo %}6{% else %}5{% endif %}" class="detail-cell">
+          <div class="detail-grid">
+
+            {% if d.data_inicio or d.data_conclusao %}
+            <div class="detail-group">
+              <span class="detail-label">Início da Demanda</span>
+              <span class="detail-value">
+                {% if d.data_inicio %}{{ d.data_inicio|date:"d/m/Y" }}{% else %}—{% endif %}
+                {% if d.data_conclusao %} → {{ d.data_conclusao|date:"d/m/Y" }}{% endif %}
+              </span>
+            </div>
+            {% endif %}
+
+            {% if d.localizacao %}
+            <div class="detail-group">
+              <span class="detail-label">Localização</span>
+              <span class="detail-value">{{ d.localizacao }}</span>
+            </div>
+            {% endif %}
+
+            {% if d.classificacao %}
+            <div class="detail-group">
+              <span class="detail-label">Classificação</span>
+              <span class="detail-value">{{ d.classificacao }}</span>
+            </div>
+            {% endif %}
+
+            {% if d.alm and d.alm != '-' %}
+            <div class="detail-group">
+              <span class="detail-label">ALM</span>
+              <span class="detail-value detail-value--mono">{{ d.alm }}</span>
+            </div>
+            {% endif %}
+
+            {% if d.priorizacao %}
+            <div class="detail-group">
+              <span class="detail-label">Priorização</span>
+              <span class="detail-value detail-value--mono">{{ d.priorizacao }}</span>
+            </div>
+            {% endif %}
+
+            <div class="detail-group">
+              <span class="detail-label">Reiterada</span>
+              <span class="detail-value">
+                {% if d.reiterada %}
+                  <span class="badge badge--danger">Sim</span>
+                  {% if d.data_reiteracao %} · {{ d.data_reiteracao|date:"d/m/Y" }}{% endif %}
+                {% else %}
+                  Não
+                {% endif %}
+              </span>
+            </div>
+
+            {% if d.processo_relacionado and d.processo_relacionado != '-' %}
+            <div class="detail-group detail-group--wide">
+              <span class="detail-label">Processo relacionado</span>
+              <span class="detail-value detail-value--mono">{{ d.processo_relacionado }}</span>
+            </div>
+            {% endif %}
+
+            {% if d.observacoes %}
+            <div class="detail-group detail-group--full">
+              <span class="detail-label">Observações</span>
+              <p class="detail-obs">{{ d.observacoes|linebreaksbr }}</p>
+            </div>
+            {% endif %}
+
+          </div>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{# Paginação #}
+{% if is_paginated %}
+<nav class="pagination" aria-label="Paginação">
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{ q }}{% endif %}{% if filtro_status %}&status={{ filtro_status }}{% endif %}{% if filtro_tipo %}&tipo={{ filtro_tipo }}{% endif %}"
+       class="btn btn--ghost btn--sm">← Anterior</a>
+  {% endif %}
+  <span class="pagination__info">
+    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+  </span>
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q }}{% endif %}{% if filtro_status %}&status={{ filtro_status }}{% endif %}{% if filtro_tipo %}&tipo={{ filtro_tipo }}{% endif %}"
+       class="btn btn--ghost btn--sm">Próxima →</a>
+  {% endif %}
+</nav>
+{% endif %}
+
+{% else %}
+{# Empty state #}
+<div class="empty-state">
+  <div class="empty-state__icon" aria-hidden="true">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+      <rect x="9" y="3" width="6" height="4" rx="1"/>
+      <path d="M9 12h6M9 16h4"/>
+    </svg>
+  </div>
+  {% if q or filtro_status or filtro_tipo %}
+    <p class="empty-state__title">Nenhuma demanda encontrada</p>
+    <p class="empty-state__body">Ajuste os filtros ou <a href="{{ request.path }}" class="link">limpe a busca</a>.</p>
+  {% else %}
+    <p class="empty-state__title">Nenhuma demanda registrada</p>
+    <p class="empty-state__body">Os dados serão importados via comando de gerenciamento.</p>
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.expand-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const detailRow = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!detailRow) return;
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.classList.toggle('is-open', !expanded);
+    detailRow.hidden = expanded;
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}Excluir Demanda — Monitoramento{% endblock %}
+
+{% block content %}
+<div style="padding: var(--space-8) var(--page-padding); max-width: 520px;">
+  <h1 style="font-size: var(--font-size-xl); font-weight: 700; margin: 0 0 var(--space-2);">Confirmar exclusão</h1>
+  <p style="color: var(--color-text-muted); margin: 0 0 var(--space-6);">Esta ação não pode ser desfeita.</p>
+
+  <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); margin-bottom: var(--space-6);">
+    <p style="font-size: var(--font-size-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--color-primary); margin: 0 0 var(--space-2);">{{ object.get_tipo_display }}</p>
+    <p style="font-size: var(--font-size-base); font-weight: 600; margin: 0;">{{ object.nome }}</p>
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+    <div style="display: flex; gap: var(--space-3);">
+      <button type="submit" class="btn btn-primary" style="background: #c0392b; border-color: #c0392b;">Sim, excluir</button>
+      <a href="{{ cancelar_url }}" class="btn btn-ghost">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

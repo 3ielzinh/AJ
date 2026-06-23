@@ -1,0 +1,70 @@
+/*
+  tokens.css — Variáveis globais de design (design tokens).
+  Altere aqui para refletir em toda a aplicação.
+*/
+:root {
+    /* Cores principais */
+    --color-primary:        #005f73;
+    --color-primary-dark:   #003f4d;
+    --color-primary-light:  #e8f4f7;
+    --color-accent:         #ee9b00;
+    --color-success:        #0d7a45;
+    --color-warning:        #e9a800;
+    --color-danger:         #b42318;
+    --color-info:           #1d6fa4;
+
+    /* Superfícies e fundo */
+    --color-bg:             #f4f6fb;
+    --color-surface:        #ffffff;
+    --color-surface-soft:   #eef2ff;
+
+    /* Texto */
+    --color-text:           #1b2340;
+    --color-text-muted:     #5f6b8c;
+    --color-text-invert:    #ffffff;
+
+    /* Bordas */
+    --color-border:         #dbe1f0;
+    --color-border-focus:   #005f73;
+
+    /* Sombras */
+    --shadow-sm:  0 2px 8px rgba(17, 32, 67, 0.06);
+    --shadow-md:  0 8px 24px rgba(17, 32, 67, 0.09);
+    --shadow-lg:  0 16px 40px rgba(17, 32, 67, 0.12);
+
+    /* Bordas arredondadas */
+    --radius-sm:  8px;
+    --radius-md:  14px;
+    --radius-lg:  20px;
+    --radius-full: 9999px;
+
+    /* Espaçamentos */
+    --space-1:  0.25rem;   /* 4px  */
+    --space-2:  0.5rem;    /* 8px  */
+    --space-3:  0.75rem;   /* 12px */
+    --space-4:  1rem;      /* 16px */
+    --space-5:  1.5rem;    /* 24px */
+    --space-6:  2rem;      /* 32px */
+    --space-7:  2.5rem;    /* 40px */
+    --space-8:  3rem;      /* 48px */
+    --space-9:  3.5rem;    /* 56px */
+    --space-10: 4rem;      /* 64px */
+
+    /* Tipografia */
+    --font-sans:  "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-mono:  "Cascadia Code", "Consolas", "Courier New", monospace;
+    --font-size-xs:   0.75rem;
+    --font-size-sm:   0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg:   1.125rem;
+    --font-size-xl:   1.25rem;
+    --font-size-2xl:  1.5rem;
+    --font-size-3xl:  1.875rem;
+    --font-size-4xl:  2.25rem;
+
+    /* Layout */
+    --page-padding:     clamp(1rem, 3vw, 2.5rem);
+    --topbar-height:    64px;
+    --transition-fast:  0.15s ease;
+    --transition-base:  0.2s ease;
+}

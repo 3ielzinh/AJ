@@ -1,0 +1,29 @@
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Django
+*.log
+logs/
+db.sqlite3
+media/
+staticfiles/
+
+# Ambiente e segredos
+.env
+.env.local
+
+# IDE / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Testes
+.coverage
+htmlcov/
+.pytest_cache/

@@ -1,0 +1,8 @@
+<div class="empty-state">
+    <div class="empty-state__icon">📭</div>
+    <h3 class="empty-state__title">{{ title|default:'Nenhum resultado' }}</h3>
+    {% if body %}<p class="empty-state__body">{{ body }}</p>{% endif %}
+    {% if cta_label %}
+    {% include 'components/button.html' with label=cta_label href=cta_href %}
+    {% endif %}
+</div>

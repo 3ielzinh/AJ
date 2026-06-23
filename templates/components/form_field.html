@@ -1,0 +1,30 @@
+{% if field %}
+<div class="form-field {% if field.errors %}form-field--error{% endif %}">
+    <label class="form-label" for="{{ field.id_for_label }}">
+        {{ field.label }}{% if field.field.required %}<span class="form-required" aria-hidden="true"> *</span>{% endif %}
+    </label>
+    {{ field }}
+    {% if field.errors %}
+    <ul class="form-errors">
+        {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if field.help_text %}
+    <p class="form-help">{{ field.help_text }}</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="form-field">
+    <label class="form-label" for="{{ id }}">
+        {{ label }}{% if required %}<span class="form-required" aria-hidden="true"> *</span>{% endif %}
+    </label>
+    <input
+        class="form-input"
+        id="{{ id }}"
+        name="{{ name }}"
+        type="{{ type|default:'text' }}"
+        placeholder="{{ placeholder|default:'' }}"
+        {% if required %}required{% endif %}
+    >
+</div>
+{% endif %}
