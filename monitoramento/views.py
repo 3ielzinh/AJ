@@ -279,6 +279,13 @@ class DemandaUpdateView(LoginRequiredMixin, UpdateView):
     form_class    = DemandaForm
     template_name = "monitoramento/form.html"
 
+    def form_valid(self, form):
+        demanda = form.save(commit=False)
+        if demanda.status == StatusDemanda.CONCLUIDA:
+            demanda.priorizacao = None
+        demanda.save()
+        return super().form_valid(form)
+
     def get_success_url(self):
         messages.success(self.request, "Demanda atualizada com sucesso.")
         return reverse_lazy("monitoramento:lista")

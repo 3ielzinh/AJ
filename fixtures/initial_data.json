@@ -1479,7 +1479,7 @@
     "localizacao": "SEM ANDAMENTO",
     "reiterada": false,
     "data_reiteracao": null,
-    "priorizacao": 1,
+    "priorizacao": null,
     "observacoes": "",
     "criado_em": "2026-06-23T19:31:45.902Z",
     "atualizado_em": "2026-06-23T19:31:45.902Z"
@@ -1501,7 +1501,7 @@
     "localizacao": "",
     "reiterada": false,
     "data_reiteracao": null,
-    "priorizacao": 3,
+    "priorizacao": null,
     "observacoes": "",
     "criado_em": "2026-06-23T19:31:45.903Z",
     "atualizado_em": "2026-06-23T19:31:45.903Z"
@@ -1523,7 +1523,7 @@
     "localizacao": "MGI-SGP-DIGID",
     "reiterada": false,
     "data_reiteracao": null,
-    "priorizacao": 2,
+    "priorizacao": null,
     "observacoes": "",
     "criado_em": "2026-06-23T19:31:45.904Z",
     "atualizado_em": "2026-06-23T19:31:45.904Z"
