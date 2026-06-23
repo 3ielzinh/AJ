@@ -315,7 +315,12 @@ class ReordenarPrioridadeView(LoginRequiredMixin, View):
         from django.shortcuts import render
         colunas = []
         for tipo, label in TipoDemanda.choices:
-            items = list(Demanda.objects.filter(tipo=tipo).order_by("priorizacao", "nome"))
+            items = list(
+                Demanda.objects
+                .filter(tipo=tipo)
+                .exclude(status=StatusDemanda.CONCLUIDA)
+                .order_by("priorizacao", "nome")
+            )
             prio_ativa = any(d.priorizacao is not None for d in items)
             colunas.append({
                 "tipo": tipo,
@@ -335,7 +340,7 @@ class ReordenarPrioridadeView(LoginRequiredMixin, View):
                     for i, pk in enumerate(pks, start=1):
                         Demanda.objects.filter(pk=pk, tipo=tipo).update(priorizacao=i)
                     pks_set = {int(pk) for pk in pks}
-                    Demanda.objects.filter(tipo=tipo).exclude(pk__in=pks_set).update(priorizacao=None)
+                    Demanda.objects.filter(tipo=tipo).exclude(status=StatusDemanda.CONCLUIDA).exclude(pk__in=pks_set).update(priorizacao=None)
             return JsonResponse({"ok": True})
         except Exception as e:
             return JsonResponse({"ok": False, "erro": str(e)}, status=400)

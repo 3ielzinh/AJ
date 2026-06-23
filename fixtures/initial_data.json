@@ -256,7 +256,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1200000$TjxoEdTAApLU8KOJAudSuP$SH0e45a9DLb7hlinE8/NA8YMnid7VWHlKFK8NDPfGMk=",
-    "last_login": "2026-06-23T20:07:52.448Z",
+    "last_login": "2026-06-23T20:33:37.392Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -331,6 +331,14 @@
   "fields": {
     "session_data": ".eJxVjDkOwjAQAP-yNbLwER8p6fMGy-td4wBypDipEH9HkVJAOzOaN8S0bzXundc4E4wg4fLLMOUnt0PQI7X7IvLStnVGcSTitF1MC_HrdrZ_g5p6hREyos2mBG9ysl7aopMkJKXJ8ZBDQW2CHnxRzl_ZBdTGo-NiFAWvuCB8vgAeOIM:1wc7PU:Iso8awVxnMaWrlabybmiQCoHC6Dky8tZNQQJ9X2ikNo",
     "expire_date": "2026-07-07T20:07:52.457Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yymmus780p309p3cji95qmlr27zzlnqy",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAQAP-yNbLwER8p6fMGy-td4wBypDipEH9HkVJAOzOaN8S0bzXundc4E4wg4fLLMOUnt0PQI7X7IvLStnVGcSTitF1MC_HrdrZ_g5p6hREyos2mBG9ysl7aopMkJKXJ8ZBDQW2CHnxRzl_ZBdTGo-NiFAWvuCB8vgAeOIM:1wc7oP:Xmg2RPirn1sBn5bVYQ3m21I04theZ3UwUlujrvA1Avg",
+    "expire_date": "2026-06-24T04:33:37.402Z"
   }
 },
 {
