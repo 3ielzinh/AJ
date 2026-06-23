@@ -109,6 +109,42 @@ AJ/
 
 ---
 
+## Trazer dados de produção para desenvolvimento
+
+Quando os usuários usarem o sistema em produção, os dados ficam no banco PostgreSQL do servidor.
+Para trazer esses dados para o seu ambiente de desenvolvimento (ex: para analisar, corrigir ou ter uma cópia atualizada):
+
+### No servidor de produção
+
+```bash
+# Acessar o servidor (via SSH ou terminal do servidor)
+cd /caminho/do/projeto
+
+# Exportar os dados do banco de produção
+DJANGO_SETTINGS_MODULE=config.settings.production python manage.py dumpdata --indent 2 --output fixtures/prod_snapshot.json
+
+# Commitar e subir
+git add fixtures/prod_snapshot.json
+git commit -m "chore: snapshot dados producao $(date +%Y-%m-%d)"
+git push
+```
+
+### No seu PC de desenvolvimento
+
+```powershell
+# 1. Baixar o snapshot
+git pull
+
+# 2. Carregar os dados de produção no banco local
+.\venv\Scripts\python.exe manage.py loaddata fixtures/prod_snapshot.json
+```
+
+> **Atenção:** o `loaddata` sobrescreve os dados locais. Faça isso apenas quando quiser substituir seu banco dev pelos dados reais de produção.
+
+> **Dica:** mantenha `fixtures/initial_data.json` para dados de desenvolvimento e use `fixtures/prod_snapshot.json` apenas para snapshots de produção — assim você pode alternar entre os dois quando necessário.
+
+---
+
 ## Variáveis de ambiente (.env)
 
 Copie `.env.example` para `.env` e preencha:
