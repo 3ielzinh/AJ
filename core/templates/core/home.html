@@ -9,7 +9,9 @@
         <h1 class="hero__title">Bem-vindo ao AJ</h1>
         <p class="hero__subtitle">Base estrutural do projeto. Pronta para crescer.</p>
         <div class="hero__actions">
+            {% if user.is_staff %}
             {% include 'components/button.html' with label='Ver Design System' href='/design-system/' %}
+            {% endif %}
             {% include 'components/button.html' with label='Administração' href='/admin/' variant='ghost' %}
         </div>
     </div>

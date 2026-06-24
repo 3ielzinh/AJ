@@ -36,7 +36,9 @@
         <nav id="main-nav" class="main-nav" role="navigation">
             <a href="{% url 'core:home' %}" class="nav-link {% if request.path == '/' %}nav-link--active{% endif %}">Início</a>
             <a href="{% url 'monitoramento:lista' %}" class="nav-link {% if '/monitoramento' in request.path %}nav-link--active{% endif %}">Monitoramento</a>
+            {% if user.is_staff %}
             <a href="{% url 'core:design_system' %}" class="nav-link {% if '/design-system' in request.path %}nav-link--active{% endif %}">Design System</a>
+            {% endif %}
             <a href="/admin/" class="nav-link">Admin</a>
         </nav>
 
