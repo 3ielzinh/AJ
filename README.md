@@ -53,12 +53,19 @@ Os dados do banco **não são versionados automaticamente**. Use o fluxo abaixo 
 ```powershell
 # 1. Exportar os dados
 $env:DJANGO_SETTINGS_MODULE="config.settings.development"
+$env:PYTHONUTF8="1"
 .\venv\Scripts\python.exe manage.py dumpdata --indent 2 --output fixtures/initial_data.json
 
 # 2. Commitar código + dados
 git add .
 git commit -m "chore: sync dados + código"
 git push
+```
+
+Se preferir em uma linha:
+
+```powershell
+$env:DJANGO_SETTINGS_MODULE="config.settings.development"; $env:PYTHONUTF8="1"; .\venv\Scripts\python.exe manage.py dumpdata --indent 2 --output fixtures/initial_data.json
 ```
 
 ### Ao chegar no outro PC (importar)
