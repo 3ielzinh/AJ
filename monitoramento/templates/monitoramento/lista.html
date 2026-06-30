@@ -29,7 +29,7 @@
       <a href="{% url 'monitoramento:lista' %}"
          class="tab-nav__item {% if not tipo_fixo and not filtro_tipo and not is_concluidas %}tab-nav__item--active{% endif %}">
         Todas
-        <span class="tab-nav__count">{{ contadores.evolutiva|add:contadores.corretiva|add:contadores.indicacao_rubrica|add:contadores.criacao_objeto }}</span>
+        <span class="tab-nav__count">{{ contadores.evolutiva|add:contadores.corretiva|add:contadores.gestao_objetos }}</span>
       </a>
       <a href="{% url 'monitoramento:evolutivas' %}"
          class="tab-nav__item {% if tipo_fixo == 'evolutiva' %}tab-nav__item--active{% endif %}">
@@ -41,15 +41,10 @@
         Corretivas
         <span class="tab-nav__count">{{ contadores.corretiva }}</span>
       </a>
-      <a href="{% url 'monitoramento:indicacao_rubrica' %}"
-         class="tab-nav__item {% if tipo_fixo == 'indicacao_rubrica' %}tab-nav__item--active{% endif %}">
-        Ind. Rubrica
-        <span class="tab-nav__count">{{ contadores.indicacao_rubrica }}</span>
-      </a>
-      <a href="{% url 'monitoramento:criacao_objeto' %}"
-         class="tab-nav__item {% if tipo_fixo == 'criacao_objeto' %}tab-nav__item--active{% endif %}">
-        Criação Objeto
-        <span class="tab-nav__count">{{ contadores.criacao_objeto }}</span>
+      <a href="{% url 'monitoramento:gestao_objetos' %}"
+         class="tab-nav__item {% if tipo_fixo == 'gestao_objetos' %}tab-nav__item--active{% endif %}">
+        Gestão de Objetos
+        <span class="tab-nav__count">{{ contadores.gestao_objetos }}</span>
       </a>
       <a href="{% url 'monitoramento:concluidas' %}"
          class="tab-nav__item {% if is_concluidas %}tab-nav__item--active{% endif %}"
@@ -78,7 +73,7 @@
         type="search"
         name="q"
         value="{{ q }}"
-        placeholder="Buscar por nome, processo SEI ou observações…"
+        placeholder="Buscar em todos os campos da demanda…"
         class="filters-bar__input"
         aria-label="Busca"
       >
@@ -133,8 +128,8 @@
             <span class="badge badge--info">Evolutiva</span>
           {% elif d.tipo == 'corretiva' %}
             <span class="badge badge--danger">Corretiva</span>
-          {% elif d.tipo == 'indicacao_rubrica' %}
-            <span class="badge badge--warning">Ind. Rubrica</span>
+          {% elif d.tipo == 'gestao_objetos' %}
+            <span class="badge badge--warning">Gestão de Objetos</span>
           {% else %}
             <span class="badge badge--default">{{ d.get_tipo_display }}</span>
           {% endif %}

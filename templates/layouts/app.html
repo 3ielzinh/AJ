@@ -35,7 +35,7 @@
 
         <nav id="main-nav" class="main-nav" role="navigation">
             <a href="{% url 'core:home' %}" class="nav-link {% if request.path == '/' %}nav-link--active{% endif %}">Início</a>
-            <a href="{% url 'monitoramento:lista' %}" class="nav-link {% if '/monitoramento' in request.path %}nav-link--active{% endif %}">Monitoramento</a>
+            <a href="{% url 'monitoramento:hub' %}" class="nav-link {% if '/monitoramento' in request.path %}nav-link--active{% endif %}">Monitoramento</a>
             {% if user.is_staff %}
             <a href="{% url 'core:design_system' %}" class="nav-link {% if '/design-system' in request.path %}nav-link--active{% endif %}">Design System</a>
             {% endif %}
@@ -44,7 +44,9 @@
 
         {% if user.is_authenticated %}
         <div class="topbar-user">
-            <span class="user-name">{{ user.get_full_name|default:user.username }}</span>
+            <a href="{% url 'core:perfil' %}" class="user-name" style="text-decoration:none;" title="Ver perfil">
+                {{ user.get_full_name|default:user.username }}
+            </a>
             <form method="post" action="{% url 'logout' %}" style="display:inline">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-ghost btn-sm">Sair</button>

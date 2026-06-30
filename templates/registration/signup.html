@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar — AJ</title>
+    <title>Criar Conta — AJ</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
     <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -18,17 +18,17 @@
             background: var(--color-bg);
         }
 
-        .login-card {
+        .signup-card {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-xl, 1rem);
             padding: 2.5rem 2rem;
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
         }
 
-        .login-brand {
+        .signup-brand {
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -37,19 +37,19 @@
             text-decoration: none;
         }
 
-        .login-brand-icon {
+        .signup-brand-icon {
             font-size: 2rem;
             line-height: 1;
         }
 
-        .login-brand-name {
+        .signup-brand-name {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--color-primary);
             letter-spacing: -0.02em;
         }
 
-        .login-title {
+        .signup-title {
             font-size: 1.125rem;
             font-weight: 600;
             color: var(--color-text);
@@ -57,15 +57,15 @@
             margin-bottom: 0.25rem;
         }
 
-        .login-subtitle {
+        .signup-subtitle {
             font-size: 0.875rem;
             color: var(--color-text-muted);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.1rem;
         }
 
         .form-group label {
@@ -94,17 +94,23 @@
             box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.12);
         }
 
-        .login-error {
+        .form-help {
+            margin-top: 0.35rem;
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+        }
+
+        .signup-error {
             background: #fef2f2;
             border: 1px solid #fecaca;
             border-radius: var(--radius-md, 0.5rem);
             padding: 0.75rem 1rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.1rem;
             font-size: 0.875rem;
             color: #b91c1c;
         }
 
-        .btn-login {
+        .btn-signup {
             width: 100%;
             padding: 0.75rem;
             background: var(--color-primary);
@@ -115,65 +121,76 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.15s;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
 
-        .btn-login:hover {
+        .btn-signup:hover {
             background: var(--color-primary-dark);
         }
 
-        .login-footer {
+        .signup-footer {
             text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.8125rem;
+            margin-top: 1.25rem;
+            font-size: 0.86rem;
             color: var(--color-text-muted);
+        }
+
+        .signup-footer a {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .signup-footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <a href="/" class="login-brand">
-        <span class="login-brand-icon">⚖️</span>
-        <span class="login-brand-name">AJ</span>
+<div class="signup-card">
+    <a href="/" class="signup-brand">
+        <span class="signup-brand-icon">⚖️</span>
+        <span class="signup-brand-name">AJ</span>
     </a>
 
-    <h1 class="login-title">Bem-vindo de volta</h1>
-    <p class="login-subtitle">Entre com suas credenciais para continuar</p>
+    <h1 class="signup-title">Criar conta</h1>
+    <p class="signup-subtitle">Cadastre-se para acessar o sistema</p>
 
-    {% if form.errors %}
-    <div class="login-error">
-        Usuário ou senha inválidos. Tente novamente.
+    {% if form.non_field_errors %}
+    <div class="signup-error">
+        {% for err in form.non_field_errors %}
+            <div>{{ err }}</div>
+        {% endfor %}
     </div>
     {% endif %}
 
-    <form method="post">
+    <form method="post" novalidate>
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
 
         <div class="form-group">
-            <label for="id_username">Usuário</label>
-            <input type="text" id="id_username" name="username"
-                   autofocus autocomplete="username"
-                   placeholder="Nome de usuário"
-                   value="{{ form.username.value|default:'' }}">
+            <label for="id_nome">Nome</label>
+            <input type="text" id="id_nome" name="nome" value="{{ form.nome.value|default:'' }}" placeholder="Seu nome completo" required>
+            {% for err in form.nome.errors %}<div class="signup-error" style="margin:0.45rem 0 0;">{{ err }}</div>{% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_username">Nome de usuário</label>
+            <input type="text" id="id_username" name="username" value="{{ form.username.value|default:'' }}" placeholder="nome.sobrenome" required>
+            <p class="form-help">Formato obrigatório: nome.sobrenome em letras minúsculas.</p>
+            {% for err in form.username.errors %}<div class="signup-error" style="margin:0.45rem 0 0;">{{ err }}</div>{% endfor %}
         </div>
 
         <div class="form-group">
             <label for="id_password">Senha</label>
-            <input type="password" id="id_password" name="password"
-                   autocomplete="current-password"
-                   placeholder="Sua senha">
+            <input type="password" id="id_password" name="password" placeholder="Crie sua senha" required>
+            {% for err in form.password.errors %}<div class="signup-error" style="margin:0.45rem 0 0;">{{ err }}</div>{% endfor %}
         </div>
 
-        <button type="submit" class="btn-login">Entrar</button>
+        <button type="submit" class="btn-signup">Criar conta</button>
     </form>
 
-    <p class="login-footer" style="margin-top:1rem;">
-        Ainda não tem conta? <a href="{% url 'core:signup' %}" style="color:var(--color-primary);font-weight:600;text-decoration:none;">Criar conta</a>
-    </p>
-
-    <p class="login-footer">CGPJU · Assessoria Jurídica</p>
+    <p class="signup-footer">Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
 </div>
 
 </body>

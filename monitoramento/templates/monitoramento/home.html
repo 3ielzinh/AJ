@@ -1,0 +1,279 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}Monitoramento{% endblock %}
+
+{% block extra_head %}
+<style>
+.monitoramento-home {
+  position: relative;
+  padding: var(--space-8) var(--page-padding) var(--space-10);
+  isolation: isolate;
+}
+
+.monitoramento-home::before,
+.monitoramento-home::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.monitoramento-home::before {
+  width: 340px;
+  height: 340px;
+  right: -90px;
+  top: -40px;
+  background: radial-gradient(circle, rgba(0, 95, 115, 0.18), rgba(0, 95, 115, 0));
+}
+
+.monitoramento-home::after {
+  width: 280px;
+  height: 280px;
+  left: -70px;
+  bottom: -30px;
+  background: radial-gradient(circle, rgba(10, 147, 150, 0.15), rgba(10, 147, 150, 0));
+}
+
+.monitoramento-home__header {
+  margin-bottom: var(--space-6);
+  padding: var(--space-6);
+  border: 1px solid rgba(0, 95, 115, 0.14);
+  border-radius: calc(var(--radius-md) + 2px);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 246, 0.92));
+  box-shadow: 0 14px 34px rgba(13, 54, 61, 0.08);
+}
+
+.monitoramento-home__eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.monitoramento-home__title {
+  margin: 0 0 var(--space-2);
+  font-size: clamp(1.65rem, 2vw, 2.15rem);
+  line-height: 1.12;
+}
+
+.monitoramento-home__subtitle {
+  margin: 0;
+  color: var(--color-text-muted);
+  max-width: 760px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.monitoramento-home__nowrap {
+  white-space: nowrap;
+}
+
+.monitoramento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 1024px) {
+  .monitoramento-grid { grid-template-columns: 1fr; }
+}
+
+.monitoramento-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid rgba(0, 95, 115, 0.16);
+  border-radius: calc(var(--radius-md) + 2px);
+  text-decoration: none;
+  color: inherit;
+  min-height: 240px;
+  box-shadow: 0 12px 30px rgba(19, 48, 52, 0.1);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  animation: cardEnter .45s ease both;
+}
+
+.monitoramento-card:nth-child(2) { animation-delay: .06s; }
+.monitoramento-card:nth-child(3) { animation-delay: .12s; }
+
+.monitoramento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+}
+
+.monitoramento-card::after {
+  content: "";
+  position: absolute;
+  right: -42px;
+  bottom: -42px;
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  opacity: .2;
+  transition: transform .22s ease;
+}
+
+.monitoramento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(10, 42, 47, 0.16);
+  border-color: rgba(0, 95, 115, 0.45);
+}
+
+.monitoramento-card:hover::after {
+  transform: scale(1.08);
+}
+
+.monitoramento-card--sei {
+  background: linear-gradient(155deg, #ffffff, #edf9ff);
+}
+
+.monitoramento-card--sei::after {
+  background: radial-gradient(circle, #3fa7d6, transparent 70%);
+}
+
+.monitoramento-card--sistemico {
+  background: linear-gradient(155deg, #ffffff, #ebf9f5);
+}
+
+.monitoramento-card--sistemico::after {
+  background: radial-gradient(circle, #1fa080, transparent 70%);
+}
+
+.monitoramento-card--aj {
+  background: linear-gradient(155deg, #ffffff, #fff4ea);
+}
+
+.monitoramento-card--aj::after {
+  background: radial-gradient(circle, #dd7a2b, transparent 70%);
+}
+
+.monitoramento-card__chip {
+  width: fit-content;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #0c4a5a;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(10, 72, 89, 0.14);
+}
+
+.monitoramento-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.monitoramento-card--sei .monitoramento-card__icon {
+  background: linear-gradient(135deg, #14648a, #3fa7d6);
+}
+
+.monitoramento-card--sistemico .monitoramento-card__icon {
+  background: linear-gradient(135deg, #106a64, #1fa080);
+}
+
+.monitoramento-card--aj .monitoramento-card__icon {
+  background: linear-gradient(135deg, #a85a1d, #dd7a2b);
+}
+
+.monitoramento-card__title {
+  margin: 0;
+  font-size: 1.14rem;
+  line-height: 1.25;
+}
+
+.monitoramento-card__desc {
+  margin: 0;
+  color: rgba(36, 50, 53, 0.82);
+  line-height: 1.6;
+}
+
+.monitoramento-card__cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.monitoramento-card__cta::after {
+  content: ">";
+  font-size: .95rem;
+  transition: transform .2s ease;
+}
+
+.monitoramento-card:hover .monitoramento-card__cta::after {
+  transform: translateX(3px);
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="monitoramento-home">
+  <header class="monitoramento-home__header">
+    <p class="monitoramento-home__eyebrow">CGPJU</p>
+    <h1 class="monitoramento-home__title">Monitoramentos</h1>
+    <p class="monitoramento-home__subtitle">
+      Selecione o monitoramento desejado. O conteúdo atual do sistema foi alocado em
+      <span class="monitoramento-home__nowrap">Monitoramento Sistemico</span>.
+    </p>
+  </header>
+
+  <div class="monitoramento-grid">
+    <a href="{% url 'monitoramento:sei' %}" class="monitoramento-card monitoramento-card--sei">
+      <span class="monitoramento-card__chip">Fluxo documental</span>
+      <span class="monitoramento-card__icon">SEI</span>
+      <h2 class="monitoramento-card__title">Monitoramento do SEI</h2>
+      <p class="monitoramento-card__desc">
+        Visão dedicada ao acompanhamento de demandas e fluxos vinculados ao SEI.
+      </p>
+      <span class="monitoramento-card__cta">Acessar monitoramento</span>
+    </a>
+
+    <a href="{% url 'monitoramento:lista' %}" class="monitoramento-card monitoramento-card--sistemico">
+      <span class="monitoramento-card__chip">Operacao central</span>
+      <span class="monitoramento-card__icon">SYS</span>
+      <h2 class="monitoramento-card__title">Monitoramento Sistemico</h2>
+      <p class="monitoramento-card__desc">
+        Inclui todas as abas e funcionalidades de monitoramento que ja existiam no sistema.
+      </p>
+      <span class="monitoramento-card__cta">Abrir ambiente atual</span>
+    </a>
+
+    <a href="{% url 'monitoramento:aj' %}" class="monitoramento-card monitoramento-card--aj">
+      <span class="monitoramento-card__chip">Modulo especializado</span>
+      <span class="monitoramento-card__icon">AJ</span>
+      <h2 class="monitoramento-card__title">Monitoramento AJ</h2>
+      <p class="monitoramento-card__desc">
+        Espaco dedicado para acompanhamento especifico do modulo AJ, separado do sistemico.
+      </p>
+      <span class="monitoramento-card__cta">Acessar monitoramento</span>
+    </a>
+  </div>
+</section>
+{% endblock %}

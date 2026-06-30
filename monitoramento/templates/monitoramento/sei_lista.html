@@ -1,0 +1,278 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}Monitoramento do SEI{% endblock %}
+
+{% block extra_head %}
+<style>
+.sei-doc-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.sei-doc-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  padding: var(--space-3);
+}
+
+.sei-doc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2);
+}
+
+.sei-doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: var(--space-2) var(--space-4);
+}
+
+.sei-doc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sei-doc-field--full {
+  grid-column: 1 / -1;
+}
+
+.sei-doc-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.sei-doc-value {
+  margin: 0;
+  white-space: pre-line;
+  line-height: 1.45;
+}
+
+@media (max-width: 840px) {
+  .sei-doc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header__content">
+    <div>
+      <p class="page-header__eyebrow">CGPJU · Monitoramento</p>
+      <h1 class="page-header__title">Monitoramento do SEI</h1>
+      <p class="page-header__subtitle">
+        {% if page_obj %}{{ page_obj.paginator.count }}{% else %}0{% endif %} processos no resultado
+        · {{ total_processos }} processos no total
+        · {{ total_documentos }} documentos vinculados
+      </p>
+    </div>
+
+    <a href="{% url 'monitoramento:hub' %}" class="btn btn-ghost" style="white-space:nowrap;flex-shrink:0;">
+      ← Voltar
+    </a>
+    <a href="{% url 'monitoramento:lista' %}" class="btn btn-ghost" style="white-space:nowrap;flex-shrink:0;">
+      Monitoramento Sistemico
+    </a>
+  </div>
+</div>
+
+<div class="filters-bar">
+  <form method="get" class="filters-bar__form" role="search">
+    <div class="filters-bar__search">
+      <span class="filters-bar__icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input
+        type="search"
+        name="q"
+        value="{{ q }}"
+        placeholder="Buscar por processo, documento, assunto, unidade, tipo, resumo, assinantes, criador ou arquivo"
+        class="filters-bar__input"
+        aria-label="Busca"
+      >
+    </div>
+
+    <button type="submit" class="btn btn--primary btn--sm">Filtrar</button>
+    {% if q %}
+      <a href="{% url 'monitoramento:sei' %}" class="btn btn--ghost btn--sm">Limpar</a>
+    {% endif %}
+  </form>
+</div>
+
+  {% if processos %}
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:220px">Processo</th>
+          <th style="width:150px">1ª Assinatura</th>
+          <th>Assunto principal</th>
+          <th style="width:260px">Unidade principal</th>
+          <th class="data-table__th--num" style="width:110px">Documentos</th>
+          <th style="width:90px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for processo in processos %}
+        <tr class="data-table__row" id="row-{{ processo.pk }}">
+          <td class="data-table__td--mono">
+            <strong>{{ processo.numero_processo }}</strong>
+          </td>
+          <td class="data-table__td--mono">
+            {% if processo.primeira_data_assinatura %}
+              {{ processo.primeira_data_assinatura|date:"d/m/Y" }}
+            {% else %}
+              —
+            {% endif %}
+          </td>
+          <td class="data-table__td--main">
+            <span class="demand-name">{{ processo.assunto_principal|default:"—" }}</span>
+          </td>
+          <td>{{ processo.unidade_principal|default:"—" }}</td>
+          <td class="data-table__td--num">{{ processo.total_documentos }}</td>
+          <td class="data-table__td--expand">
+            <button type="button"
+                    class="expand-toggle"
+                    aria-expanded="false"
+                    aria-controls="detail-{{ processo.pk }}"
+                    title="Expandir detalhes">
+              <svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="detail-row" id="detail-{{ processo.pk }}" hidden>
+          <td colspan="6" class="detail-cell">
+            <div class="sei-doc-list">
+              {% for doc in processo.documentos.all %}
+              <article class="sei-doc-item">
+                <div class="sei-doc-head">
+                  <span class="badge badge--info">Documento {{ doc.numero_documento }}</span>
+                  {% if doc.tipo %}<span class="badge badge--warning">{{ doc.tipo }}</span>{% endif %}
+                </div>
+
+                <div class="sei-doc-grid">
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Processo</span>
+                    <p class="sei-doc-value detail-value--mono">{{ doc.processo.numero_processo }}</p>
+                  </div>
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Documento</span>
+                    <p class="sei-doc-value detail-value--mono">{{ doc.numero_documento }}</p>
+                  </div>
+
+                  <div class="sei-doc-field sei-doc-field--full">
+                    <span class="sei-doc-label">Assunto</span>
+                    <p class="sei-doc-value">{{ doc.assunto|default:"—" }}</p>
+                  </div>
+
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Tipo</span>
+                    <p class="sei-doc-value">{{ doc.tipo|default:"—" }}</p>
+                  </div>
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Data de assinatura</span>
+                    <p class="sei-doc-value detail-value--mono">
+                      {% if doc.data_assinatura %}{{ doc.data_assinatura|date:"d/m/Y" }}{% else %}—{% endif %}
+                    </p>
+                  </div>
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Unidade</span>
+                    <p class="sei-doc-value">{{ doc.unidade|default:"—" }}</p>
+                  </div>
+
+                  <div class="sei-doc-field sei-doc-field--full">
+                    <span class="sei-doc-label">Resumo</span>
+                    <p class="sei-doc-value">{{ doc.resumo|default:"—"|linebreaksbr }}</p>
+                  </div>
+
+                  <div class="sei-doc-field sei-doc-field--full">
+                    <span class="sei-doc-label">Assinantes</span>
+                    <p class="sei-doc-value">{{ doc.assinantes|default:"—" }}</p>
+                  </div>
+
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Criado por</span>
+                    <p class="sei-doc-value detail-value--mono">{{ doc.criado_por|default:"—" }}</p>
+                  </div>
+                  <div class="sei-doc-field">
+                    <span class="sei-doc-label">Versão por</span>
+                    <p class="sei-doc-value detail-value--mono">{{ doc.versao_por|default:"—" }}</p>
+                  </div>
+
+                  <div class="sei-doc-field sei-doc-field--full">
+                    <span class="sei-doc-label">Arquivo</span>
+                    <p class="sei-doc-value detail-value--mono">{{ doc.arquivo_nome|default:"—" }}</p>
+                  </div>
+                </div>
+              </article>
+              {% empty %}
+              <div class="empty-state" style="padding:var(--space-4);">
+                <p class="empty-state__title">Sem documentos vinculados</p>
+              </div>
+              {% endfor %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Paginação">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{ q }}{% endif %}"
+         class="btn btn--ghost btn--sm">← Anterior</a>
+    {% endif %}
+    <span class="pagination__info">
+      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q }}{% endif %}"
+         class="btn btn--ghost btn--sm">Próxima →</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <div class="empty-state">
+    {% if q %}
+      <p class="empty-state__title">Nenhum processo encontrado</p>
+      <p class="empty-state__body">Ajuste a busca ou limpe o filtro.</p>
+    {% else %}
+      <p class="empty-state__title">Nenhum processo importado</p>
+      <p class="empty-state__body">Execute o comando de importação do SEI para popular os dados.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.expand-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const detailRow = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!detailRow) return;
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.classList.toggle('is-open', !expanded);
+    detailRow.hidden = expanded;
+  });
+});
+</script>
+{% endblock %}

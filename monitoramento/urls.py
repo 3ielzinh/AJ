@@ -4,12 +4,19 @@ from . import views
 app_name = "monitoramento"
 
 urlpatterns = [
-    # Visão consolidada (todas as categorias)
-    path("", views.DemandaListView.as_view(), name="lista"),
+    # Hub de monitoramentos
+    path("", views.MonitoramentoHubView.as_view(), name="hub"),
+    path("sei/", views.MonitoramentoSEIView.as_view(), name="sei"),
+    path("aj/", views.MonitoramentoAJView.as_view(), name="aj"),
+
+    # Monitoramento Sistemico (visão atual)
+    path("sistemico/", views.DemandaListView.as_view(), name="lista"),
 
     # Visões por categoria
     path("evolutivas/",         views.EvolutivaListView.as_view(),        name="evolutivas"),
     path("corretivas/",         views.CorretivaListView.as_view(),        name="corretivas"),
+    path("gestao-objetos/",     views.GestaoObjetosListView.as_view(),    name="gestao_objetos"),
+    # Rotas legadas (mantidas por compatibilidade)
     path("indicacao-rubrica/",  views.IndicacaoRubricaListView.as_view(), name="indicacao_rubrica"),
     path("criacao-objeto/",     views.CriacaoObjetoListView.as_view(),    name="criacao_objeto"),
     path("concluidas/",         views.ConcluídasListView.as_view(),       name="concluidas"),

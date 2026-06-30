@@ -1,0 +1,311 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}Meu Perfil — AJ{% endblock %}
+
+{% block extra_head %}
+<style>
+.perfil-wrap { padding: var(--space-8) var(--page-padding) var(--space-10); }
+
+.perfil-filters {
+  margin-bottom: var(--space-3);
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.perfil-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.perfil-card__head {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.perfil-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.perfil-ident {
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.perfil-ident__row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.perfil-ident__label {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.perfil-ident__value {
+  margin: 0;
+}
+
+.perfil-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.perfil-kpi {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  background: var(--color-surface);
+}
+
+.perfil-kpi__label {
+  margin: 0 0 2px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-weight: 700;
+}
+
+.perfil-kpi__value {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.perfil-role-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.perfil-docs-table {
+  table-layout: fixed;
+}
+
+.perfil-docs-table thead th,
+.perfil-docs-table tbody td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.perfil-docs-table tbody tr {
+  height: 68px;
+}
+
+.perfil-docs-table__assunto {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.perfil-pagination {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+@media (max-width: 1040px) {
+  .perfil-grid { grid-template-columns: 1fr; }
+  .perfil-kpis { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .perfil-kpis { grid-template-columns: 1fr; }
+  .perfil-ident__row { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="perfil-wrap">
+  <div class="page-header" style="margin-bottom:var(--space-5);">
+    <div class="page-header__content">
+      <div>
+        <p class="page-header__eyebrow">Conta</p>
+        <h1 class="page-header__title">Meu Perfil</h1>
+        <p class="page-header__subtitle">Visão consolidada de dados cadastrais e participação documental no SEI.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="perfil-grid">
+    <aside class="perfil-card">
+      <div class="perfil-card__head">
+        <h2 class="perfil-card__title">Informações da Conta</h2>
+      </div>
+      <div class="perfil-ident">
+        <div class="perfil-ident__row">
+          <span class="perfil-ident__label">Nome</span>
+          <p class="perfil-ident__value">{{ user.first_name|default:"—" }}</p>
+        </div>
+        <div class="perfil-ident__row">
+          <span class="perfil-ident__label">Usuário</span>
+          <p class="perfil-ident__value data-table__td--mono">{{ user.username }}</p>
+        </div>
+        <div class="perfil-ident__row">
+          <span class="perfil-ident__label">Conta ativa</span>
+          <p class="perfil-ident__value">{% if user.is_active %}Sim{% else %}Não{% endif %}</p>
+        </div>
+        <div class="perfil-ident__row">
+          <span class="perfil-ident__label">Perfil admin</span>
+          <p class="perfil-ident__value">{% if user.is_staff %}Sim{% else %}Não{% endif %}</p>
+        </div>
+        <div class="perfil-ident__row">
+          <span class="perfil-ident__label">Cadastro</span>
+          <p class="perfil-ident__value">{{ user.date_joined|date:"d/m/Y H:i" }}</p>
+        </div>
+        <div class="perfil-ident__row">
+          <span class="perfil-ident__label">Último acesso</span>
+          <p class="perfil-ident__value">{% if user.last_login %}{{ user.last_login|date:"d/m/Y H:i" }}{% else %}—{% endif %}</p>
+        </div>
+      </div>
+    </aside>
+
+    <section>
+      <div class="perfil-kpis">
+        <article class="perfil-kpi">
+          <p class="perfil-kpi__label">Criação</p>
+          <p class="perfil-kpi__value">{{ participacao.criacao }}</p>
+        </article>
+        <article class="perfil-kpi">
+          <p class="perfil-kpi__label">Edição</p>
+          <p class="perfil-kpi__value">{{ participacao.edicao }}</p>
+        </article>
+        <article class="perfil-kpi">
+          <p class="perfil-kpi__label">Análise</p>
+          <p class="perfil-kpi__value">{{ participacao.analise }}</p>
+        </article>
+        <article class="perfil-kpi">
+          <p class="perfil-kpi__label">Assinatura</p>
+          <p class="perfil-kpi__value">{{ participacao.assinatura }}</p>
+        </article>
+        <article class="perfil-kpi">
+          <p class="perfil-kpi__label">Total</p>
+          <p class="perfil-kpi__value">{{ participacao.total }}</p>
+        </article>
+      </div>
+
+      <div class="filters-bar perfil-filters">
+        <form method="get" class="filters-bar__form" role="search">
+          <div class="filters-bar__search">
+            <span class="filters-bar__icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </span>
+            <input
+              type="search"
+              name="q"
+              value="{{ filtro_q }}"
+              placeholder="Buscar por qualquer termo..."
+              class="filters-bar__input"
+              aria-label="Busca"
+            >
+          </div>
+
+          <select name="participacao" class="filters-bar__select" aria-label="Participação">
+            {% for valor, rotulo in participacao_opcoes %}
+              <option value="{{ valor }}" {% if filtro_participacao == valor %}selected{% endif %}>{{ rotulo }}</option>
+            {% endfor %}
+          </select>
+
+          <input
+            type="month"
+            name="mes_ano"
+            value="{{ filtro_mes_ano }}"
+            class="filters-bar__select"
+            aria-label="Mês e ano"
+          >
+
+          <button type="submit" class="btn btn--primary btn-sm">Filtrar</button>
+          {% if filtros_ativos %}
+            <a href="{{ request.path }}" class="btn btn--ghost btn-sm">Limpar</a>
+          {% endif %}
+
+          <a href="{% url 'core:perfil_exportar_csv' %}{% if export_querystring %}?{{ export_querystring }}{% endif %}" class="btn btn--secondary btn-sm">
+            Download CSV
+          </a>
+        </form>
+      </div>
+
+      {% if docs_with_roles %}
+      <div class="table-wrapper">
+        <table class="data-table perfil-docs-table">
+          <thead>
+            <tr>
+              <th style="width:170px;">Documento</th>
+              <th style="width:220px;">Processo</th>
+              <th style="width:170px;">Tipo</th>
+              <th>Assunto</th>
+              <th style="width:220px;">Participações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in docs_with_roles %}
+            <tr>
+              <td class="data-table__td--mono">{{ item.doc.numero_documento }}</td>
+              <td class="data-table__td--mono">{{ item.doc.processo.numero_processo }}</td>
+              <td>{{ item.doc.tipo|default:"—" }}</td>
+              <td class="perfil-docs-table__assunto" title="{{ item.doc.assunto|default:'—' }}">{{ item.doc.assunto|default:"—" }}</td>
+              <td>
+                <div class="perfil-role-badges">
+                  {% for role in item.roles %}
+                    {% if role == "Criacao" %}<span class="badge badge--info">Criação</span>{% endif %}
+                    {% if role == "Edicao" %}<span class="badge badge--warning">Edição</span>{% endif %}
+                    {% if role == "Analise" %}<span class="badge badge--default">Análise</span>{% endif %}
+                    {% if role == "Assinatura" %}<span class="badge badge--success">Assinatura</span>{% endif %}
+                  {% endfor %}
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if docs_page and docs_page.paginator.num_pages > 1 %}
+      <nav class="perfil-pagination" aria-label="Paginação">
+        {% if docs_page.has_previous %}
+          <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ docs_page.previous_page_number }}" class="btn btn--ghost btn-sm">← Anterior</a>
+        {% endif %}
+        <span class="pagination__info">Página {{ docs_page.number }} de {{ docs_page.paginator.num_pages }}</span>
+        {% if docs_page.has_next %}
+          <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ docs_page.next_page_number }}" class="btn btn--ghost btn-sm">Próxima →</a>
+        {% endif %}
+      </nav>
+      {% endif %}
+
+      {% else %}
+      <div class="empty-state">
+        <p class="empty-state__title">
+          {% if filtros_ativos %}Nenhum documento encontrado com os filtros aplicados{% else %}Sem participação documental encontrada{% endif %}
+        </p>
+        <p class="empty-state__body">
+          {% if filtros_ativos %}Ajuste os filtros e tente novamente.{% else %}Ainda não há documentos do SEI vinculados ao seu usuário.{% endif %}
+        </p>
+      </div>
+      {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}

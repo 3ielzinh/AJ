@@ -4,10 +4,9 @@ from django.db import models
 
 
 class TipoDemanda(models.TextChoices):
-    EVOLUTIVA          = "evolutiva",          "Evolutiva"
-    CORRETIVA          = "corretiva",          "Corretiva"
-    INDICACAO_RUBRICA  = "indicacao_rubrica",  "Indicação de Rubrica"
-    CRIACAO_OBJETO     = "criacao_objeto",     "Criação de Objeto"
+    EVOLUTIVA        = "evolutiva",        "Evolutiva"
+    CORRETIVA        = "corretiva",        "Corretiva"
+    GESTAO_OBJETOS   = "gestao_objetos",   "Gestão de Objetos"
 
 
 class StatusDemanda(models.TextChoices):
@@ -20,8 +19,8 @@ class Demanda(models.Model):
     """
     Representa uma demanda do módulo de Monitoramento CGPJU.
 
-    O campo `tipo` discrimina a categoria da demanda (evolutiva, corretiva,
-    indicação de rubrica ou criação de objeto), permitindo listagens e filtros
+    O campo `tipo` discrimina a categoria da demanda (evolutiva, corretiva
+    ou gestão de objetos), permitindo listagens e filtros
     independentes por área, sem necessidade de models separados.
 
     A regra de cálculo de prazo (originalmente fórmula Excel na col. E da
@@ -110,3 +109,58 @@ class Demanda(models.Model):
         """Versão formatada de dias_espera para uso direto em templates."""
         d = self.dias_espera
         return str(d) if d is not None else "—"
+
+
+class ProcessoSEI(models.Model):
+    numero_processo = models.CharField("Processo SEI", max_length=30, unique=True, db_index=True)
+    assunto_principal = models.CharField("Assunto principal", max_length=2000, blank=True, default="")
+    unidade_principal = models.CharField("Unidade principal", max_length=300, blank=True, default="")
+    primeira_data_assinatura = models.DateField("Primeira data de assinatura", null=True, blank=True)
+    total_documentos = models.PositiveIntegerField("Total de documentos", default=0)
+    criado_em = models.DateTimeField("Criado em", auto_now_add=True)
+    atualizado_em = models.DateTimeField("Atualizado em", auto_now=True)
+
+    class Meta:
+        verbose_name = "Processo SEI"
+        verbose_name_plural = "Processos SEI"
+        ordering = ["numero_processo"]
+        indexes = [
+            models.Index(fields=["numero_processo"]),
+            models.Index(fields=["assunto_principal"]),
+        ]
+
+    def __str__(self):
+        return self.numero_processo
+
+
+class DocumentoSEI(models.Model):
+    processo = models.ForeignKey(
+        ProcessoSEI,
+        on_delete=models.CASCADE,
+        related_name="documentos",
+        verbose_name="Processo",
+    )
+    numero_documento = models.CharField("Documento", max_length=20, unique=True, db_index=True)
+    assunto = models.CharField("Assunto", max_length=2000, blank=True, default="")
+    tipo = models.CharField("Tipo", max_length=200, blank=True, default="")
+    data_assinatura = models.DateField("Data de assinatura", null=True, blank=True)
+    unidade = models.CharField("Unidade", max_length=300, blank=True, default="")
+    resumo = models.TextField("Resumo", blank=True, default="")
+    assinantes = models.TextField("Assinantes", blank=True, default="")
+    criado_por = models.CharField("Criado por", max_length=255, blank=True, default="")
+    versao_por = models.CharField("Versão por", max_length=255, blank=True, default="")
+    arquivo_nome = models.CharField("Arquivo", max_length=500, blank=True, default="")
+    criado_em = models.DateTimeField("Criado em", auto_now_add=True)
+    atualizado_em = models.DateTimeField("Atualizado em", auto_now=True)
+
+    class Meta:
+        verbose_name = "Documento SEI"
+        verbose_name_plural = "Documentos SEI"
+        ordering = ["numero_documento"]
+        indexes = [
+            models.Index(fields=["processo", "numero_documento"]),
+            models.Index(fields=["tipo"]),
+        ]
+
+    def __str__(self):
+        return f"{self.numero_documento} ({self.processo.numero_processo})"

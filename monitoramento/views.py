@@ -1,4 +1,4 @@
-from django.views.generic import ListView, View
+from django.views.generic import ListView, View, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
@@ -7,10 +7,58 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.db import transaction
 from django.db.models import Q, Count, Avg, F
-from datetime import date
+from datetime import date, datetime
 import json as _json
-from .models import Demanda, TipoDemanda, StatusDemanda
+from .models import Demanda, DocumentoSEI, ProcessoSEI, TipoDemanda, StatusDemanda
 from .forms import DemandaForm
+
+
+class MonitoramentoHubView(LoginRequiredMixin, TemplateView):
+    template_name = "monitoramento/home.html"
+
+
+class MonitoramentoSEIView(LoginRequiredMixin, ListView):
+    model = ProcessoSEI
+    template_name = "monitoramento/sei_lista.html"
+    context_object_name = "processos"
+    paginate_by = 25
+
+    def get_queryset(self):
+        qs = ProcessoSEI.objects.all().prefetch_related("documentos")
+        q = self.request.GET.get("q", "").strip()
+        if q:
+            qs = qs.filter(
+                Q(numero_processo__icontains=q)
+                | Q(assunto_principal__icontains=q)
+                | Q(unidade_principal__icontains=q)
+                | Q(documentos__numero_documento__icontains=q)
+                | Q(documentos__assunto__icontains=q)
+                | Q(documentos__tipo__icontains=q)
+                | Q(documentos__unidade__icontains=q)
+                | Q(documentos__resumo__icontains=q)
+                | Q(documentos__assinantes__icontains=q)
+                | Q(documentos__criado_por__icontains=q)
+                | Q(documentos__versao_por__icontains=q)
+                | Q(documentos__arquivo_nome__icontains=q)
+            ).distinct()
+        return qs.order_by("-total_documentos", "numero_processo")
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["q"] = self.request.GET.get("q", "")
+        ctx["total_processos"] = ProcessoSEI.objects.count()
+        ctx["total_documentos"] = DocumentoSEI.objects.count()
+        return ctx
+
+
+class MonitoramentoAJView(LoginRequiredMixin, TemplateView):
+    template_name = "monitoramento/submonitoramento.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["titulo"] = "Monitoramento AJ"
+        ctx["descricao"] = "Este monitoramento estara separado do Monitoramento Sistemico."
+        return ctx
 
 
 class DemandaListView(LoginRequiredMixin, ListView):
@@ -29,6 +77,80 @@ class DemandaListView(LoginRequiredMixin, ListView):
     # Subclasses definem este atributo para fixar o tipo exibido
     tipo_fixo: str | None = None
 
+    def aplicar_busca_global(self, qs, termo: str):
+        """
+        Aplica busca ampla sobre campos textuais, enumerações, datas e números.
+        """
+        termo = termo.strip()
+        if not termo:
+            return qs
+
+        q_obj = (
+            Q(nome__icontains=termo)
+            | Q(tipo__icontains=termo)
+            | Q(classificacao__icontains=termo)
+            | Q(status__icontains=termo)
+            | Q(processo_sei__icontains=termo)
+            | Q(processo_relacionado__icontains=termo)
+            | Q(alm__icontains=termo)
+            | Q(localizacao__icontains=termo)
+            | Q(observacoes__icontains=termo)
+        )
+
+        termo_lower = termo.lower()
+
+        # Permite buscar por labels legíveis de tipo.
+        tipo_labels = {
+            "evolutiva": TipoDemanda.EVOLUTIVA,
+            "corretiva": TipoDemanda.CORRETIVA,
+            "gestao de objetos": TipoDemanda.GESTAO_OBJETOS,
+            "gestão de objetos": TipoDemanda.GESTAO_OBJETOS,
+            # Compatibilidade com nomenclatura antiga.
+            "indicacao de rubrica": TipoDemanda.GESTAO_OBJETOS,
+            "indicação de rubrica": TipoDemanda.GESTAO_OBJETOS,
+            "criacao de objeto": TipoDemanda.GESTAO_OBJETOS,
+            "criação de objeto": TipoDemanda.GESTAO_OBJETOS,
+        }
+        if termo_lower in tipo_labels:
+            q_obj |= Q(tipo=tipo_labels[termo_lower])
+
+        # Permite buscar por labels legíveis de status.
+        status_labels = {
+            "nao iniciada": StatusDemanda.NAO_INICIADA,
+            "não iniciada": StatusDemanda.NAO_INICIADA,
+            "em andamento": StatusDemanda.EM_ANDAMENTO,
+            "concluida": StatusDemanda.CONCLUIDA,
+            "concluída": StatusDemanda.CONCLUIDA,
+        }
+        if termo_lower in status_labels:
+            q_obj |= Q(status=status_labels[termo_lower])
+
+        # Busca numérica em priorização.
+        if termo.isdigit():
+            q_obj |= Q(priorizacao=int(termo))
+
+        # Busca por reiteração com termos comuns.
+        if termo_lower in {"sim", "true", "verdadeiro", "reiterada", "reiterado"}:
+            q_obj |= Q(reiterada=True)
+        if termo_lower in {"nao", "não", "false", "falso"}:
+            q_obj |= Q(reiterada=False)
+
+        # Busca por datas em formatos usuais.
+        formatos_data = ["%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y"]
+        for formato in formatos_data:
+            try:
+                data_digitada = datetime.strptime(termo, formato).date()
+                q_obj |= (
+                    Q(data_inicio=data_digitada)
+                    | Q(data_conclusao=data_digitada)
+                    | Q(data_reiteracao=data_digitada)
+                )
+                break
+            except ValueError:
+                continue
+
+        return qs.filter(q_obj)
+
     def get_queryset(self):
         qs = Demanda.objects.all()
 
@@ -42,21 +164,18 @@ class DemandaListView(LoginRequiredMixin, ListView):
 
         # Filtro por status
         status_param = self.request.GET.get("status", "")
+        q = self.request.GET.get("q", "").strip()
         if status_param:
             qs = qs.filter(status=status_param)
         else:
             # Fora da aba Concluídas, nunca mostra concluídas (elas ficam na aba própria)
-            qs = qs.exclude(status=StatusDemanda.CONCLUIDA)
+            # Exceção: com busca preenchida, inclui também concluídas para busca global.
+            if not q:
+                qs = qs.exclude(status=StatusDemanda.CONCLUIDA)
 
         # Busca textual
-        q = self.request.GET.get("q", "").strip()
         if q:
-            qs = qs.filter(
-                Q(nome__icontains=q)
-                | Q(processo_sei__icontains=q)
-                | Q(observacoes__icontains=q)
-                | Q(localizacao__icontains=q)
-            )
+            qs = self.aplicar_busca_global(qs, q)
 
         return qs.order_by("priorizacao", "-data_inicio")
 
@@ -90,12 +209,16 @@ class CorretivaListView(DemandaListView):
     tipo_fixo = TipoDemanda.CORRETIVA
 
 
-class IndicacaoRubricaListView(DemandaListView):
-    tipo_fixo = TipoDemanda.INDICACAO_RUBRICA
+class GestaoObjetosListView(DemandaListView):
+    tipo_fixo = TipoDemanda.GESTAO_OBJETOS
 
 
-class CriacaoObjetoListView(DemandaListView):
-    tipo_fixo = TipoDemanda.CRIACAO_OBJETO
+class IndicacaoRubricaListView(GestaoObjetosListView):
+    pass
+
+
+class CriacaoObjetoListView(GestaoObjetosListView):
+    pass
 
 
 class ConcluídasListView(DemandaListView):
@@ -110,12 +233,7 @@ class ConcluídasListView(DemandaListView):
         qs = Demanda.objects.filter(status=StatusDemanda.CONCLUIDA)
         q = self.request.GET.get("q", "").strip()
         if q:
-            qs = qs.filter(
-                Q(nome__icontains=q)
-                | Q(processo_sei__icontains=q)
-                | Q(observacoes__icontains=q)
-                | Q(localizacao__icontains=q)
-            )
+            qs = self.aplicar_busca_global(qs, q)
         tipo_param = self.request.GET.get("tipo", "")
         if tipo_param:
             qs = qs.filter(tipo=tipo_param)

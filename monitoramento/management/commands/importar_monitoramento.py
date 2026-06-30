@@ -1,7 +1,7 @@
 """
 Comando: importar_monitoramento
 ================================
-Importa as demandas das abas EVOLUTIVO, CORRETIVO e IND. DE RUBR.
+Importa as demandas das abas EVOLUTIVO, CORRETIVO, IND. DE RUBR. e CRIAÇÃO OBJ.
 de uma planilha Excel (.xlsm) para o banco de dados.
 
 Uso:
@@ -33,16 +33,16 @@ PLANILHA_PADRAO = Path.home() / "Downloads" / "Monitoramento CGPJU (1).xlsm"
 ABAS = {
     "EVOLUTIVO":    TipoDemanda.EVOLUTIVA,
     "CORRETIVO":    TipoDemanda.CORRETIVA,
-    "IND. DE RUBR.": TipoDemanda.INDICACAO_RUBRICA,
-    "CRIAÇÃO OBJ.": TipoDemanda.CRIACAO_OBJETO,
+    "IND. DE RUBR.": TipoDemanda.GESTAO_OBJETOS,
+    "CRIAÇÃO OBJ.": TipoDemanda.GESTAO_OBJETOS,
 }
 
 # Mapeamento para a aba CONCLUIDAS (usa coluna OBSERVAÇÕES como discriminador de tipo)
 TIPOS_CONCLUIDAS = {
     "EVOLUTIVO":    TipoDemanda.EVOLUTIVA,
     "CORRETIVO":    TipoDemanda.CORRETIVA,
-    "IND. DE RUBR.": TipoDemanda.INDICACAO_RUBRICA,
-    "CRIAÇÃO OBJ.": TipoDemanda.CRIACAO_OBJETO,
+    "IND. DE RUBR.": TipoDemanda.GESTAO_OBJETOS,
+    "CRIAÇÃO OBJ.": TipoDemanda.GESTAO_OBJETOS,
 }
 
 # Normalização de status (planilha usa capitalização inconsistente)

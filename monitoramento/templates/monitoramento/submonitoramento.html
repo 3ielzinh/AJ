@@ -1,0 +1,16 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="container section" style="padding-top:var(--space-8);padding-bottom:var(--space-10);">
+  <p class="eyebrow">CGPJU · Monitoramento</p>
+  <h1 class="hero__title" style="margin-bottom:var(--space-3);">{{ titulo }}</h1>
+  <p class="hero__subtitle" style="max-width:760px;">{{ descricao }}</p>
+
+  <div style="display:flex;gap:var(--space-3);margin-top:var(--space-5);flex-wrap:wrap;">
+    <a href="{% url 'monitoramento:hub' %}" class="btn btn-ghost">Voltar aos monitoramentos</a>
+    <a href="{% url 'monitoramento:lista' %}" class="btn btn-primary">Ir para Monitoramento Sistemico</a>
+  </div>
+</div>
+{% endblock %}
