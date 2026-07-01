@@ -2,9 +2,112 @@
 
 {% block title %}Monitoramento — {{ tipo_display }}{% endblock %}
 
+{% block extra_head %}
+<style>
+.monitoramento-header {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.monitoramento-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.monitoramento-header__actions .btn {
+  min-width: 0;
+  padding-inline: 1rem;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.monitoramento-header__actions .btn--ghost {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 95, 115, 0.14);
+}
+
+.monitoramento-header__actions .btn--secondary {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(240, 246, 248, 0.94));
+  border-color: rgba(0, 95, 115, 0.12);
+}
+
+.monitoramento-header__actions .btn--primary {
+  box-shadow: 0 10px 22px rgba(0, 95, 115, 0.18);
+}
+
+.monitoramento-tabs {
+  width: 100%;
+  padding: 0 clamp(1.25rem, 3vw, 3rem);
+  margin: 0 0 var(--space-3);
+}
+
+.monitoramento-tabs .tab-nav {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  padding: 0.45rem;
+  border-top: 0;
+  border-radius: calc(var(--radius-lg) + 2px);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(0, 95, 115, 0.08), var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.monitoramento-tabs .tab-nav__item {
+  border-bottom: 0;
+  border-radius: 999px;
+  padding: 0.72rem 1rem;
+  color: var(--color-text-muted);
+}
+
+.monitoramento-tabs .tab-nav__item:hover {
+  background: rgba(0, 95, 115, 0.06);
+}
+
+.monitoramento-tabs .tab-nav__item--active {
+  color: var(--color-primary-dark);
+  background: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 95, 115, 0.08);
+}
+
+.monitoramento-tabs .tab-nav__count {
+  background: rgba(0, 95, 115, 0.08);
+}
+
+.monitoramento-tabs .tab-nav__item--active .tab-nav__count {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.monitoramento-tabs .tab-nav__count--done {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.filters-bar--tight {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .monitoramento-header__actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .monitoramento-tabs .tab-nav {
+    justify-content: flex-start;
+    border-radius: calc(var(--radius-lg) + 2px);
+  }
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
-  <div class="page-header__content">
+  <div class="page-header__content monitoramento-header">
     <div>
       <p class="page-header__eyebrow">CGPJU · Monitoramento</p>
       <h1 class="page-header__title">{{ tipo_display }}</h1>
@@ -14,50 +117,47 @@
       </p>
     </div>
 
-    <a href="{% url 'monitoramento:dashboard' %}" class="btn btn-ghost">
-      ◎ Dashboard
-    </a>
-    <a href="{% url 'monitoramento:criar' %}" class="btn btn--primary">
-      + Nova demanda
-    </a>
-    <a href="{% url 'monitoramento:reordenar' %}" class="btn btn-ghost">
-      ↕ Reordenar
-    </a>
-
-    {# Tabs por categoria #}
-    <nav class="tab-nav" aria-label="Categorias">
-      <a href="{% url 'monitoramento:lista' %}"
-         class="tab-nav__item {% if not tipo_fixo and not filtro_tipo and not is_concluidas %}tab-nav__item--active{% endif %}">
-        Todas
-        <span class="tab-nav__count">{{ contadores.evolutiva|add:contadores.corretiva|add:contadores.gestao_objetos }}</span>
-      </a>
-      <a href="{% url 'monitoramento:evolutivas' %}"
-         class="tab-nav__item {% if tipo_fixo == 'evolutiva' %}tab-nav__item--active{% endif %}">
-        Evolutivas
-        <span class="tab-nav__count">{{ contadores.evolutiva }}</span>
-      </a>
-      <a href="{% url 'monitoramento:corretivas' %}"
-         class="tab-nav__item {% if tipo_fixo == 'corretiva' %}tab-nav__item--active{% endif %}">
-        Corretivas
-        <span class="tab-nav__count">{{ contadores.corretiva }}</span>
-      </a>
-      <a href="{% url 'monitoramento:gestao_objetos' %}"
-         class="tab-nav__item {% if tipo_fixo == 'gestao_objetos' %}tab-nav__item--active{% endif %}">
-        Gestão de Objetos
-        <span class="tab-nav__count">{{ contadores.gestao_objetos }}</span>
-      </a>
-      <a href="{% url 'monitoramento:concluidas' %}"
-         class="tab-nav__item {% if is_concluidas %}tab-nav__item--active{% endif %}"
-        >
-        ✓ Concluídas
-        <span class="tab-nav__count" style="background:#dcfce7;color:#166534;">{{ contadores.concluidas }}</span>
-      </a>
-    </nav>
+    <div class="monitoramento-header__actions">
+      <a href="{% url 'monitoramento:dashboard' %}" class="btn btn--ghost btn-sm">Ver dashboard</a>
+      <a href="{% url 'monitoramento:reordenar' %}" class="btn btn--secondary btn-sm">Reordenar fila</a>
+      <a href="{% url 'monitoramento:criar' %}" class="btn btn--primary btn-sm">Nova demanda</a>
+    </div>
   </div>
 </div>
 
+<div class="monitoramento-tabs">
+  {# Tabs por categoria #}
+  <nav class="tab-nav" aria-label="Categorias">
+    <a href="{% url 'monitoramento:lista' %}"
+       class="tab-nav__item {% if not tipo_fixo and not filtro_tipo and not is_concluidas %}tab-nav__item--active{% endif %}">
+      Todas
+      <span class="tab-nav__count">{{ contadores.evolutiva|add:contadores.corretiva|add:contadores.gestao_objetos }}</span>
+    </a>
+    <a href="{% url 'monitoramento:evolutivas' %}"
+       class="tab-nav__item {% if tipo_fixo == 'evolutiva' %}tab-nav__item--active{% endif %}">
+      Evolutivas
+      <span class="tab-nav__count">{{ contadores.evolutiva }}</span>
+    </a>
+    <a href="{% url 'monitoramento:corretivas' %}"
+       class="tab-nav__item {% if tipo_fixo == 'corretiva' %}tab-nav__item--active{% endif %}">
+      Corretivas
+      <span class="tab-nav__count">{{ contadores.corretiva }}</span>
+    </a>
+    <a href="{% url 'monitoramento:gestao_objetos' %}"
+       class="tab-nav__item {% if tipo_fixo == 'gestao_objetos' %}tab-nav__item--active{% endif %}">
+      Gestão de Objetos
+      <span class="tab-nav__count">{{ contadores.gestao_objetos }}</span>
+    </a>
+    <a href="{% url 'monitoramento:concluidas' %}"
+       class="tab-nav__item {% if is_concluidas %}tab-nav__item--active{% endif %}">
+      Concluídas
+      <span class="tab-nav__count tab-nav__count--done">{{ contadores.concluidas }}</span>
+    </a>
+  </nav>
+</div>
+
 {# Filtros #}
-<div class="filters-bar">
+<div class="filters-bar filters-bar--tight">
   <form method="get" class="filters-bar__form" role="search">
     {% if tipo_fixo %}
       {# Preserva tipo quando a view é de tipo fixo #}
@@ -95,9 +195,9 @@
       {% endfor %}
     </select>
 
-    <button type="submit" class="btn btn--primary btn--sm">Filtrar</button>
+    <button type="submit" class="btn btn--primary btn-sm">Filtrar</button>
     {% if q or filtro_status or filtro_tipo %}
-      <a href="{{ request.path }}" class="btn btn--ghost btn--sm">Limpar</a>
+      <a href="{{ request.path }}" class="btn btn--ghost btn-sm">Limpar</a>
     {% endif %}
   </form>
 </div>
@@ -266,14 +366,14 @@
 <nav class="pagination" aria-label="Paginação">
   {% if page_obj.has_previous %}
     <a href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{ q }}{% endif %}{% if filtro_status %}&status={{ filtro_status }}{% endif %}{% if filtro_tipo %}&tipo={{ filtro_tipo }}{% endif %}"
-       class="btn btn--ghost btn--sm">← Anterior</a>
+      class="btn btn--ghost btn-sm">← Anterior</a>
   {% endif %}
   <span class="pagination__info">
     Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
   </span>
   {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q }}{% endif %}{% if filtro_status %}&status={{ filtro_status }}{% endif %}{% if filtro_tipo %}&tipo={{ filtro_tipo }}{% endif %}"
-       class="btn btn--ghost btn--sm">Próxima →</a>
+      class="btn btn--ghost btn-sm">Próxima →</a>
   {% endif %}
 </nav>
 {% endif %}

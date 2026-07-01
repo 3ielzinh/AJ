@@ -5,16 +5,193 @@
 {% block extra_head %}
 <style>
 /* ── Form layout ─────────────────────────────────────────── */
-.form-page          { padding: var(--space-8) var(--page-padding) var(--space-10); max-width: 860px; margin: 0 auto; }
-.form-page__back    { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--font-size-sm); color: var(--color-text-muted); text-decoration: none; margin-bottom: var(--space-5); transition: color var(--transition-fast); }
-.form-page__back:hover { color: var(--color-primary); }
-.form-page__header  { margin-bottom: var(--space-7); padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-border); }
-.form-page__eyebrow { font-size: var(--font-size-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--color-primary); margin: 0 0 var(--space-1); }
-.form-page__title   { font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin: 0; line-height: 1.3; }
+.form-page {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: var(--space-6) clamp(1.25rem, 3vw, 3rem) var(--space-10);
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+.form-page::before,
+.form-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.form-page::before {
+  width: 320px;
+  height: 320px;
+  right: -80px;
+  top: -20px;
+  background: radial-gradient(circle, rgba(0, 95, 115, 0.14), rgba(0, 95, 115, 0));
+}
+
+.form-page::after {
+  width: 240px;
+  height: 240px;
+  left: -70px;
+  bottom: 14%;
+  background: radial-gradient(circle, rgba(238, 155, 0, 0.1), rgba(238, 155, 0, 0));
+}
+
+.form-page__shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-5);
+}
+
+.form-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-bottom: var(--space-4);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 95, 115, 0.12);
+  box-shadow: var(--shadow-sm);
+  transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.form-page__back:hover {
+  color: var(--color-primary);
+  border-color: rgba(0, 95, 115, 0.26);
+  transform: translateY(-1px);
+}
+
+.form-page__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: var(--space-4);
+}
+
+.form-page__lead,
+.form-page__panel,
+.form-card {
+  border: 1px solid rgba(0, 95, 115, 0.12);
+  border-radius: calc(var(--radius-lg) + 2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-page__lead,
+.form-page__panel {
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+.form-page__lead {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(238, 155, 0, 0.14), transparent 32%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 247, 251, 0.93));
+}
+
+.form-page__panel {
+  display: grid;
+  gap: var(--space-4);
+  align-content: space-between;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(0, 95, 115, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 251, 0.94));
+}
+
+.form-page__eyebrow { font-size: var(--font-size-xs); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--color-primary); margin: 0 0 var(--space-2); }
+.form-page__title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--color-text); margin: 0 0 var(--space-2); line-height: 0.98; letter-spacing: -0.04em; }
+.form-page__desc { font-size: var(--font-size-base); color: var(--color-text-muted); margin: 0; max-width: 62ch; line-height: 1.6; }
+
+.form-page__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.form-page__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.form-page__chip--accent { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+.form-page__chip--success { background: #ecfdf5; border-color: #bbf7d0; color: #065f46; }
+
+.form-page__panel-label {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.form-page__panel-value {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--color-text);
+}
+
+.form-page__panel-copy {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.form-page__panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.form-page__panel-item {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--color-border);
+}
+
+.form-page__panel-key {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.form-page__panel-val {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text);
+}
 
 /* Card sections */
-.form-card          { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-5) var(--space-6); margin-bottom: var(--space-4); box-shadow: var(--shadow-sm); }
-.form-card__title   { font-size: var(--font-size-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--color-primary); margin: 0 0 var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border); }
+.form-sections { display: grid; gap: var(--space-4); }
+.form-card { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,251,252,0.96)); padding: var(--space-5) var(--space-6); margin-bottom: 0; }
+.form-card__title { font-size: var(--font-size-xs); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--color-primary); margin: 0 0 var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border); }
 .form-grid          { display: grid; gap: var(--space-4) var(--space-5); }
 .form-grid--2       { grid-template-columns: 1fr 1fr; }
 .form-grid--3       { grid-template-columns: 1fr 1fr 1fr; }
@@ -46,12 +223,19 @@
 .form-errors-summary ul { margin: var(--space-1) 0 0 var(--space-4); }
 
 /* Footer actions */
-.form-actions       { display: flex; gap: var(--space-3); align-items: center; padding-top: var(--space-5); border-top: 1px solid var(--color-border); margin-top: var(--space-2); }
+.form-actions { display: flex; gap: var(--space-3); align-items: center; padding-top: var(--space-5); border-top: 1px solid var(--color-border); margin-top: var(--space-2); }
 .form-actions__danger { margin-left: auto; }
+
+@media (max-width: 980px) {
+  .form-page__hero { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 640px) {
   .form-grid--2, .form-grid--3 { grid-template-columns: 1fr; }
   .form-col-span-2, .form-col-span-3 { grid-column: span 1; }
+  .form-page__panel-grid { grid-template-columns: 1fr; }
+  .form-actions { flex-wrap: wrap; }
+  .form-actions__danger { margin-left: 0; width: 100%; }
 }
 </style>
 {% endblock %}
@@ -59,15 +243,58 @@
 {% block content %}
 <div class="form-page">
 
+  <div class="form-page__shell">
+
   <a href="{{ cancelar_url }}" class="form-page__back">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Voltar ao Monitoramento
   </a>
 
-  <header class="form-page__header">
-    <p class="form-page__eyebrow">CGPJU · Monitoramento</p>
-    <h1 class="form-page__title">{{ titulo }}</h1>
-  </header>
+  <section class="form-page__hero">
+    <div class="form-page__lead">
+      <div>
+        <p class="form-page__eyebrow">CGPJU · Monitoramento</p>
+        <h1 class="form-page__title">{{ titulo }}</h1>
+        <p class="form-page__desc">Preencha os dados centrais da demanda, registre o estado atual e mantenha a rastreabilidade operacional em um único fluxo de criação ou edição.</p>
+      </div>
+
+      <div class="form-page__chips">
+        <span class="form-page__chip form-page__chip--accent">Fluxo unificado</span>
+        {% if object %}
+          <span class="form-page__chip form-page__chip--success">Edição em andamento</span>
+        {% else %}
+          <span class="form-page__chip form-page__chip--success">Nova demanda</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <aside class="form-page__panel">
+      <div>
+        <p class="form-page__panel-label">Contexto do registro</p>
+        <p class="form-page__panel-value">{{ titulo }}</p>
+        <p class="form-page__panel-copy">O formulário organiza identificação, status, rastreabilidade e reiteração para reduzir perda de contexto entre atualização e acompanhamento.</p>
+      </div>
+
+      <div class="form-page__panel-grid">
+        <div class="form-page__panel-item">
+          <span class="form-page__panel-key">Modo</span>
+          <span class="form-page__panel-val">{% if object %}Edição{% else %}Criação{% endif %}</span>
+        </div>
+        <div class="form-page__panel-item">
+          <span class="form-page__panel-key">Escopo</span>
+          <span class="form-page__panel-val">Demanda sistêmica</span>
+        </div>
+        <div class="form-page__panel-item">
+          <span class="form-page__panel-key">Blocos</span>
+          <span class="form-page__panel-val">5 seções</span>
+        </div>
+        <div class="form-page__panel-item">
+          <span class="form-page__panel-key">Ação final</span>
+          <span class="form-page__panel-val">Salvar alterações</span>
+        </div>
+      </div>
+    </aside>
+  </section>
 
   {% if form.errors %}
   <div class="form-errors-summary" role="alert">
@@ -83,6 +310,8 @@
 
   <form method="post" novalidate>
     {% csrf_token %}
+
+    <div class="form-sections">
 
     {# ── Seção: Identificação ── #}
     <div class="form-card">
@@ -231,7 +460,7 @@
     {# ── Ações ── #}
     <div class="form-actions">
       <button type="submit" class="btn btn--primary">Salvar alterações</button>
-      <a href="{{ cancelar_url }}" class="btn btn-ghost">Cancelar</a>
+      <a href="{{ cancelar_url }}" class="btn btn--ghost">Cancelar</a>
       {% if object %}
       <div class="form-actions__danger">
         <a href="{% url 'monitoramento:excluir' object.pk %}" class="btn btn--danger">Excluir demanda</a>
@@ -239,6 +468,9 @@
       {% endif %}
     </div>
 
+    </div>
+
   </form>
+</div>
 </div>
 {% endblock %}

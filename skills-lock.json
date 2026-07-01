@@ -1,11 +1,107 @@
 {
   "version": 1,
   "skills": {
+    "code-review-excellence": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/developer-essentials/skills/code-review-excellence/SKILL.md",
+      "computedHash": "89b2a6a234f6368b12f0232e1d77bd5ed894115114edf67eb1f2976e153664c0"
+    },
+    "design-system-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/ui-design/skills/design-system-patterns/SKILL.md",
+      "computedHash": "b6ba14bf8809ee027a3c4c9e88bdc71626eb7f68604b65dce000519d8e4ad458"
+    },
+    "django-patterns": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/django-patterns/SKILL.md",
+      "computedHash": "29bd613c39c39f304fa3ba02c09121dc27a6c7242bb72dd9ca3d268950cc8670"
+    },
+    "docker-expert": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/docker-expert/SKILL.md",
+      "computedHash": "7be30b1c18b91628dcd8437a89e7e20acce76bae4349533e4ebdeb376a660bcb"
+    },
+    "documentation-writer": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/documentation-writer/SKILL.md",
+      "computedHash": "ee53d65b163cd7eb953a930c95841cfe398cc2c0bd24c06508bbaa07c432be35"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "781bd6d3f9b19f8c9af6b53d8d0e4876d0183841b565db34ca7092ffa412d111"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "93f53fd1c0352d3d7ec17b8f73d7351bf76f4821e55d123c9d2abc2c53ba48e4"
+    },
+    "github-actions-docs": {
+      "source": "xixu-me/skills",
+      "sourceType": "github",
+      "skillPath": "skills/github-actions-docs/SKILL.md",
+      "computedHash": "ead3fa2aff18e829c468dee593e1dc897aa95dc7a07d9ff8ff9f30c296b19af8"
+    },
+    "mcp-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-builder/SKILL.md",
+      "computedHash": "6498a736a8dc5c645047c8a875b8ea7417e2ad97146f005200e50d20a9337ada"
+    },
+    "prompt-engineering-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/llm-application-dev/skills/prompt-engineering-patterns/SKILL.md",
+      "computedHash": "7ac6e2a8672c5afab8cddd7f122523c6a3c28cf01e0b35c5b5385fc3a2bbe901"
+    },
+    "python-performance-optimization": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/python-development/skills/python-performance-optimization/SKILL.md",
+      "computedHash": "393407ad12fa7c847db0e77935783908f394b883efc05442e886ad70f9fa34f5"
+    },
+    "python-testing-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/python-development/skills/python-testing-patterns/SKILL.md",
+      "computedHash": "f4de9bdbf2db1c1f8e8211e6af463ad49956f15aa604e2f08ae716c71e71f64b"
+    },
+    "refactoring-patterns": {
+      "source": "wondelai/skills",
+      "sourceType": "github",
+      "skillPath": "refactoring-patterns/SKILL.md",
+      "computedHash": "5372f40d0b83f20713f7cb8436466280e234cc1b2a5e3c956ece457724c7b3a4"
+    },
+    "security-review": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/security-review/SKILL.md",
+      "computedHash": "e92c5c7f41ad27b42eedc8afd9ca566115b24b66d81e42c7b626dac9dcdb28cb"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "3639bed1f40b3fbadae79fee631c42c89b2d1f5c30b05d5aa3cca06422a6bbbc"
+    },
+    "systematic-debugging": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/systematic-debugging/SKILL.md",
+      "computedHash": "792a368e074981d7e3138edb439e138489b2ac247cd1e5739fab52af680fb17b"
+    },
+    "technical-writing": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "technical-writing/SKILL.md",
+      "computedHash": "84fa66851fa6618549bdd387bee0a1f8bcd911e1a77cec9f25f0c06b7d4b2749"
     }
   }
 }

@@ -4,6 +4,115 @@ Sistema interno de monitoramento de demandas da CGPJU.
 
 ---
 
+## Visão Geral
+
+O AJ é um sistema interno em Django voltado para organização, acompanhamento e priorização de demandas da CGPJU, com foco em monitoramento sistêmico, rastreabilidade de processos SEI e leitura operacional do fluxo de trabalho.
+
+Atualmente o projeto reúne três frentes principais:
+
+- Monitoramento sistêmico de demandas com filtros, tabs por categoria, dashboard, reordenação de prioridade e CRUD completo.
+- Consulta e consolidação de informações do SEI, incluindo processos, documentos e relação com autoria, edição, análise e assinatura.
+- Camada de interface institucional com design system próprio, telas iniciais redesenhadas e experiência mais consistente entre home, perfil e monitoramento.
+
+---
+
+## Principais Fluxos
+
+### Home
+
+- Painel inicial com métricas consolidadas de demandas, taxa de conclusão, distribuição por tipo e atalhos operacionais.
+
+### Perfil
+
+- Visão da conta autenticada.
+- Consolidação de participação documental no SEI.
+- Filtros por texto, tipo de participação e mês/ano.
+- Exportação CSV dos documentos vinculados ao usuário.
+
+### Monitoramento
+
+- Hub principal com entrada para monitoramento sistêmico, monitoramento SEI e área AJ.
+- Lista sistêmica com filtros, tabs por categoria e navegação por status.
+- Dashboard com KPIs, gráficos e destaque para demandas antigas/em atraso.
+- Reordenação de prioridades por categoria com drag and drop.
+- Fluxo de criação, edição e exclusão de demandas.
+
+### SEI
+
+- Consulta de processos e documentos com busca ampla.
+- Relação entre documento, processo, tipo, assunto e metadados relevantes.
+
+---
+
+## Interface e Design System
+
+O front do projeto foi consolidado em torno de um design system simples, baseado em:
+
+- tokens em `static/css/tokens.css`
+- estilos-base em `static/css/base.css`
+- componentes compartilhados em `static/css/components.css`
+- template de referência em `core/templates/core/design_system.html`
+
+Telas com tratamento visual mais recente:
+
+- Home principal
+- Perfil
+- Hub de monitoramento
+- Lista sistêmica
+- Dashboard
+- Reordenação de prioridades
+- Formulário de nova demanda e edição
+
+Observações importantes:
+
+- A rota `core:design_system` existe para referência visual e fica restrita a usuários com `is_staff`.
+- O objetivo do front atual é manter consistência entre páginas operacionais sem depender de bibliotecas visuais externas além do que já existe no projeto.
+
+---
+
+## Skills e Workflow no Workspace
+
+Este repositório passou a incorporar um workflow de iteração visual apoiado por skills instaladas no workspace. Hoje, as mais relevantes para manutenção da interface são:
+
+- `frontend-design`: usada como referência para decisões de layout, hierarquia visual, hero sections, distribuição espacial e refinamento das telas.
+- `find-skills`: usada para descoberta e instalação de novas skills de apoio ao fluxo de desenvolvimento.
+
+Essas skills não são dependências de runtime da aplicação. Elas servem apenas como apoio ao processo de desenvolvimento dentro do editor/agente.
+
+Quando evoluir a interface, mantenha este norte:
+
+- reaproveitar `components.css` antes de criar estilos isolados por página
+- preservar a linguagem já aplicada em home, monitoramento, perfil, dashboard e formulários
+- validar mudanças com `manage.py check` após edições estruturais de template
+
+---
+
+## Rotas Principais
+
+- `/` — home
+- `/perfil/` — perfil do usuário
+- `/monitoramento/` — hub do monitoramento
+- `/monitoramento/sistemico/` — lista sistêmica de demandas
+- `/monitoramento/dashboard/` — dashboard do monitoramento
+- `/monitoramento/reordenar/` — reordenação de prioridades
+- `/monitoramento/nova/` — nova demanda
+- `/monitoramento/<pk>/editar/` — edição de demanda
+- `/monitoramento/<pk>/excluir/` — exclusão de demanda
+- `/monitoramento/sei/` — consulta de processos SEI
+
+---
+
+## Validação Rápida
+
+Após mudanças em templates, estilos ou views, use pelo menos:
+
+```powershell
+$env:DJANGO_SETTINGS_MODULE="config.settings.development"
+.\venv\Scripts\python.exe manage.py check
+```
+
+---
+
 ## Requisitos
 
 ### Opção 1: Docker (Recomendado)
