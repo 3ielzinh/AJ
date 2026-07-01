@@ -411,3 +411,157 @@ docker compose logs --follow
 - [Django Documentation](https://docs.djangoproject.com/)
 - [Docker Documentation](https://docs.docker.com/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
+
+---
+
+## Governanca do Projeto
+
+Este repositorio possui documentos de apoio para agentes e manutencao continua:
+
+- `AGENTS.md`: guia principal de desenvolvimento para agentes e pessoas.
+- `CHANGELOG.md`: historico de mudancas relevantes por versao.
+- `ROADMAP.md`: direcao planejada para proximas versoes.
+- `TODO.md`: pendencias operacionais ainda nao planejadas em detalhe.
+- `docs/adr/`: decisoes arquiteturais registradas.
+- `.ai/context/`: contexto funcional do produto.
+- `.ai/rules/`: regras de trabalho para agentes.
+- `.ai/prompts/`: prompts reutilizaveis para tarefas recorrentes.
+- `.ai/agents/`: agentes especializados para backend, frontend, review, QA, docs, DBA e DevOps.
+
+---
+
+## Arquitetura
+
+O AJ segue uma arquitetura Django tradicional, com separacao por apps e templates compartilhados.
+
+Fluxo geral de uma requisicao:
+
+```text
+Usuario
+  |
+  v
+URL
+  |
+  v
+View
+  |
+  v
+Form / Service / Query
+  |
+  v
+Model
+  |
+  v
+PostgreSQL ou SQLite em desenvolvimento local
+  |
+  v
+Template
+  |
+  v
+HTML + CSS modular
+```
+
+Camadas principais:
+
+- `config`: configuracao Django, urls globais, settings, WSGI e ASGI.
+- `core`: home, perfil, autenticacao complementar e referencia do design system.
+- `monitoramento`: demandas, SEI, dashboard, filtros, prioridades e importacoes.
+- `templates`: layouts e componentes reutilizaveis.
+- `static/css`: tokens, base visual e componentes compartilhados.
+- `fixtures`: dados de apoio para desenvolvimento e sincronizacao.
+
+---
+
+## Apps
+
+### core
+
+Responsavel pelas telas institucionais e transversais:
+
+- home
+- perfil do usuario
+- design system de referencia
+- formularios e views de apoio
+
+### monitoramento
+
+Responsavel pelo dominio operacional:
+
+- demandas
+- lista sistemica
+- dashboard
+- reordenacao de prioridades
+- consulta SEI
+- comandos de importacao
+
+---
+
+## Fluxos Funcionais
+
+### Fluxo Monitoramento
+
+```text
+Usuario
+  |
+  v
+/monitoramento/
+  |
+  v
+Hub de monitoramento
+  |
+  +--> Lista sistemica
+  +--> Dashboard
+  +--> Reordenacao
+  +--> Nova demanda / editar / excluir
+```
+
+### Fluxo SEI
+
+```text
+Usuario
+  |
+  v
+/monitoramento/sei/
+  |
+  v
+Busca de processos e documentos
+  |
+  v
+ProcessoSEI / DocumentoSEI
+  |
+  v
+Resultado consolidado por processo, documento, tipo e participacao
+```
+
+### Fluxo Dashboard
+
+```text
+Demandas
+  |
+  v
+Consultas agregadas
+  |
+  v
+KPIs, graficos e destaques
+  |
+  v
+Leitura operacional para priorizacao
+```
+
+### Fluxo Perfil
+
+```text
+Usuario autenticado
+  |
+  v
+/perfil/
+  |
+  v
+Documentos SEI vinculados
+  |
+  v
+Filtros por texto, participacao e periodo
+  |
+  v
+Visualizacao e exportacao CSV
+```

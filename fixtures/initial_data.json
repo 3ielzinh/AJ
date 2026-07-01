@@ -341,7 +341,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1200000$TjxoEdTAApLU8KOJAudSuP$SH0e45a9DLb7hlinE8/NA8YMnid7VWHlKFK8NDPfGMk=",
-    "last_login": "2026-06-26T14:49:26.102Z",
+    "last_login": "2026-07-01T11:41:50.166Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -359,7 +359,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1200000$bVcqHeMUjY5VAYbl61JHpb$3zyr3JHEJkgOIYh5uYaxXbYAQTYGL0Zp2fTF+7UjLxg=",
-    "last_login": "2026-06-26T16:39:46.905Z",
+    "last_login": "2026-07-01T12:00:14.076Z",
     "is_superuser": false,
     "username": "gabriel.jorge",
     "first_name": "Gabriel Silva Jorge",
@@ -454,10 +454,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "cdq9uf57s93wrbvkjwj5d23bmq4kbqo9",
+  "pk": "lon7jz78lpwwqoyh3a7rf9j1jl51thf8",
   "fields": {
-    "session_data": ".eJxVjEEOwiAQAP-yZ0OAZYH26N03EMpupWrapLQn499Nkx70OjOZN6S8bzXtTdY0MfRg4fLLhlyeMh-CH3m-L6os87ZOgzoSddqmbgvL63q2f4OaW4UeAmI00QoSSeHRSKAcMTrvvMNQNKFn21nNmilaos7GkQ36gA6Fc4HPF63MNpI:1wd9ak:VIF2MJ3MPjds4AJw-Fts7_tQ6CPQxyVIRVxGdsUnTqk",
-    "expire_date": "2026-07-10T16:39:46.916Z"
+    "session_data": ".eJxVjEEOwiAQAP-yZ0OAZYH26N03EMpupWrapLQn499Nkx70OjOZN6S8bzXtTdY0MfRg4fLLhlyeMh-CH3m-L6os87ZOgzoSddqmbgvL63q2f4OaW4UeAmI00QoSSeHRSKAcMTrvvMNQNKFn21nNmilaos7GkQ36gA6Fc4HPF63MNpI:1wetby:T-OouXL24hyFW9Rw1Hnr_9K6Fl0tGKaSnNOH5qzWhTg",
+    "expire_date": "2026-07-15T12:00:14.088Z"
   }
 },
 {
@@ -1165,9 +1165,9 @@
     "nome": "Tarefa presa no perfil confirmador - erro interno",
     "tipo": "corretiva",
     "classificacao": "",
-    "status": "em_andamento",
+    "status": "concluida",
     "data_inicio": "2023-04-17",
-    "data_conclusao": null,
+    "data_conclusao": "2024-11-05",
     "processo_sei": "NÃO LOCALIZADO",
     "processo_relacionado": "",
     "alm": "3737925",
@@ -1175,9 +1175,9 @@
     "reiterada": false,
     "data_reiteracao": null,
     "priorizacao": null,
-    "observacoes": "ALM nº 3737925, aberta 17/04/23.\nA demanda está na fila do AJ no SERPRO. Vai precisar de uma evolução no AJ. Segundo informações da área técnica, o time do SERPRO está atuando no Sigepe Benefícios - 04/02/25 \nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "observacoes": "ALM nº 3737925, aberta 17/04/23.\r\nA demanda está na fila do AJ no SERPRO. Vai precisar de uma evolução no AJ. Segundo informações da área técnica, o time do SERPRO está atuando no Sigepe Benefícios - 04/02/25 \r\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.\r\n\r\nALM Cancelada",
     "criado_em": "2026-06-23T18:08:31.006Z",
-    "atualizado_em": "2026-06-23T19:31:45.880Z"
+    "atualizado_em": "2026-07-01T14:26:52.302Z"
   }
 },
 {
@@ -1187,9 +1187,9 @@
     "nome": "Alteração regra de absorção",
     "tipo": "corretiva",
     "classificacao": "",
-    "status": "em_andamento",
+    "status": "concluida",
     "data_inicio": "2025-05-23",
-    "data_conclusao": null,
+    "data_conclusao": "2025-07-21",
     "processo_sei": "19975.015654/2025-13",
     "processo_relacionado": "",
     "alm": "-",
@@ -1199,7 +1199,7 @@
     "priorizacao": null,
     "observacoes": "Processo encaminhado à DESIN para análise e adoção de providências relacionadas à absorção de rubricas judiciais decorrentes de decisões transitadas em julgado referentes às vantagens oriundas dos denominados \"Planos Econômicos\". Posteriormente, a demanda foi reiterada, sendo o processo devolvido em 18/07/2025 à DESIN, com a finalidade de obter esclarecimentos acerca da efetiva implementação da parametrização da absorção das referidas rubricas, bem como do andamento das providências anteriormente indicadas nos autos. ATUALIZADO EM 08/06/2026",
     "criado_em": "2026-06-23T18:08:31.007Z",
-    "atualizado_em": "2026-06-23T19:31:45.881Z"
+    "atualizado_em": "2026-07-01T14:24:15.124Z"
   }
 },
 {
@@ -1275,9 +1275,9 @@
     "nome": "Inconsistência na devolução do IR",
     "tipo": "corretiva",
     "classificacao": "",
-    "status": "em_andamento",
+    "status": "concluida",
     "data_inicio": "2021-04-16",
-    "data_conclusao": null,
+    "data_conclusao": "2021-06-14",
     "processo_sei": "NÃO LOCALIZADO",
     "processo_relacionado": "",
     "alm": "2630451",
@@ -1285,9 +1285,9 @@
     "reiterada": false,
     "data_reiteracao": null,
     "priorizacao": null,
-    "observacoes": "ALM n.º 2630451, aberta em 16/04/2021. \n  Caso concreto: Ação nº 1005455-1420174013800. \nA demanda está com a equipe da folha. A área técnica sugeriu analisar a necessidade da demanda (urgência) para sinalizar a DESIN – 03/02/25\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "observacoes": "ALM n.º 2630451, aberta em 16/04/2021. \r\n  Caso concreto: Ação nº 1005455-1420174013800. \r\nA demanda está com a equipe da folha. A área técnica sugeriu analisar a necessidade da demanda (urgência) para sinalizar a DESIN – 03/02/25\r\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.\r\n\r\nALM - Não localizada.",
     "criado_em": "2026-06-23T18:08:31.013Z",
-    "atualizado_em": "2026-06-23T19:31:45.885Z"
+    "atualizado_em": "2026-07-01T14:27:47.522Z"
   }
 },
 {
@@ -1341,9 +1341,9 @@
     "nome": "Replicação indevida de valores de uma matrícula noutra matrícula (DEVOLUÇÃO DE ABATE-TETO NA PENSÃO)",
     "tipo": "corretiva",
     "classificacao": "",
-    "status": "em_andamento",
+    "status": "concluida",
     "data_inicio": "2023-12-06",
-    "data_conclusao": null,
+    "data_conclusao": "2026-06-08",
     "processo_sei": "19975.134282/2023-53",
     "processo_relacionado": "",
     "alm": "-",
@@ -1351,9 +1351,9 @@
     "reiterada": true,
     "data_reiteracao": "2026-06-08",
     "priorizacao": null,
-    "observacoes": "Processo encaminhado à DESIN para solução sistêmica com vistas a correção das inconsistências apresentadas no objeto \"Devolução de Abate-Teto na Pensão\".\nA demanda está na fila da Folha para ser verificada - 04/02/25. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026",
+    "observacoes": "Processo encaminhado à DESIN para solução sistêmica com vistas a correção das inconsistências apresentadas no objeto \"Devolução de Abate-Teto na Pensão\".\r\nA demanda está na fila da Folha para ser verificada - 04/02/25. Demanda reiterada pela DIGJU em 28/05/2026. ATUALIZADO EM 29/05/2026\r\n\r\nTendo em vista o lapso temporal conclui-se a demanda.",
     "criado_em": "2026-06-23T18:08:31.016Z",
-    "atualizado_em": "2026-06-23T19:31:45.888Z"
+    "atualizado_em": "2026-07-01T14:26:03.567Z"
   }
 },
 {
@@ -1441,7 +1441,7 @@
     "priorizacao": null,
     "observacoes": "Sistema passou a utilizar o valor do PSS majorado pela antecipação de férias para fins de cálculo do adicional de 1/3 de férias pago em rubrica judicial, o que resultou na majoração do montante apurado. A demanda decorre de inconsistência no cálculo de parcelas judiciais quando a base considerada pelo sistema é impactada por verbas transitórias, como antecipação de férias, posteriormente estornadas. Tal situação tem ocasionado majoração indevida do valor apurado para o terço constitucional de férias incidente sobre o abono de permanência, indicando a necessidade de ajuste sistêmico para excluir parcelas de natureza provisória da base de cálculo judicial.",
     "criado_em": "2026-06-23T18:08:31.020Z",
-    "atualizado_em": "2026-06-23T19:31:45.892Z"
+    "atualizado_em": "2026-07-01T14:14:57.014Z"
   }
 },
 {
@@ -1451,9 +1451,9 @@
     "nome": "Pagamento não gerado em ação judicial confirmada",
     "tipo": "corretiva",
     "classificacao": "",
-    "status": "em_andamento",
+    "status": "concluida",
     "data_inicio": "2024-05-17",
-    "data_conclusao": null,
+    "data_conclusao": "2024-08-29",
     "processo_sei": "NÃO LOCALIZADO",
     "processo_relacionado": "",
     "alm": "4278147",
@@ -1461,9 +1461,9 @@
     "reiterada": false,
     "data_reiteracao": null,
     "priorizacao": null,
-    "observacoes": "ALM n.º 4278147, aberta em 17/05/2024.\nCaso concreto: Ação nº 0013278-9220184014100. Houve a homologação em 2023 e só foi feita a confirmação em 2024. O que provavelmente gerou pagamento de exercicios anteriores. Serpro sugeriu que a ação voltasse para o Executor. Verificar junto ao órgão visto que a ação está sendo paga com rubrica administrativa.\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
+    "observacoes": "ALM n.º 4278147, aberta em 17/05/2024.\r\nCaso concreto: Ação nº 0013278-9220184014100. Houve a homologação em 2023 e só foi feita a confirmação em 2024. O que provavelmente gerou pagamento de exercicios anteriores. Serpro sugeriu que a ação voltasse para o Executor. Verificar junto ao órgão visto que a ação está sendo paga com rubrica administrativa.\r\nResgatar demanda ALM no sistema e avaliar necessidade de criação/instrução de processo SEI para esta demanda, ou conclusão.",
     "criado_em": "2026-06-23T18:08:31.021Z",
-    "atualizado_em": "2026-06-23T19:31:45.893Z"
+    "atualizado_em": "2026-07-01T11:42:07.005Z"
   }
 },
 {
@@ -1787,13 +1787,13 @@
     "processo_sei": "19975.026816/2025-31",
     "processo_relacionado": "",
     "alm": "",
-    "localizacao": "SEM ANDAMENTO",
-    "reiterada": false,
-    "data_reiteracao": null,
+    "localizacao": "MGI-SGP-DESIN-CGGSP-COGES",
+    "reiterada": true,
+    "data_reiteracao": "2026-06-26",
     "priorizacao": null,
     "observacoes": "",
     "criado_em": "2026-06-23T19:31:45.913Z",
-    "atualizado_em": "2026-06-26T12:48:28.566Z"
+    "atualizado_em": "2026-06-30T19:01:27.350Z"
   }
 },
 {
