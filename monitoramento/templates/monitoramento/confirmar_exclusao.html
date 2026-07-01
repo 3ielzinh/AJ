@@ -15,7 +15,7 @@
   <form method="post">
     {% csrf_token %}
     <div style="display: flex; gap: var(--space-3);">
-      <button type="submit" class="btn btn-primary" style="background: #c0392b; border-color: #c0392b;">Sim, excluir</button>
+      <button type="submit" class="btn btn--danger">Sim, excluir</button>
       <a href="{{ cancelar_url }}" class="btn btn-ghost">Cancelar</a>
     </div>
   </form>

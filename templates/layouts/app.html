@@ -39,7 +39,9 @@
             {% if user.is_staff %}
             <a href="{% url 'core:design_system' %}" class="nav-link {% if '/design-system' in request.path %}nav-link--active{% endif %}">Design System</a>
             {% endif %}
+            {% if user.is_superuser %}
             <a href="/admin/" class="nav-link">Admin</a>
+            {% endif %}
         </nav>
 
         {% if user.is_authenticated %}

@@ -2,18 +2,454 @@
 
 {% block title %}Início — AJ{% endblock %}
 
+{% block extra_head %}
+<style>
+.footer {
+    display: none;
+}
+
+.home-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: var(--space-5) clamp(1.25rem, 3vw, 3rem) var(--space-8);
+    display: grid;
+    gap: var(--space-4);
+}
+
+.home-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--radius-lg) + 2px);
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(238, 155, 0, 0.16), transparent 38%),
+        radial-gradient(circle at 88% 12%, rgba(0, 95, 115, 0.18), transparent 42%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 247, 251, 0.86) 58%, rgba(255, 249, 240, 0.92) 100%);
+    border: 1px solid rgba(0, 95, 115, 0.12);
+    box-shadow: var(--shadow-md);
+}
+
+.home-hero::before,
+.home-hero::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+.home-hero::before {
+    inset: auto -6rem -5rem auto;
+    width: 18rem;
+    height: 18rem;
+    background: radial-gradient(circle, rgba(0, 95, 115, 0.16), rgba(0, 95, 115, 0));
+}
+
+.home-hero::after {
+    inset: -5rem auto auto -6rem;
+    width: 16rem;
+    height: 16rem;
+    background: radial-gradient(circle, rgba(238, 155, 0, 0.18), rgba(238, 155, 0, 0));
+}
+
+.home-hero__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+    gap: var(--space-6);
+    align-items: stretch;
+}
+
+.home-hero__eyebrow {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.home-hero__title {
+    margin: 0;
+    max-width: 14ch;
+    font-size: clamp(2.1rem, 4vw, 3.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: manual;
+    text-wrap: balance;
+}
+
+.home-hero__subtitle {
+    margin: var(--space-2) 0 0;
+    max-width: 58ch;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    font-size: var(--font-size-lg);
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: manual;
+    text-wrap: pretty;
+}
+
+.home-hero__actions {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.home-signal {
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0, 95, 115, 0.16);
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: var(--shadow-sm);
+    align-self: stretch;
+}
+
+.home-signal__label {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.home-signal__value {
+    margin: 0;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    line-height: 1.15;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+}
+
+.home-signal__value strong {
+    display: block;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 0.95;
+}
+
+.home-signal__list {
+    margin-top: var(--space-5);
+    display: grid;
+    gap: var(--space-2);
+}
+
+.home-signal__item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(0, 95, 115, 0.12);
+}
+
+.home-signal__item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.home-signal__key {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.home-signal__val {
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+}
+
+.home-grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.home-card {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 95, 115, 0.12);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
+}
+
+.home-card--metric {
+    position: relative;
+    overflow: hidden;
+    min-height: 8.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.home-card--metric::after {
+    content: "";
+    position: absolute;
+    right: -1.6rem;
+    bottom: -1.6rem;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 999px;
+    background: radial-gradient(circle, var(--card-accent, rgba(0, 95, 115, 0.22)) 0%, transparent 72%);
+    opacity: 0.8;
+}
+
+.home-card--primary { --card-accent: var(--color-primary); }
+.home-card--success { --card-accent: var(--color-success); }
+.home-card--accent { --card-accent: var(--color-accent); }
+.home-card--info { --card-accent: var(--color-info); }
+
+.home-card__title {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    font-weight: 700;
+}
+
+.home-card__value {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.2vw, 2.1rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: var(--color-text);
+    position: relative;
+    z-index: 1;
+}
+
+.home-card__meta {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    position: relative;
+    z-index: 1;
+}
+
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+.span-6 { grid-column: span 6; }
+
+.home-secondary {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.home-panel {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 95, 115, 0.12);
+    border-radius: calc(var(--radius-md) + 2px);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-4);
+}
+
+.home-panel--wide {
+    grid-column: span 7;
+}
+
+.home-panel--narrow {
+    grid-column: span 5;
+}
+
+.home-panel__title {
+    margin: 0 0 var(--space-3);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.quick-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-1);
+}
+
+.quick-links a {
+    display: block;
+    padding: 0.75rem var(--space-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0, 95, 115, 0.12);
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.quick-links a:focus-visible,
+.home-hero__actions a:focus-visible {
+    outline: 3px solid rgba(0, 95, 115, 0.22);
+    outline-offset: 3px;
+}
+
+.quick-links a:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.status-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-1);
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.45rem var(--space-3);
+    background: #fff;
+}
+
+.status-row__label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.status-row__value {
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quick-links a,
+    .home-hero__actions a {
+        transition: none;
+    }
+}
+
+@media (min-width: 1024px) and (min-height: 680px) {
+    .home-shell {
+        grid-template-rows: auto auto 1fr;
+        gap: var(--space-4);
+    }
+
+    .home-grid {
+        margin-top: 0;
+        align-content: start;
+    }
+}
+
+@media (max-width: 960px) {
+    .span-3, .span-4, .span-6 { grid-column: span 6; }
+    .home-hero__grid,
+    .home-secondary { grid-template-columns: 1fr; }
+    .home-panel--wide,
+    .home-panel--narrow { grid-column: auto; }
+}
+
+@media (max-width: 640px) {
+    .footer { display: block; }
+    .home-shell { padding: var(--space-4) var(--page-padding) var(--space-6); }
+    .span-3, .span-4, .span-6 { grid-column: span 12; }
+    .home-hero__actions .btn { width: 100%; }
+    .home-hero__title { max-width: 100%; }
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container section">
-    <div class="hero">
-        <p class="eyebrow">Sistema AJ</p>
-        <h1 class="hero__title">Bem-vindo ao AJ</h1>
-        <p class="hero__subtitle">Base estrutural do projeto. Pronta para crescer.</p>
-        <div class="hero__actions">
-            {% if user.is_staff %}
-            {% include 'components/button.html' with label='Ver Design System' href='/design-system/' %}
-            {% endif %}
-            {% include 'components/button.html' with label='Administração' href='/admin/' variant='ghost' %}
+<div class="home-shell">
+    <section class="home-hero">
+        <div class="home-hero__grid">
+            <div>
+                <p class="home-hero__eyebrow">Sistema AJ</p>
+                <h1 class="home-hero__title">Painel inicial com visão rápida do trabalho em andamento</h1>
+                <p class="home-hero__subtitle">
+                    Acompanhe os principais números do monitoramento, acesse atalhos frequentes e mantenha foco nas entregas com maior impacto.
+                </p>
+
+                <div class="home-hero__actions">
+                    {% include 'components/button.html' with label='Abrir Monitoramento' href='/monitoramento/' %}
+                    {% include 'components/button.html' with label='Ver Dashboard' href='/monitoramento/dashboard/' variant='secondary' %}
+                    {% if user.is_staff %}
+                    {% include 'components/button.html' with label='Ver Design System' href='/design-system/' variant='ghost' %}
+                    {% endif %}
+                    {% if user.is_superuser %}
+                    {% include 'components/button.html' with label='Administração' href='/admin/' variant='ghost' %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <aside class="home-signal" aria-label="Resumo rápido">
+                <p class="home-signal__label">Painel ao vivo</p>
+                <p class="home-signal__value"><strong>{{ total_demandas }}</strong> demandas acompanhadas</p>
+                <div class="home-signal__list">
+                    <div class="home-signal__item"><span class="home-signal__key">Concluídas</span><span class="home-signal__val">{{ total_concluidas }}</span></div>
+                    <div class="home-signal__item"><span class="home-signal__key">Em andamento</span><span class="home-signal__val">{{ total_em_andamento }}</span></div>
+                    <div class="home-signal__item"><span class="home-signal__key">Processos SEI</span><span class="home-signal__val">{{ total_processos_sei }}</span></div>
+                    <div class="home-signal__item"><span class="home-signal__key">Documentos SEI</span><span class="home-signal__val">{{ total_documentos_sei }}</span></div>
+                </div>
+            </aside>
         </div>
-    </div>
+    </section>
+
+    <section class="home-grid" aria-label="Resumo">
+        <article class="home-card home-card--metric home-card--primary span-3">
+            <p class="home-card__title">Demandas totais</p>
+            <p class="home-card__value">{{ total_demandas }}</p>
+            <p class="home-card__meta">Base consolidada do monitoramento</p>
+        </article>
+
+        <article class="home-card home-card--metric home-card--success span-3">
+            <p class="home-card__title">Concluídas</p>
+            <p class="home-card__value">{{ total_concluidas }}</p>
+            <p class="home-card__meta">Taxa de conclusão: {{ taxa_conclusao }}%</p>
+        </article>
+
+        <article class="home-card home-card--metric home-card--accent span-3">
+            <p class="home-card__title">Em andamento</p>
+            <p class="home-card__value">{{ total_em_andamento }}</p>
+            <p class="home-card__meta">Itens ativos no momento</p>
+        </article>
+
+        <article class="home-card home-card--metric home-card--info span-3">
+            <p class="home-card__title">Não iniciadas</p>
+            <p class="home-card__value">{{ total_nao_iniciadas }}</p>
+            <p class="home-card__meta">Demandas aguardando início</p>
+        </article>
+    </section>
+
+    <section class="home-secondary" aria-label="Apoio operacional">
+        <article class="home-panel home-panel--wide">
+            <p class="home-panel__title">Distribuição por categoria</p>
+            <ul class="status-list">
+                <li class="status-row"><span class="status-row__label">Evolutivas</span><span class="status-row__value">{{ total_evolutivas }}</span></li>
+                <li class="status-row"><span class="status-row__label">Corretivas</span><span class="status-row__value">{{ total_corretivas }}</span></li>
+                <li class="status-row"><span class="status-row__label">Gestão de Objetos</span><span class="status-row__value">{{ total_gestao_objetos }}</span></li>
+            </ul>
+        </article>
+
+        <article class="home-panel home-panel--narrow">
+            <p class="home-panel__title">Atalhos úteis</p>
+            <ul class="quick-links">
+                <li><a href="/monitoramento/sistemico/">Lista sistêmica de demandas</a></li>
+                <li><a href="/monitoramento/corretivas/">Fila de corretivas</a></li>
+                <li><a href="/monitoramento/concluidas/">Demandas concluídas</a></li>
+                <li><a href="/monitoramento/sei/">Monitoramento SEI</a></li>
+                <li><a href="/perfil/">Meu perfil e participação</a></li>
+            </ul>
+        </article>
+    </section>
 </div>
 {% endblock %}

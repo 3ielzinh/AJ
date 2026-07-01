@@ -11,12 +11,38 @@ from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 import unicodedata
 
-from monitoramento.models import DocumentoSEI
+from monitoramento.models import Demanda, DocumentoSEI, StatusDemanda, TipoDemanda
 from .forms import SignUpForm
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "core/home.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        total_demandas = Demanda.objects.count()
+        concluidas = Demanda.objects.filter(status=StatusDemanda.CONCLUIDA).count()
+        em_andamento = Demanda.objects.filter(status=StatusDemanda.EM_ANDAMENTO).count()
+        nao_iniciadas = Demanda.objects.filter(status=StatusDemanda.NAO_INICIADA).count()
+
+        taxa_conclusao = round((concluidas / total_demandas) * 100) if total_demandas else 0
+
+        ctx.update(
+            {
+                "total_demandas": total_demandas,
+                "total_concluidas": concluidas,
+                "total_em_andamento": em_andamento,
+                "total_nao_iniciadas": nao_iniciadas,
+                "taxa_conclusao": taxa_conclusao,
+                "total_processos_sei": DocumentoSEI.objects.values("processo").distinct().count(),
+                "total_documentos_sei": DocumentoSEI.objects.count(),
+                "total_corretivas": Demanda.objects.filter(tipo=TipoDemanda.CORRETIVA).count(),
+                "total_evolutivas": Demanda.objects.filter(tipo=TipoDemanda.EVOLUTIVA).count(),
+                "total_gestao_objetos": Demanda.objects.filter(tipo=TipoDemanda.GESTAO_OBJETOS).count(),
+            }
+        )
+        return ctx
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):

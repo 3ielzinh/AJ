@@ -16,6 +16,18 @@ from .forms import DemandaForm
 class MonitoramentoHubView(LoginRequiredMixin, TemplateView):
     template_name = "monitoramento/home.html"
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update(
+            {
+                "total_processos_sei": ProcessoSEI.objects.count(),
+                "total_documentos_sei": DocumentoSEI.objects.count(),
+                "total_demandas": Demanda.objects.count(),
+                "total_concluidas": Demanda.objects.filter(status=StatusDemanda.CONCLUIDA).count(),
+            }
+        )
+        return ctx
+
 
 class MonitoramentoSEIView(LoginRequiredMixin, ListView):
     model = ProcessoSEI
@@ -269,12 +281,90 @@ class ConcluídasListView(DemandaListView):
 # Dashboard --------------------------------------------------------------
 
 class DashboardView(LoginRequiredMixin, View):
+    @staticmethod
+    def _aplicar_busca_dashboard(qs, termo: str):
+        termo = termo.strip()
+        if not termo:
+            return qs
+
+        q_obj = (
+            Q(nome__icontains=termo)
+            | Q(tipo__icontains=termo)
+            | Q(classificacao__icontains=termo)
+            | Q(status__icontains=termo)
+            | Q(processo_sei__icontains=termo)
+            | Q(processo_relacionado__icontains=termo)
+            | Q(alm__icontains=termo)
+            | Q(localizacao__icontains=termo)
+            | Q(observacoes__icontains=termo)
+        )
+
+        termo_lower = termo.lower()
+        tipo_labels = {
+            "evolutiva": TipoDemanda.EVOLUTIVA,
+            "corretiva": TipoDemanda.CORRETIVA,
+            "gestao de objetos": TipoDemanda.GESTAO_OBJETOS,
+            "gestão de objetos": TipoDemanda.GESTAO_OBJETOS,
+        }
+        if termo_lower in tipo_labels:
+            q_obj |= Q(tipo=tipo_labels[termo_lower])
+
+        status_labels = {
+            "nao iniciada": StatusDemanda.NAO_INICIADA,
+            "não iniciada": StatusDemanda.NAO_INICIADA,
+            "em andamento": StatusDemanda.EM_ANDAMENTO,
+            "concluida": StatusDemanda.CONCLUIDA,
+            "concluída": StatusDemanda.CONCLUIDA,
+        }
+        if termo_lower in status_labels:
+            q_obj |= Q(status=status_labels[termo_lower])
+
+        if termo.isdigit():
+            q_obj |= Q(priorizacao=int(termo))
+
+        for formato in ("%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y"):
+            try:
+                data_digitada = datetime.strptime(termo, formato).date()
+                q_obj |= (
+                    Q(data_inicio=data_digitada)
+                    | Q(data_conclusao=data_digitada)
+                    | Q(data_reiteracao=data_digitada)
+                )
+                break
+            except ValueError:
+                continue
+
+        return qs.filter(q_obj)
+
     def get(self, request):
         hoje = date.today()
 
-        ativas = Demanda.objects.exclude(status=StatusDemanda.CONCLUIDA)
-        concluidas = Demanda.objects.filter(status=StatusDemanda.CONCLUIDA)
-        todas = Demanda.objects.all()
+        q = request.GET.get("q", "").strip()
+        tipo_param = request.GET.get("tipo", "").strip()
+        status_param = request.GET.get("status", "").strip()
+        ano_param = request.GET.get("ano", "").strip()
+        mes_param = request.GET.get("mes", "").strip()
+
+        base_qs = Demanda.objects.all()
+
+        if q:
+            base_qs = self._aplicar_busca_dashboard(base_qs, q)
+
+        if tipo_param:
+            base_qs = base_qs.filter(tipo=tipo_param)
+
+        if status_param:
+            base_qs = base_qs.filter(status=status_param)
+
+        if ano_param.isdigit():
+            base_qs = base_qs.filter(models.Q(data_inicio__year=int(ano_param)) | models.Q(data_conclusao__year=int(ano_param)))
+
+        if mes_param.isdigit():
+            base_qs = base_qs.filter(models.Q(data_inicio__month=int(mes_param)) | models.Q(data_conclusao__month=int(mes_param)))
+
+        ativas = base_qs.exclude(status=StatusDemanda.CONCLUIDA)
+        concluidas = base_qs.filter(status=StatusDemanda.CONCLUIDA)
+        todas = base_qs
 
         # ── KPIs ──────────────────────────────────────────────────────────
         total_ativas    = ativas.count()
@@ -339,11 +429,48 @@ class DashboardView(LoginRequiredMixin, View):
         # ── Gráfico 5: Top 5 mais antigas em andamento ───────────────────
         top_antigas = []
         for d in ativas.filter(status=StatusDemanda.EM_ANDAMENTO, data_inicio__isnull=False).order_by("data_inicio")[:5]:
+            observacoes = (d.observacoes or "").strip().replace("\n", " ").replace("\r", " ")
             top_antigas.append({
+                "id": d.id,
                 "nome":  d.nome[:50] + ("…" if len(d.nome) > 50 else ""),
+                "nome_completo": d.nome,
                 "dias":  (hoje - d.data_inicio).days,
                 "tipo":  d.get_tipo_display(),
+                "status": d.get_status_display(),
+                "status_code": d.status,
+                "processo_sei": d.processo_sei or "—",
+                "data_inicio": d.data_inicio,
+                "data_conclusao": d.data_conclusao,
+                "localizacao": d.localizacao or "—",
+                "priorizacao": d.priorizacao,
+                "reiterada": d.reiterada,
+                "observacoes": observacoes,
             })
+
+        max_dias = max((item["dias"] for item in top_antigas), default=1) or 1
+
+        anos = sorted({
+            ano
+            for ano in (
+                list(Demanda.objects.exclude(data_inicio__isnull=True).values_list("data_inicio__year", flat=True))
+                + list(Demanda.objects.exclude(data_conclusao__isnull=True).values_list("data_conclusao__year", flat=True))
+            )
+            if ano
+        }, reverse=True)
+        meses = [
+            ("1", "Janeiro"),
+            ("2", "Fevereiro"),
+            ("3", "Março"),
+            ("4", "Abril"),
+            ("5", "Maio"),
+            ("6", "Junho"),
+            ("7", "Julho"),
+            ("8", "Agosto"),
+            ("9", "Setembro"),
+            ("10", "Outubro"),
+            ("11", "Novembro"),
+            ("12", "Dezembro"),
+        ]
 
         ctx = {
             # KPIs
@@ -370,6 +497,15 @@ class DashboardView(LoginRequiredMixin, View):
             "chart_faixas_labels":   _json.dumps(list(faixas.keys())),
             "chart_faixas_data":     _json.dumps(list(faixas.values())),
             "top_antigas":           top_antigas,
+            "max_dias_top":          max_dias,
+            "q":                     q,
+            "filtro_tipo":           tipo_param,
+            "filtro_status":         status_param,
+            "filtro_ano":            ano_param,
+            "filtro_mes":            mes_param,
+            "anos_disponiveis":      anos,
+            "meses_disponiveis":     meses,
+            "filtros_ativos":        bool(q or tipo_param or status_param or ano_param or mes_param),
         }
         return render(request, "monitoramento/dashboard.html", ctx)
 
@@ -406,6 +542,8 @@ class DemandaUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, "Demanda atualizada com sucesso.")
+        if getattr(self.object, "status", None) == StatusDemanda.CONCLUIDA:
+            return reverse_lazy("monitoramento:concluidas")
         return reverse_lazy("monitoramento:lista")
 
     def get_context_data(self, **kwargs):

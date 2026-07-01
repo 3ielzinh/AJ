@@ -4,36 +4,181 @@
 
 {% block extra_head %}
 <style>
-.perfil-wrap { padding: var(--space-8) var(--page-padding) var(--space-10); }
+.perfil-wrap {
+  padding: var(--space-8) 0 var(--space-10);
+}
 
-.perfil-filters {
-  margin-bottom: var(--space-3);
+.perfil-shell {
+  width: 100%;
+  max-width: none;
+  padding: 0 clamp(1.25rem, 3vw, 3rem);
+  display: grid;
+  gap: var(--space-5);
+}
+
+.perfil-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.perfil-hero__lead,
+.perfil-hero__panel,
+.perfil-panel,
+.perfil-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 251, 252, 0.96) 100%);
+  border: 1px solid rgba(0, 95, 115, 0.12);
+  border-radius: calc(var(--radius-lg) + 2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.perfil-hero__lead {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(238, 155, 0, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.99) 0%, rgba(239, 247, 251, 0.94) 100%);
+}
+
+.perfil-hero__eyebrow {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.perfil-hero__title {
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+}
+
+.perfil-hero__subtitle {
+  margin: 0;
+  max-width: 62ch;
+  font-size: var(--font-size-base);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.perfil-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.perfil-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.perfil-chip--success { background: #ecfdf5; color: #065f46; border-color: #bbf7d0; }
+.perfil-chip--info { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.perfil-chip--neutral { background: var(--color-surface-soft); color: var(--color-text-muted); }
+
+.perfil-hero__panel {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  display: grid;
+  gap: var(--space-4);
+  align-content: space-between;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(0, 95, 115, 0.12), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 250, 251, 0.95) 100%);
+}
+
+.perfil-hero__panel-label {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.perfil-hero__panel-total {
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--color-text);
+}
+
+.perfil-hero__panel-copy {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.perfil-hero__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.perfil-hero__meta-item {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.perfil-hero__meta-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.perfil-hero__meta-value {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 .perfil-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 360px) 1fr;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: var(--space-4);
   align-items: start;
 }
 
 .perfil-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
 
 .perfil-card__head {
   padding: var(--space-4);
   border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .perfil-card__title {
   margin: 0;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .perfil-ident {
@@ -45,55 +190,117 @@
 .perfil-ident__row {
   display: grid;
   grid-template-columns: 130px 1fr;
-  gap: var(--space-2);
+  gap: var(--space-3);
   font-size: var(--font-size-sm);
+  align-items: baseline;
 }
 
 .perfil-ident__label {
   color: var(--color-text-muted);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .perfil-ident__value {
   margin: 0;
+  font-weight: 600;
+}
+
+.perfil-main {
+  display: grid;
+  gap: var(--space-4);
 }
 
 .perfil-kpis {
   display: grid;
-  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
 }
 
 .perfil-kpi {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-3);
-  background: var(--color-surface);
+  border-radius: calc(var(--radius-md) + 2px);
+  padding: var(--space-4);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 251, 0.95) 100%);
+}
+
+.perfil-kpi::after {
+  content: "";
+  position: absolute;
+  inset: auto var(--space-4) 0;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-primary), rgba(238, 155, 0, 0.8));
 }
 
 .perfil-kpi__label {
-  margin: 0 0 2px;
+  margin: 0 0 0.25rem;
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: .05em;
-  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-weight: 800;
 }
 
 .perfil-kpi__value {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
   font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--color-primary);
 }
 
-.perfil-role-badges {
+.perfil-panel {
+  overflow: hidden;
+}
+
+.perfil-panel__head {
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  gap: var(--space-3);
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.perfil-panel__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.perfil-panel__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.perfil-panel__subtitle {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.perfil-filters {
+  margin-bottom: 0;
+}
+
+.perfil-filters .filters-bar__form {
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  box-shadow: none;
+}
+
+.perfil-filters .btn {
+  flex-shrink: 0;
 }
 
 .perfil-docs-table {
@@ -117,20 +324,27 @@
 }
 
 .perfil-pagination {
-  margin-top: var(--space-4);
+  padding: 0 var(--space-4) var(--space-4);
+  margin-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
 }
 
-@media (max-width: 1040px) {
+.perfil-panel .empty-state {
+  margin: var(--space-4);
+}
+
+@media (max-width: 1120px) {
+  .perfil-hero,
   .perfil-grid { grid-template-columns: 1fr; }
-  .perfil-kpis { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+  .perfil-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 640px) {
-  .perfil-kpis { grid-template-columns: 1fr; }
+  .perfil-kpis,
+  .perfil-hero__meta { grid-template-columns: 1fr; }
   .perfil-ident__row { grid-template-columns: 1fr; }
 }
 </style>
@@ -138,174 +352,207 @@
 
 {% block content %}
 <div class="perfil-wrap">
-  <div class="page-header" style="margin-bottom:var(--space-5);">
-    <div class="page-header__content">
-      <div>
-        <p class="page-header__eyebrow">Conta</p>
-        <h1 class="page-header__title">Meu Perfil</h1>
-        <p class="page-header__subtitle">Visão consolidada de dados cadastrais e participação documental no SEI.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="perfil-grid">
-    <aside class="perfil-card">
-      <div class="perfil-card__head">
-        <h2 class="perfil-card__title">Informações da Conta</h2>
-      </div>
-      <div class="perfil-ident">
-        <div class="perfil-ident__row">
-          <span class="perfil-ident__label">Nome</span>
-          <p class="perfil-ident__value">{{ user.first_name|default:"—" }}</p>
+  <div class="perfil-shell">
+    <section class="perfil-hero">
+      <div class="perfil-hero__lead">
+        <p class="perfil-hero__eyebrow">Conta</p>
+        <h1 class="perfil-hero__title">Meu Perfil</h1>
+        <p class="perfil-hero__subtitle">Visão consolidada dos dados cadastrais e da participação documental no SEI, com foco no que o usuário efetivamente faz na rotina.</p>
+        <div class="perfil-chip-row" aria-label="Resumo da conta">
+          <span class="perfil-chip {% if user.is_active %}perfil-chip--success{% else %}perfil-chip--neutral{% endif %}">{% if user.is_active %}Conta ativa{% else %}Conta inativa{% endif %}</span>
+          <span class="perfil-chip {% if user.is_staff %}perfil-chip--info{% else %}perfil-chip--neutral{% endif %}">{% if user.is_staff %}Acesso administrativo{% else %}Acesso padrão{% endif %}</span>
+          <span class="perfil-chip perfil-chip--neutral">{{ user.get_full_name|default:user.username }}</span>
         </div>
-        <div class="perfil-ident__row">
-          <span class="perfil-ident__label">Usuário</span>
-          <p class="perfil-ident__value data-table__td--mono">{{ user.username }}</p>
-        </div>
-        <div class="perfil-ident__row">
-          <span class="perfil-ident__label">Conta ativa</span>
-          <p class="perfil-ident__value">{% if user.is_active %}Sim{% else %}Não{% endif %}</p>
-        </div>
-        <div class="perfil-ident__row">
-          <span class="perfil-ident__label">Perfil admin</span>
-          <p class="perfil-ident__value">{% if user.is_staff %}Sim{% else %}Não{% endif %}</p>
-        </div>
-        <div class="perfil-ident__row">
-          <span class="perfil-ident__label">Cadastro</span>
-          <p class="perfil-ident__value">{{ user.date_joined|date:"d/m/Y H:i" }}</p>
-        </div>
-        <div class="perfil-ident__row">
-          <span class="perfil-ident__label">Último acesso</span>
-          <p class="perfil-ident__value">{% if user.last_login %}{{ user.last_login|date:"d/m/Y H:i" }}{% else %}—{% endif %}</p>
-        </div>
-      </div>
-    </aside>
-
-    <section>
-      <div class="perfil-kpis">
-        <article class="perfil-kpi">
-          <p class="perfil-kpi__label">Criação</p>
-          <p class="perfil-kpi__value">{{ participacao.criacao }}</p>
-        </article>
-        <article class="perfil-kpi">
-          <p class="perfil-kpi__label">Edição</p>
-          <p class="perfil-kpi__value">{{ participacao.edicao }}</p>
-        </article>
-        <article class="perfil-kpi">
-          <p class="perfil-kpi__label">Análise</p>
-          <p class="perfil-kpi__value">{{ participacao.analise }}</p>
-        </article>
-        <article class="perfil-kpi">
-          <p class="perfil-kpi__label">Assinatura</p>
-          <p class="perfil-kpi__value">{{ participacao.assinatura }}</p>
-        </article>
-        <article class="perfil-kpi">
-          <p class="perfil-kpi__label">Total</p>
-          <p class="perfil-kpi__value">{{ participacao.total }}</p>
-        </article>
       </div>
 
-      <div class="filters-bar perfil-filters">
-        <form method="get" class="filters-bar__form" role="search">
-          <div class="filters-bar__search">
-            <span class="filters-bar__icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-            </span>
-            <input
-              type="search"
-              name="q"
-              value="{{ filtro_q }}"
-              placeholder="Buscar por qualquer termo..."
-              class="filters-bar__input"
-              aria-label="Busca"
-            >
+      <aside class="perfil-hero__panel">
+        <div>
+          <p class="perfil-hero__panel-label">Participação consolidada</p>
+          <p class="perfil-hero__panel-total">{{ participacao.total }}</p>
+          <p class="perfil-hero__panel-copy">Documentos nos quais o seu usuário aparece em criação, edição, análise ou assinatura.</p>
+        </div>
+        <div class="perfil-hero__meta">
+          <div class="perfil-hero__meta-item">
+            <span class="perfil-hero__meta-label">Cadastro</span>
+            <span class="perfil-hero__meta-value">{{ user.date_joined|date:"d/m/Y H:i" }}</span>
+          </div>
+          <div class="perfil-hero__meta-item">
+            <span class="perfil-hero__meta-label">Último acesso</span>
+            <span class="perfil-hero__meta-value">{% if user.last_login %}{{ user.last_login|date:"d/m/Y H:i" }}{% else %}—{% endif %}</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="perfil-grid">
+      <aside class="perfil-card">
+        <div class="perfil-card__head">
+          <h2 class="perfil-card__title">Informações da Conta</h2>
+        </div>
+        <div class="perfil-ident">
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Nome</span>
+            <p class="perfil-ident__value">{{ user.first_name|default:"—" }}</p>
+          </div>
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Usuário</span>
+            <p class="perfil-ident__value data-table__td--mono">{{ user.username }}</p>
+          </div>
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Conta ativa</span>
+            <p class="perfil-ident__value">{% if user.is_active %}Sim{% else %}Não{% endif %}</p>
+          </div>
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Perfil admin</span>
+            <p class="perfil-ident__value">{% if user.is_staff %}Sim{% else %}Não{% endif %}</p>
+          </div>
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Cadastro</span>
+            <p class="perfil-ident__value">{{ user.date_joined|date:"d/m/Y H:i" }}</p>
+          </div>
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Último acesso</span>
+            <p class="perfil-ident__value">{% if user.last_login %}{{ user.last_login|date:"d/m/Y H:i" }}{% else %}—{% endif %}</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="perfil-main">
+        <div class="perfil-kpis">
+          <article class="perfil-kpi">
+            <p class="perfil-kpi__label">Criação</p>
+            <p class="perfil-kpi__value">{{ participacao.criacao }}</p>
+          </article>
+          <article class="perfil-kpi">
+            <p class="perfil-kpi__label">Edição</p>
+            <p class="perfil-kpi__value">{{ participacao.edicao }}</p>
+          </article>
+          <article class="perfil-kpi">
+            <p class="perfil-kpi__label">Análise</p>
+            <p class="perfil-kpi__value">{{ participacao.analise }}</p>
+          </article>
+          <article class="perfil-kpi">
+            <p class="perfil-kpi__label">Assinatura</p>
+            <p class="perfil-kpi__value">{{ participacao.assinatura }}</p>
+          </article>
+          <article class="perfil-kpi">
+            <p class="perfil-kpi__label">Total</p>
+            <p class="perfil-kpi__value">{{ participacao.total }}</p>
+          </article>
+        </div>
+
+        <div class="perfil-panel">
+          <div class="perfil-panel__head">
+            <div>
+              <p class="perfil-panel__eyebrow">Documentos vinculados</p>
+              <h2 class="perfil-panel__title">Histórico e filtros</h2>
+            </div>
+            <p class="perfil-panel__subtitle">Busque, refine e exporte a lista documental do seu perfil.</p>
           </div>
 
-          <select name="participacao" class="filters-bar__select" aria-label="Participação">
-            {% for valor, rotulo in participacao_opcoes %}
-              <option value="{{ valor }}" {% if filtro_participacao == valor %}selected{% endif %}>{{ rotulo }}</option>
-            {% endfor %}
-          </select>
+          <div class="filters-bar perfil-filters">
+            <form method="get" class="filters-bar__form" role="search">
+              <div class="filters-bar__search">
+                <span class="filters-bar__icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                  </svg>
+                </span>
+                <input
+                  type="search"
+                  name="q"
+                  value="{{ filtro_q }}"
+                  placeholder="Buscar por qualquer termo..."
+                  class="filters-bar__input"
+                  aria-label="Busca"
+                >
+              </div>
 
-          <input
-            type="month"
-            name="mes_ano"
-            value="{{ filtro_mes_ano }}"
-            class="filters-bar__select"
-            aria-label="Mês e ano"
-          >
+              <select name="participacao" class="filters-bar__select" aria-label="Participação">
+                {% for valor, rotulo in participacao_opcoes %}
+                  <option value="{{ valor }}" {% if filtro_participacao == valor %}selected{% endif %}>{{ rotulo }}</option>
+                {% endfor %}
+              </select>
 
-          <button type="submit" class="btn btn--primary btn-sm">Filtrar</button>
-          {% if filtros_ativos %}
-            <a href="{{ request.path }}" class="btn btn--ghost btn-sm">Limpar</a>
+              <input
+                type="month"
+                name="mes_ano"
+                value="{{ filtro_mes_ano }}"
+                class="filters-bar__select"
+                aria-label="Mês e ano"
+              >
+
+              <button type="submit" class="btn btn--primary btn-sm">Filtrar</button>
+              {% if filtros_ativos %}
+                <a href="{{ request.path }}" class="btn btn--ghost btn-sm">Limpar</a>
+              {% endif %}
+
+              <a href="{% url 'core:perfil_exportar_csv' %}{% if export_querystring %}?{{ export_querystring }}{% endif %}" class="btn btn--secondary btn-sm">
+                Download CSV
+              </a>
+            </form>
+          </div>
+
+          {% if docs_with_roles %}
+          <div class="table-wrapper">
+            <table class="data-table perfil-docs-table">
+              <thead>
+                <tr>
+                  <th style="width:170px;">Documento</th>
+                  <th style="width:220px;">Processo</th>
+                  <th style="width:170px;">Tipo</th>
+                  <th>Assunto</th>
+                  <th style="width:220px;">Participações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in docs_with_roles %}
+                <tr>
+                  <td class="data-table__td--mono">{{ item.doc.numero_documento }}</td>
+                  <td class="data-table__td--mono">{{ item.doc.processo.numero_processo }}</td>
+                  <td>{{ item.doc.tipo|default:"—" }}</td>
+                  <td class="perfil-docs-table__assunto" title="{{ item.doc.assunto|default:'—' }}">{{ item.doc.assunto|default:"—" }}</td>
+                  <td>
+                    <div class="perfil-role-badges">
+                      {% for role in item.roles %}
+                        {% if role == "Criacao" %}<span class="badge badge--info">Criação</span>{% endif %}
+                        {% if role == "Edicao" %}<span class="badge badge--warning">Edição</span>{% endif %}
+                        {% if role == "Analise" %}<span class="badge badge--default">Análise</span>{% endif %}
+                        {% if role == "Assinatura" %}<span class="badge badge--success">Assinatura</span>{% endif %}
+                      {% endfor %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {% if docs_page and docs_page.paginator.num_pages > 1 %}
+          <nav class="perfil-pagination" aria-label="Paginação">
+            {% if docs_page.has_previous %}
+              <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ docs_page.previous_page_number }}" class="btn btn--ghost btn-sm">← Anterior</a>
+            {% endif %}
+            <span class="pagination__info">Página {{ docs_page.number }} de {{ docs_page.paginator.num_pages }}</span>
+            {% if docs_page.has_next %}
+              <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ docs_page.next_page_number }}" class="btn btn--ghost btn-sm">Próxima →</a>
+            {% endif %}
+          </nav>
           {% endif %}
 
-          <a href="{% url 'core:perfil_exportar_csv' %}{% if export_querystring %}?{{ export_querystring }}{% endif %}" class="btn btn--secondary btn-sm">
-            Download CSV
-          </a>
-        </form>
-      </div>
-
-      {% if docs_with_roles %}
-      <div class="table-wrapper">
-        <table class="data-table perfil-docs-table">
-          <thead>
-            <tr>
-              <th style="width:170px;">Documento</th>
-              <th style="width:220px;">Processo</th>
-              <th style="width:170px;">Tipo</th>
-              <th>Assunto</th>
-              <th style="width:220px;">Participações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in docs_with_roles %}
-            <tr>
-              <td class="data-table__td--mono">{{ item.doc.numero_documento }}</td>
-              <td class="data-table__td--mono">{{ item.doc.processo.numero_processo }}</td>
-              <td>{{ item.doc.tipo|default:"—" }}</td>
-              <td class="perfil-docs-table__assunto" title="{{ item.doc.assunto|default:'—' }}">{{ item.doc.assunto|default:"—" }}</td>
-              <td>
-                <div class="perfil-role-badges">
-                  {% for role in item.roles %}
-                    {% if role == "Criacao" %}<span class="badge badge--info">Criação</span>{% endif %}
-                    {% if role == "Edicao" %}<span class="badge badge--warning">Edição</span>{% endif %}
-                    {% if role == "Analise" %}<span class="badge badge--default">Análise</span>{% endif %}
-                    {% if role == "Assinatura" %}<span class="badge badge--success">Assinatura</span>{% endif %}
-                  {% endfor %}
-                </div>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-
-      {% if docs_page and docs_page.paginator.num_pages > 1 %}
-      <nav class="perfil-pagination" aria-label="Paginação">
-        {% if docs_page.has_previous %}
-          <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ docs_page.previous_page_number }}" class="btn btn--ghost btn-sm">← Anterior</a>
-        {% endif %}
-        <span class="pagination__info">Página {{ docs_page.number }} de {{ docs_page.paginator.num_pages }}</span>
-        {% if docs_page.has_next %}
-          <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ docs_page.next_page_number }}" class="btn btn--ghost btn-sm">Próxima →</a>
-        {% endif %}
-      </nav>
-      {% endif %}
-
-      {% else %}
-      <div class="empty-state">
-        <p class="empty-state__title">
-          {% if filtros_ativos %}Nenhum documento encontrado com os filtros aplicados{% else %}Sem participação documental encontrada{% endif %}
-        </p>
-        <p class="empty-state__body">
-          {% if filtros_ativos %}Ajuste os filtros e tente novamente.{% else %}Ainda não há documentos do SEI vinculados ao seu usuário.{% endif %}
-        </p>
-      </div>
-      {% endif %}
-    </section>
+          {% else %}
+          <div class="empty-state">
+            <p class="empty-state__title">
+              {% if filtros_ativos %}Nenhum documento encontrado com os filtros aplicados{% else %}Sem participação documental encontrada{% endif %}
+            </p>
+            <p class="empty-state__body">
+              {% if filtros_ativos %}Ajuste os filtros e tente novamente.{% else %}Ainda não há documentos do SEI vinculados ao seu usuário.{% endif %}
+            </p>
+          </div>
+          {% endif %}
+        </div>
+      </section>
+    </div>
   </div>
 </div>
 {% endblock %}

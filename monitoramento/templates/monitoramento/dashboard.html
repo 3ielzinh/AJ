@@ -9,7 +9,7 @@
 /* ═══════════════════════════════════════════════════════════════
    DASHBOARD LAYOUT
 ═══════════════════════════════════════════════════════════════ */
-.dash               { padding: var(--space-6) var(--page-padding) var(--space-10); }
+.dash               { width: 100%; max-width: none; margin: 0; padding: var(--space-6) clamp(1.25rem, 3vw, 3rem) var(--space-10); }
 .dash__back         { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--font-size-sm); color: var(--color-text-muted); text-decoration: none; margin-bottom: var(--space-5); transition: color var(--transition-fast); }
 .dash__back:hover   { color: var(--color-primary); }
 .dash__head         { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-7); gap: var(--space-4); flex-wrap: wrap; }
@@ -91,7 +91,9 @@
    TOP ANTIGAS
 ═══════════════════════════════════════════════════════════════ */
 .rank-list          { display: flex; flex-direction: column; gap: var(--space-2); }
-.rank-item          { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--color-bg); border-radius: var(--radius-sm); border: 1px solid var(--color-border); }
+.rank-item          { width: 100%; padding: var(--space-3); background: var(--color-bg); border-radius: var(--radius-sm); border: 1px solid var(--color-border); }
+.rank-item__summary  { display: flex; align-items: center; gap: var(--space-3); cursor: pointer; list-style: none; }
+.rank-item__summary::-webkit-details-marker { display: none; }
 .rank-item__pos     { width: 1.5rem; height: 1.5rem; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; font-family: var(--font-mono); background: var(--color-primary-light); color: var(--color-primary-dark); flex-shrink: 0; }
 .rank-item__body    { flex: 1; min-width: 0; }
 .rank-item__name    { font-size: var(--font-size-xs); font-weight: 600; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -99,6 +101,21 @@
 .rank-item__days    { font-size: var(--font-size-sm); font-weight: 800; font-family: var(--font-mono); color: #dc2626; flex-shrink: 0; text-align: right; }
 .rank-item__bar     { width: 100%; height: 3px; background: var(--color-border); border-radius: 2px; margin-top: var(--space-1); overflow: hidden; }
 .rank-item__barfill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #dc2626, #f87171); }
+.rank-item__details  { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border); display: grid; gap: var(--space-2); }
+.rank-item__grid     { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2) var(--space-4); }
+.rank-item__field    { display: grid; gap: 2px; }
+.rank-item__label    { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-muted); }
+.rank-item__value    { font-size: var(--font-size-xs); color: var(--color-text); margin: 0; }
+.rank-item__obs      { font-size: var(--font-size-xs); color: var(--color-text-muted); margin: 0; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+.dash-filters        { margin-bottom: var(--space-5); }
+.dash-filters__form  { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.dash-filters__field { min-width: 180px; }
+.dash-filters__field--search { flex: 1; min-width: 240px; }
+
+.dash-filter-select  { width: 100%; padding: 0.55rem var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-full); background: var(--color-surface); color: var(--color-text); font-size: var(--font-size-sm); }
+.dash-filter-input   { width: 100%; padding: 0.55rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-full); background: var(--color-surface); color: var(--color-text); font-size: var(--font-size-sm); }
+.dash-filter-input:focus, .dash-filter-select:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(0,95,115,.12); }
 </style>
 {% endblock %}
 
@@ -117,6 +134,62 @@
       <p class="dash__sub">Visão consolidada · atualizada em tempo real</p>
     </div>
     <span class="dash__date">{% now "d/m/Y" %}</span>
+  </div>
+
+  <div class="filters-bar dash-filters">
+    <form method="get" class="dash-filters__form" role="search">
+      <div class="dash-filters__field dash-filters__field--search">
+        <input
+          type="search"
+          name="q"
+          value="{{ q }}"
+          class="dash-filter-input"
+          placeholder="Buscar por demanda, processo, localização, observação..."
+          aria-label="Busca geral"
+        >
+      </div>
+
+      <div class="dash-filters__field">
+        <select name="tipo" class="dash-filter-select" aria-label="Tipo">
+          <option value="">Todos os tipos</option>
+          <option value="evolutiva" {% if filtro_tipo == 'evolutiva' %}selected{% endif %}>Evolutiva</option>
+          <option value="corretiva" {% if filtro_tipo == 'corretiva' %}selected{% endif %}>Corretiva</option>
+          <option value="gestao_objetos" {% if filtro_tipo == 'gestao_objetos' %}selected{% endif %}>Gestão de Objetos</option>
+        </select>
+      </div>
+
+      <div class="dash-filters__field">
+        <select name="status" class="dash-filter-select" aria-label="Status">
+          <option value="">Todos os status</option>
+          <option value="nao_iniciada" {% if filtro_status == 'nao_iniciada' %}selected{% endif %}>Não iniciada</option>
+          <option value="em_andamento" {% if filtro_status == 'em_andamento' %}selected{% endif %}>Em andamento</option>
+          <option value="concluida" {% if filtro_status == 'concluida' %}selected{% endif %}>Concluída</option>
+        </select>
+      </div>
+
+      <div class="dash-filters__field">
+        <select name="ano" class="dash-filter-select" aria-label="Ano">
+          <option value="">Todos os anos</option>
+          {% for ano in anos_disponiveis %}
+            <option value="{{ ano }}" {% if filtro_ano|stringformat:'s' == ano|stringformat:'s' %}selected{% endif %}>{{ ano }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="dash-filters__field">
+        <select name="mes" class="dash-filter-select" aria-label="Mês">
+          <option value="">Todos os meses</option>
+          {% for valor, label in meses_disponiveis %}
+            <option value="{{ valor }}" {% if filtro_mes == valor %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn--primary btn-sm">Filtrar</button>
+      {% if filtros_ativos %}
+        <a href="{{ request.path }}" class="btn btn--ghost btn-sm">Limpar</a>
+      {% endif %}
+    </form>
   </div>
 
   {# ── Hero KPIs ── #}
@@ -263,17 +336,58 @@
     </div>
     <div class="rank-list">
       {% for item in top_antigas %}
-      <div class="rank-item">
-        <span class="rank-item__pos">{{ forloop.counter }}</span>
-        <div class="rank-item__body">
-          <p class="rank-item__name">{{ item.nome }}</p>
-          <p class="rank-item__tipo">{{ item.tipo }}</p>
-          <div class="rank-item__bar">
-            <div class="rank-item__barfill" style="width:{% widthratio item.dias top_antigas.0.dias 100 %}%"></div>
+      <details class="rank-item">
+        <summary class="rank-item__summary">
+          <span class="rank-item__pos">{{ forloop.counter }}</span>
+          <div class="rank-item__body">
+            <p class="rank-item__name">{{ item.nome }}</p>
+            <p class="rank-item__tipo">{{ item.tipo }} · {{ item.status }}</p>
+            <div class="rank-item__bar">
+              <div class="rank-item__barfill" style="width:{% widthratio item.dias max_dias_top 100 %}%"></div>
+            </div>
           </div>
+          <div class="rank-item__days">{{ item.dias }}<br><small style="font-size:10px;font-weight:400;color:var(--color-text-muted);">dias</small></div>
+        </summary>
+
+        <div class="rank-item__details">
+          <div class="rank-item__grid">
+            <div class="rank-item__field">
+              <span class="rank-item__label">Processo SEI</span>
+              <p class="rank-item__value rank-item__value--mono">{{ item.processo_sei }}</p>
+            </div>
+            <div class="rank-item__field">
+              <span class="rank-item__label">Priorização</span>
+              <p class="rank-item__value">{% if item.priorizacao %}{{ item.priorizacao }}{% else %}—{% endif %}</p>
+            </div>
+            <div class="rank-item__field">
+              <span class="rank-item__label">Data de início</span>
+              <p class="rank-item__value">{% if item.data_inicio %}{{ item.data_inicio|date:"d/m/Y" }}{% else %}—{% endif %}</p>
+            </div>
+            <div class="rank-item__field">
+              <span class="rank-item__label">Localização</span>
+              <p class="rank-item__value">{{ item.localizacao }}</p>
+            </div>
+          </div>
+
+          <div class="rank-item__grid">
+            <div class="rank-item__field">
+              <span class="rank-item__label">Reiterada</span>
+              <p class="rank-item__value">{% if item.reiterada %}Sim{% else %}Não{% endif %}</p>
+            </div>
+            <div class="rank-item__field">
+              <span class="rank-item__label">Nome completo</span>
+              <p class="rank-item__value">{{ item.nome_completo }}</p>
+            </div>
+          </div>
+
+          {% if item.observacoes %}
+          <div class="rank-item__field">
+            <span class="rank-item__label">Observações</span>
+            <p class="rank-item__obs">{{ item.observacoes }}</p>
+          </div>
+          {% endif %}
         </div>
-        <div class="rank-item__days">{{ item.dias }}<br><small style="font-size:10px;font-weight:400;color:var(--color-text-muted);">dias</small></div>
-      </div>
+      </details>
       {% endfor %}
     </div>
   </div>

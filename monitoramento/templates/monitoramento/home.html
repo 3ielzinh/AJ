@@ -6,8 +6,12 @@
 <style>
 .monitoramento-home {
   position: relative;
-  padding: var(--space-8) var(--page-padding) var(--space-10);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: var(--space-6) clamp(1.25rem, 3vw, 3rem) var(--space-10);
   isolation: isolate;
+  overflow-x: clip;
 }
 
 .monitoramento-home::before,
@@ -35,14 +39,28 @@
   background: radial-gradient(circle, rgba(10, 147, 150, 0.15), rgba(10, 147, 150, 0));
 }
 
-.monitoramento-home__header {
-  margin-bottom: var(--space-6);
+.monitoramento-home__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: var(--space-4);
+  align-items: stretch;
+  margin-bottom: var(--space-5);
+}
+
+.monitoramento-home__header,
+.monitoramento-home__ledger {
   padding: var(--space-6);
   border: 1px solid rgba(0, 95, 115, 0.14);
   border-radius: calc(var(--radius-md) + 2px);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 246, 0.92));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(237, 248, 246, 0.9));
   box-shadow: 0 14px 34px rgba(13, 54, 61, 0.08);
+}
+
+.monitoramento-home__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
 }
 
 .monitoramento-home__eyebrow {
@@ -56,30 +74,115 @@
 
 .monitoramento-home__title {
   margin: 0 0 var(--space-2);
-  font-size: clamp(1.65rem, 2vw, 2.15rem);
-  line-height: 1.12;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+  text-wrap: balance;
 }
 
 .monitoramento-home__subtitle {
   margin: 0;
   color: var(--color-text-muted);
-  max-width: 760px;
-  line-height: 1.6;
+  max-width: 72ch;
+  line-height: 1.55;
+  font-size: var(--font-size-lg);
   text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
 }
 
 .monitoramento-home__nowrap {
   white-space: nowrap;
 }
 
+.monitoramento-home__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.monitoramento-home__actions .btn:focus-visible,
+.monitoramento-card:focus-visible {
+  outline: 3px solid rgba(0, 95, 115, 0.22);
+  outline-offset: 3px;
+}
+
+.monitoramento-home__ledger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: space-between;
+}
+
+.monitoramento-home__ledger-label {
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.monitoramento-home__ledger-value {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.monitoramento-home__ledger-value strong {
+  display: block;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  line-height: 0.95;
+}
+
+.monitoramento-home__ledger-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.monitoramento-home__ledger-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(0, 95, 115, 0.12);
+}
+
+.monitoramento-home__ledger-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.monitoramento-home__ledger-key {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.monitoramento-home__ledger-val {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
 .monitoramento-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--space-4);
 }
 
 @media (max-width: 1024px) {
+  .monitoramento-home__hero,
   .monitoramento-grid { grid-template-columns: 1fr; }
+
+  .monitoramento-card--span-4 {
+    grid-column: auto;
+  }
 }
 
 .monitoramento-card {
@@ -89,11 +192,11 @@
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-5);
-  border: 1px solid rgba(0, 95, 115, 0.16);
-  border-radius: calc(var(--radius-md) + 2px);
+  border: 1px solid rgba(0, 95, 115, 0.14);
+  border-radius: calc(var(--radius-md) + 4px);
   text-decoration: none;
   color: inherit;
-  min-height: 240px;
+  min-height: 16rem;
   box-shadow: 0 12px 30px rgba(19, 48, 52, 0.1);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   animation: cardEnter .45s ease both;
@@ -113,10 +216,10 @@
 .monitoramento-card::after {
   content: "";
   position: absolute;
-  right: -42px;
-  bottom: -42px;
-  width: 140px;
-  height: 140px;
+  right: -48px;
+  bottom: -48px;
+  width: 150px;
+  height: 150px;
   border-radius: 999px;
   opacity: .2;
   transition: transform .22s ease;
@@ -130,6 +233,10 @@
 
 .monitoramento-card:hover::after {
   transform: scale(1.08);
+}
+
+.monitoramento-card:focus-visible {
+  transform: translateY(-2px);
 }
 
 .monitoramento-card--sei {
@@ -156,9 +263,27 @@
   background: radial-gradient(circle, #dd7a2b, transparent 70%);
 }
 
+.monitoramento-card--span-4 {
+  grid-column: span 4;
+}
+
+@media (min-width: 1280px) {
+  .monitoramento-home {
+    padding-inline: clamp(2rem, 4vw, 4.5rem);
+  }
+
+  .monitoramento-home__hero {
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  }
+
+  .monitoramento-grid {
+    gap: var(--space-5);
+  }
+}
+
 .monitoramento-card__chip {
   width: fit-content;
-  padding: 2px 10px;
+  padding: 0.25rem 0.7rem;
   border-radius: var(--radius-full);
   font-size: 11px;
   letter-spacing: .06em;
@@ -197,8 +322,9 @@
 
 .monitoramento-card__title {
   margin: 0;
-  font-size: 1.14rem;
-  line-height: 1.25;
+  font-size: 1.24rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .monitoramento-card__desc {
@@ -207,8 +333,15 @@
   line-height: 1.6;
 }
 
-.monitoramento-card__cta {
+.monitoramento-card__meta {
   margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.monitoramento-card__cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -230,49 +363,99 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .monitoramento-card {
+    animation: none;
+    transition: none;
+  }
+
+  .monitoramento-card:hover,
+  .monitoramento-card:hover::after,
+  .monitoramento-card:focus-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .monitoramento-home {
+    padding-top: var(--space-4);
+  }
+
+  .monitoramento-home__header,
+  .monitoramento-home__ledger,
+  .monitoramento-card {
+    padding: var(--space-4);
+  }
+}
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="monitoramento-home">
-  <header class="monitoramento-home__header">
-    <p class="monitoramento-home__eyebrow">CGPJU</p>
-    <h1 class="monitoramento-home__title">Monitoramentos</h1>
-    <p class="monitoramento-home__subtitle">
-      Selecione o monitoramento desejado. O conteúdo atual do sistema foi alocado em
-      <span class="monitoramento-home__nowrap">Monitoramento Sistemico</span>.
-    </p>
-  </header>
+  <div class="monitoramento-home__hero">
+    <header class="monitoramento-home__header">
+      <div>
+        <p class="monitoramento-home__eyebrow">CGPJU</p>
+        <h1 class="monitoramento-home__title">Monitoramentos</h1>
+        <p class="monitoramento-home__subtitle">
+          Selecione a entrada certa para a tarefa. O conteúdo atual do sistema continua em
+          <span class="monitoramento-home__nowrap">Monitoramento Sistêmico</span>, enquanto SEI e AJ ficam separados para navegação direta.
+        </p>
+      </div>
+
+      <div class="monitoramento-home__actions">
+        <a href="{% url 'monitoramento:lista' %}" class="btn btn--primary">Abrir sistema atual</a>
+        <a href="{% url 'monitoramento:sei' %}" class="btn btn--secondary">Ir para o SEI</a>
+      </div>
+    </header>
+
+    <aside class="monitoramento-home__ledger" aria-label="Resumo operacional">
+      <p class="monitoramento-home__ledger-label">Base em uso</p>
+      <p class="monitoramento-home__ledger-value"><strong>{{ total_processos_sei }}</strong> processos SEI</p>
+      <div class="monitoramento-home__ledger-list">
+        <div class="monitoramento-home__ledger-item"><span class="monitoramento-home__ledger-key">Documentos SEI</span><span class="monitoramento-home__ledger-val">{{ total_documentos_sei }}</span></div>
+        <div class="monitoramento-home__ledger-item"><span class="monitoramento-home__ledger-key">Demandas totais</span><span class="monitoramento-home__ledger-val">{{ total_demandas }}</span></div>
+        <div class="monitoramento-home__ledger-item"><span class="monitoramento-home__ledger-key">Concluídas</span><span class="monitoramento-home__ledger-val">{{ total_concluidas }}</span></div>
+      </div>
+    </aside>
+  </div>
 
   <div class="monitoramento-grid">
-    <a href="{% url 'monitoramento:sei' %}" class="monitoramento-card monitoramento-card--sei">
+    <a href="{% url 'monitoramento:sei' %}" class="monitoramento-card monitoramento-card--sei monitoramento-card--span-4">
       <span class="monitoramento-card__chip">Fluxo documental</span>
       <span class="monitoramento-card__icon">SEI</span>
       <h2 class="monitoramento-card__title">Monitoramento do SEI</h2>
       <p class="monitoramento-card__desc">
         Visão dedicada ao acompanhamento de demandas e fluxos vinculados ao SEI.
       </p>
-      <span class="monitoramento-card__cta">Acessar monitoramento</span>
+      <span class="monitoramento-card__meta">
+        <span class="monitoramento-card__cta">Acessar monitoramento</span>
+      </span>
     </a>
 
-    <a href="{% url 'monitoramento:lista' %}" class="monitoramento-card monitoramento-card--sistemico">
-      <span class="monitoramento-card__chip">Operacao central</span>
+    <a href="{% url 'monitoramento:lista' %}" class="monitoramento-card monitoramento-card--sistemico monitoramento-card--span-4">
+      <span class="monitoramento-card__chip">Operação central</span>
       <span class="monitoramento-card__icon">SYS</span>
-      <h2 class="monitoramento-card__title">Monitoramento Sistemico</h2>
+      <h2 class="monitoramento-card__title">Monitoramento Sistêmico</h2>
       <p class="monitoramento-card__desc">
-        Inclui todas as abas e funcionalidades de monitoramento que ja existiam no sistema.
+        Reúne as abas e funcionalidades que sustentam a operação diária do sistema.
       </p>
-      <span class="monitoramento-card__cta">Abrir ambiente atual</span>
+      <span class="monitoramento-card__meta">
+        <span class="monitoramento-card__cta">Abrir ambiente atual</span>
+      </span>
     </a>
 
-    <a href="{% url 'monitoramento:aj' %}" class="monitoramento-card monitoramento-card--aj">
-      <span class="monitoramento-card__chip">Modulo especializado</span>
+    <a href="{% url 'monitoramento:aj' %}" class="monitoramento-card monitoramento-card--aj monitoramento-card--span-4">
+      <span class="monitoramento-card__chip">Módulo especializado</span>
       <span class="monitoramento-card__icon">AJ</span>
       <h2 class="monitoramento-card__title">Monitoramento AJ</h2>
       <p class="monitoramento-card__desc">
-        Espaco dedicado para acompanhamento especifico do modulo AJ, separado do sistemico.
+        Espaço dedicado para acompanhamento específico do módulo AJ, separado do sistêmico.
       </p>
-      <span class="monitoramento-card__cta">Acessar monitoramento</span>
+      <span class="monitoramento-card__meta">
+        <span class="monitoramento-card__cta">Acessar monitoramento</span>
+      </span>
     </a>
   </div>
 </section>

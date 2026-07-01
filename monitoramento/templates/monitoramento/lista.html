@@ -14,13 +14,13 @@
       </p>
     </div>
 
-    <a href="{% url 'monitoramento:dashboard' %}" class="btn btn-ghost" style="white-space:nowrap;flex-shrink:0;">
+    <a href="{% url 'monitoramento:dashboard' %}" class="btn btn-ghost">
       ◎ Dashboard
     </a>
-    <a href="{% url 'monitoramento:criar' %}" class="btn btn-primary" style="white-space:nowrap;flex-shrink:0;">
+    <a href="{% url 'monitoramento:criar' %}" class="btn btn--primary">
       + Nova demanda
     </a>
-    <a href="{% url 'monitoramento:reordenar' %}" class="btn btn-ghost" style="white-space:nowrap;flex-shrink:0;">
+    <a href="{% url 'monitoramento:reordenar' %}" class="btn btn-ghost">
       ↕ Reordenar
     </a>
 
@@ -48,7 +48,7 @@
       </a>
       <a href="{% url 'monitoramento:concluidas' %}"
          class="tab-nav__item {% if is_concluidas %}tab-nav__item--active{% endif %}"
-         style="{% if is_concluidas %}{% else %}color:var(--color-text-muted);{% endif %}">
+        >
         ✓ Concluídas
         <span class="tab-nav__count" style="background:#dcfce7;color:#166534;">{{ contadores.concluidas }}</span>
       </a>

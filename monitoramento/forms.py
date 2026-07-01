@@ -32,8 +32,15 @@ class DemandaForm(forms.ModelForm):
 
     def clean(self):
         cleaned = super().clean()
+        status = cleaned.get("status")
+        data_conclusao = cleaned.get("data_conclusao")
         reiterada = cleaned.get("reiterada")
         data_reiteracao = cleaned.get("data_reiteracao")
+
+        # Garante consistência mínima para demandas finalizadas.
+        if status == StatusDemanda.CONCLUIDA and not data_conclusao:
+            self.add_error("data_conclusao", "Informe a data de conclusão quando o status for Concluída.")
+
         if reiterada and not data_reiteracao:
             self.add_error("data_reiteracao", "Informe a data de reiteração.")
         return cleaned

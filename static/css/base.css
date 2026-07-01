@@ -166,8 +166,24 @@ h4 { font-size: var(--font-size-lg); }
     box-shadow: var(--shadow-md);
     margin-bottom: var(--space-7);
 }
-.hero__title { font-size: clamp(1.8rem, 4vw, var(--font-size-4xl)); margin-block: var(--space-3); }
-.hero__subtitle { color: var(--color-text-muted); font-size: var(--font-size-lg); max-width: 60ch; margin-bottom: var(--space-6); }
+.hero__title {
+    font-size: clamp(1.8rem, 4vw, var(--font-size-4xl));
+    margin-block: var(--space-3);
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: manual;
+    text-wrap: balance;
+}
+.hero__subtitle {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    max-width: 60ch;
+    margin-bottom: var(--space-6);
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: manual;
+    text-wrap: pretty;
+}
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 
 /* ── Cabeçalho de página ── */
