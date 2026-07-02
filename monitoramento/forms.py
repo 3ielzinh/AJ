@@ -1,5 +1,5 @@
 from django import forms
-from .models import Demanda, TipoDemanda, StatusDemanda
+from .models import Demanda, ObjetoGestao, TipoDemanda, StatusDemanda
 
 
 class DemandaForm(forms.ModelForm):
@@ -44,3 +44,46 @@ class DemandaForm(forms.ModelForm):
         if reiterada and not data_reiteracao:
             self.add_error("data_reiteracao", "Informe a data de reiteração.")
         return cleaned
+
+
+class ObjetoGestaoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            widget = field.widget
+            if isinstance(widget, forms.Select):
+                css_class = "form-select"
+            elif isinstance(widget, forms.Textarea):
+                css_class = "form-textarea"
+            else:
+                css_class = "form-input"
+            widget.attrs["class"] = f"{widget.attrs.get('class', '')} {css_class}".strip()
+
+    class Meta:
+        model = ObjetoGestao
+        fields = [
+            "id_objeto",
+            "nome",
+            "descricao",
+            "grupo",
+            "ativo",
+            "data_encerramento",
+            "processo_sei",
+            "ajs_ativas",
+            "tipo_objeto",
+            "carater",
+            "fluxo_confirmacao",
+            "passivel_absorcao",
+            "tema",
+            "subtema",
+            "pedido_inicial",
+            "limite_maximo_objeto",
+            "observacao",
+        ]
+        widgets = {
+            "data_encerramento": forms.DateInput(attrs={"type": "date"}),
+            "descricao": forms.Textarea(attrs={"rows": 4}),
+            "ajs_ativas": forms.Textarea(attrs={"rows": 3}),
+            "pedido_inicial": forms.Textarea(attrs={"rows": 3}),
+            "observacao": forms.Textarea(attrs={"rows": 4}),
+        }

@@ -382,12 +382,6 @@
                 <div class="home-hero__actions">
                     {% include 'components/button.html' with label='Abrir Monitoramento' href='/monitoramento/' %}
                     {% include 'components/button.html' with label='Ver Dashboard' href='/monitoramento/dashboard/' variant='secondary' %}
-                    {% if user.is_staff %}
-                    {% include 'components/button.html' with label='Ver Design System' href='/design-system/' variant='ghost' %}
-                    {% endif %}
-                    {% if user.is_superuser %}
-                    {% include 'components/button.html' with label='Administração' href='/admin/' variant='ghost' %}
-                    {% endif %}
                 </div>
             </div>
 

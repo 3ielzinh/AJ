@@ -406,6 +406,14 @@
             <span class="perfil-ident__label">Perfil admin</span>
             <p class="perfil-ident__value">{% if user.is_staff %}Sim{% else %}Não{% endif %}</p>
           </div>
+          {% if user.is_superuser %}
+          <div class="perfil-ident__row">
+            <span class="perfil-ident__label">Administração</span>
+            <p class="perfil-ident__value">
+              <a href="/admin/" class="btn btn--ghost btn-sm">Abrir admin</a>
+            </p>
+          </div>
+          {% endif %}
           <div class="perfil-ident__row">
             <span class="perfil-ident__label">Cadastro</span>
             <p class="perfil-ident__value">{{ user.date_joined|date:"d/m/Y H:i" }}</p>

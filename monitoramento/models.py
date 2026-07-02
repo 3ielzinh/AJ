@@ -111,6 +111,80 @@ class Demanda(models.Model):
         return str(d) if d is not None else "—"
 
 
+class ObjetoGestao(models.Model):
+    """
+    Catalogo operacional de objetos judiciais.
+
+    Diferente de `Demanda`, este model representa itens de referencia da aba
+    Gestao de Objetos, com campos proprios para filtragem, edicao e consulta.
+    """
+
+    id_objeto = models.CharField("ID do objeto", max_length=80, blank=True, default="", db_index=True)
+    nome = models.CharField("Nome do objeto", max_length=2000, db_index=True)
+    descricao = models.TextField("Descricao", blank=True, default="")
+    grupo = models.CharField("Grupo de objetos", max_length=300, blank=True, default="", db_index=True)
+    ativo = models.BooleanField("Ativo", null=True, blank=True, db_index=True)
+    data_encerramento = models.DateField("Data de encerramento", null=True, blank=True)
+    processo_sei = models.CharField("Processo SEI", max_length=300, blank=True, default="")
+    ajs_ativas = models.TextField("AJs ativas", blank=True, default="")
+    tipo_objeto = models.CharField("Tipo de objeto", max_length=300, blank=True, default="")
+    carater = models.CharField("Carater", max_length=200, blank=True, default="", db_index=True)
+    fluxo_confirmacao = models.CharField("Fluxo de confirmacao", max_length=300, blank=True, default="", db_index=True)
+    passivel_absorcao = models.BooleanField("Passivel de absorcao", null=True, blank=True)
+    tema = models.CharField("Tema", max_length=500, blank=True, default="", db_index=True)
+    subtema = models.CharField("Subtema", max_length=500, blank=True, default="")
+    pedido_inicial = models.TextField("Pedido inicial", blank=True, default="")
+    limite_maximo_objeto = models.DecimalField(
+        "Limite maximo do objeto",
+        max_digits=14,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+    observacao = models.TextField("Observacao", blank=True, default="")
+    aba_origem = models.CharField("Aba de origem", max_length=200, blank=True, default="")
+    linha_origem = models.PositiveIntegerField("Linha de origem", null=True, blank=True)
+    demanda_origem = models.ForeignKey(
+        Demanda,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="objetos_gestao_migrados",
+        verbose_name="Demanda de origem",
+    )
+    criado_em = models.DateTimeField("Criado em", auto_now_add=True)
+    atualizado_em = models.DateTimeField("Atualizado em", auto_now=True)
+
+    class Meta:
+        verbose_name = "Objeto de Gestao"
+        verbose_name_plural = "Objetos de Gestao"
+        ordering = ["grupo", "nome"]
+        indexes = [
+            models.Index(fields=["grupo", "ativo"]),
+            models.Index(fields=["carater", "fluxo_confirmacao"]),
+            models.Index(fields=["tema"]),
+        ]
+
+    def __str__(self):
+        return self.nome[:120]
+
+    @property
+    def ativo_display(self) -> str:
+        if self.ativo is True:
+            return "Sim"
+        if self.ativo is False:
+            return "Nao"
+        return "Nao informado"
+
+    @property
+    def passivel_absorcao_display(self) -> str:
+        if self.passivel_absorcao is True:
+            return "Sim"
+        if self.passivel_absorcao is False:
+            return "Nao"
+        return "Nao informado"
+
+
 class ProcessoSEI(models.Model):
     numero_processo = models.CharField("Processo SEI", max_length=30, unique=True, db_index=True)
     assunto_principal = models.CharField("Assunto principal", max_length=2000, blank=True, default="")

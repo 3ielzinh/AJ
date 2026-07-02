@@ -1,0 +1,336 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}Monitoramento - Gestao de Objetos{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header__content monitoramento-header monitoramento-header--catalogo">
+    <div>
+      <p class="page-header__eyebrow">CGPJU - Monitoramento</p>
+      <h1 class="page-header__title">Gestao de Objetos</h1>
+      <p class="page-header__subtitle">
+        {{ total }} objetos exibidos de {{ total_catalogo }} no catalogo
+        {% if filtros_ativos %} - filtros ativos: {{ filtros_ativos|join:", " }}{% endif %}
+      </p>
+    </div>
+
+    <div class="monitoramento-header__actions">
+      <a href="{% url 'monitoramento:dashboard' %}" class="btn btn--ghost btn-sm">Ver dashboard</a>
+      <a href="{% url 'monitoramento:gestao_objeto_criar' %}" class="btn btn--primary btn-sm">Novo objeto</a>
+    </div>
+  </div>
+</div>
+
+<div class="monitoramento-tabs">
+  <nav class="tab-nav" aria-label="Categorias">
+    <a href="{% url 'monitoramento:lista' %}" class="tab-nav__item">
+      Todas
+      <span class="tab-nav__count">{{ contadores.evolutiva|add:contadores.corretiva|add:contadores.gestao_objetos }}</span>
+    </a>
+    <a href="{% url 'monitoramento:evolutivas' %}" class="tab-nav__item">
+      Evolutivas
+      <span class="tab-nav__count">{{ contadores.evolutiva }}</span>
+    </a>
+    <a href="{% url 'monitoramento:corretivas' %}" class="tab-nav__item">
+      Corretivas
+      <span class="tab-nav__count">{{ contadores.corretiva }}</span>
+    </a>
+    <a href="{% url 'monitoramento:gestao_objetos' %}" class="tab-nav__item tab-nav__item--active">
+      Gestao de Objetos
+      <span class="tab-nav__count">{{ contadores.gestao_objetos }}</span>
+    </a>
+    <a href="{% url 'monitoramento:concluidas' %}" class="tab-nav__item">
+      Concluidas
+      <span class="tab-nav__count tab-nav__count--done">{{ contadores.concluidas }}</span>
+    </a>
+  </nav>
+</div>
+
+<section class="gestao-catalogo-kpis" aria-label="Resumo do catalogo">
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Total</p>
+    <p class="gestao-kpi-card__value">{{ total_catalogo }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Ativos</p>
+    <p class="gestao-kpi-card__value">{{ kpi_ativos }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Inativos</p>
+    <p class="gestao-kpi-card__value">{{ kpi_inativos }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Sem ativo</p>
+    <p class="gestao-kpi-card__value">{{ kpi_sem_ativo }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Financeiros</p>
+    <p class="gestao-kpi-card__value">{{ kpi_financeiros }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Cadastrais</p>
+    <p class="gestao-kpi-card__value">{{ kpi_cadastrais }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Centralizado</p>
+    <p class="gestao-kpi-card__value">{{ kpi_fluxo_centralizado }}</p>
+  </article>
+  <article class="gestao-kpi-card">
+    <p class="gestao-kpi-card__label">Descentralizado</p>
+    <p class="gestao-kpi-card__value">{{ kpi_fluxo_descentralizado }}</p>
+  </article>
+</section>
+
+<div class="filters-bar filters-bar--catalogo">
+  <form method="get" class="filters-bar__form" role="search">
+    <div class="filters-bar__search">
+      <span class="filters-bar__icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input type="search" name="q" value="{{ q }}" placeholder="Buscar por nome, grupo, processo ou observacao" class="filters-bar__input" aria-label="Busca ampla">
+    </div>
+
+    <select name="grupo" class="filters-bar__select" aria-label="Grupo de objetos">
+      <option value="">Todos os grupos</option>
+      {% for item in grupos_disponiveis %}
+      <option value="{{ item }}" {% if filtro_grupo == item %}selected{% endif %}>{{ item }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="ativo" class="filters-bar__select" aria-label="Ativo">
+      <option value="">Ativo: todos</option>
+      <option value="sim" {% if filtro_ativo == 'sim' %}selected{% endif %}>Sim</option>
+      <option value="nao" {% if filtro_ativo == 'nao' %}selected{% endif %}>Nao</option>
+      <option value="sem" {% if filtro_ativo == 'sem' %}selected{% endif %}>Nao informado</option>
+    </select>
+
+    <select name="carater" class="filters-bar__select" aria-label="Carater">
+      <option value="">Carater: todos</option>
+      {% for item in carateres_disponiveis %}
+      <option value="{{ item }}" {% if filtro_carater == item %}selected{% endif %}>{{ item }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="fluxo" class="filters-bar__select" aria-label="Fluxo de confirmacao">
+      <option value="">Fluxo: todos</option>
+      {% for item in fluxos_disponiveis %}
+      <option value="{{ item }}" {% if filtro_fluxo == item %}selected{% endif %}>{{ item }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="tema" class="filters-bar__select" aria-label="Tema">
+      <option value="">Tema: todos</option>
+      {% for item in temas_disponiveis %}
+      <option value="{{ item }}" {% if filtro_tema == item %}selected{% endif %}>{{ item }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn--primary btn-sm">Filtrar</button>
+    {% if q or filtro_grupo or filtro_ativo or filtro_carater or filtro_fluxo or filtro_tema %}
+    <a href="{{ request.path }}" class="btn btn--ghost btn-sm">Limpar</a>
+    {% endif %}
+  </form>
+</div>
+
+{% if objetos %}
+<div class="table-wrapper">
+  <table class="data-table data-table--catalogo">
+    <thead>
+      <tr>
+        <th>Nome do objeto</th>
+        <th>Grupo</th>
+        <th>Ativo</th>
+        <th>Carater</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in objetos %}
+      <tr class="data-table__row" id="catalogo-row-{{ obj.pk }}">
+        <td class="data-table__td--main">
+          <span class="demand-name">{{ obj.nome }}</span>
+        </td>
+
+        <td>{{ obj.grupo|default:"-" }}</td>
+
+        <td>
+          {% if obj.ativo is True %}
+          <span class="badge badge--success">Sim</span>
+          {% elif obj.ativo is False %}
+          <span class="badge badge--default">Nao</span>
+          {% else %}
+          <span class="badge badge--warning">Nao informado</span>
+          {% endif %}
+        </td>
+
+        <td>{{ obj.carater|default:"-" }}</td>
+
+        <td class="data-table__td--expand">
+          <div class="catalogo-actions">
+            <a href="{% url 'monitoramento:gestao_objeto_editar' obj.pk %}" class="expand-toggle" title="Editar objeto" aria-label="Editar objeto">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </a>
+            <button type="button" class="expand-toggle" aria-expanded="false" aria-controls="catalogo-detail-{{ obj.pk }}" title="Expandir detalhes" aria-label="Expandir detalhes">
+              <svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      <tr class="detail-row" id="catalogo-detail-{{ obj.pk }}" hidden>
+        <td colspan="5" class="detail-cell">
+          <div class="detail-grid detail-grid--catalogo">
+            {% if obj.tipo_objeto %}
+            <div class="detail-group">
+              <span class="detail-label">Tipo de objeto</span>
+              <span class="detail-value">{{ obj.tipo_objeto }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.fluxo_confirmacao %}
+            <div class="detail-group">
+              <span class="detail-label">Fluxo de confirmacao</span>
+              <span class="detail-value">{{ obj.fluxo_confirmacao }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.tema %}
+            <div class="detail-group">
+              <span class="detail-label">Tema</span>
+              <span class="detail-value">{{ obj.tema }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.limite_maximo_objeto %}
+            <div class="detail-group">
+              <span class="detail-label">Limite maximo</span>
+              <span class="detail-value detail-value--mono">{{ obj.limite_maximo_objeto }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.processo_sei %}
+            <div class="detail-group">
+              <span class="detail-label">Processo SEI</span>
+              <span class="detail-value detail-value--mono">{{ obj.processo_sei }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.descricao %}
+            <div class="detail-group detail-group--full">
+              <span class="detail-label">Descricao</span>
+              <p class="detail-obs">{{ obj.descricao|linebreaksbr }}</p>
+            </div>
+            {% endif %}
+
+            {% if obj.pedido_inicial %}
+            <div class="detail-group detail-group--wide">
+              <span class="detail-label">Pedido inicial</span>
+              <span class="detail-value">{{ obj.pedido_inicial }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.subtema %}
+            <div class="detail-group">
+              <span class="detail-label">Subtema</span>
+              <span class="detail-value">{{ obj.subtema }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.ajs_ativas %}
+            <div class="detail-group">
+              <span class="detail-label">AJs ativas</span>
+              <span class="detail-value">{{ obj.ajs_ativas }}</span>
+            </div>
+            {% endif %}
+
+            <div class="detail-group">
+              <span class="detail-label">Passivel de absorcao</span>
+              <span class="detail-value">{{ obj.passivel_absorcao_display }}</span>
+            </div>
+
+            {% if obj.data_encerramento %}
+            <div class="detail-group">
+              <span class="detail-label">Data encerramento</span>
+              <span class="detail-value">{{ obj.data_encerramento|date:"d/m/Y" }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.id_objeto %}
+            <div class="detail-group">
+              <span class="detail-label">ID do objeto</span>
+              <span class="detail-value detail-value--mono">{{ obj.id_objeto }}</span>
+            </div>
+            {% endif %}
+
+            {% if obj.observacao %}
+            <div class="detail-group detail-group--full">
+              <span class="detail-label">Observacao</span>
+              <p class="detail-obs">{{ obj.observacao|linebreaksbr }}</p>
+            </div>
+            {% endif %}
+
+            {% if obj.aba_origem or obj.linha_origem %}
+            <div class="detail-group detail-group--full">
+              <span class="detail-label">Origem da importacao</span>
+              <span class="detail-value">
+                {% if obj.aba_origem %}Aba {{ obj.aba_origem }}{% endif %}
+                {% if obj.linha_origem %} - Linha {{ obj.linha_origem }}{% endif %}
+              </span>
+            </div>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if is_paginated %}
+<nav class="pagination" aria-label="Paginacao">
+  {% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}{% if filtro_grupo %}&grupo={{ filtro_grupo|urlencode }}{% endif %}{% if filtro_ativo %}&ativo={{ filtro_ativo|urlencode }}{% endif %}{% if filtro_carater %}&carater={{ filtro_carater|urlencode }}{% endif %}{% if filtro_fluxo %}&fluxo={{ filtro_fluxo|urlencode }}{% endif %}{% if filtro_tema %}&tema={{ filtro_tema|urlencode }}{% endif %}" class="btn btn--ghost btn-sm">Anterior</a>
+  {% endif %}
+  <span class="pagination__info">Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}{% if filtro_grupo %}&grupo={{ filtro_grupo|urlencode }}{% endif %}{% if filtro_ativo %}&ativo={{ filtro_ativo|urlencode }}{% endif %}{% if filtro_carater %}&carater={{ filtro_carater|urlencode }}{% endif %}{% if filtro_fluxo %}&fluxo={{ filtro_fluxo|urlencode }}{% endif %}{% if filtro_tema %}&tema={{ filtro_tema|urlencode }}{% endif %}" class="btn btn--ghost btn-sm">Proxima</a>
+  {% endif %}
+</nav>
+{% endif %}
+
+{% else %}
+<div class="empty-state">
+  <div class="empty-state__icon" aria-hidden="true">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+      <rect x="9" y="3" width="6" height="4" rx="1"/>
+      <path d="M9 12h6M9 16h4"/>
+    </svg>
+  </div>
+  <p class="empty-state__title">Nenhum objeto encontrado</p>
+  <p class="empty-state__body">Ajuste os filtros ou limpe a busca para visualizar o catalogo completo.</p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.expand-toggle[aria-controls]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const target = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!target) return;
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.classList.toggle('is-open', !expanded);
+    target.hidden = expanded;
+  });
+});
+</script>
+{% endblock %}

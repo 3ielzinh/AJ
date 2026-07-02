@@ -9,8 +9,64 @@ from django.db import transaction
 from django.db.models import Q, Count, Avg, F
 from datetime import date, datetime
 import json as _json
-from .models import Demanda, DocumentoSEI, ProcessoSEI, TipoDemanda, StatusDemanda
-from .forms import DemandaForm
+import unicodedata
+from .models import Demanda, DocumentoSEI, ObjetoGestao, ProcessoSEI, TipoDemanda, StatusDemanda
+from .forms import DemandaForm, ObjetoGestaoForm
+
+
+GESTAO_OBJETOS_OBS_PREFIX = "Importacao Gestao de Objetos (planilha):"
+
+GESTAO_OBJETOS_OBS_FIELDS = {
+    "ID DO OBJETO",
+    "DESCRICAO",
+    "ATIVO",
+    "DATA ENCERRAMENTO",
+    "AJS ATIVAS",
+    "TIPO DE OBJETO",
+    "CARATER",
+    "FLUXO DE CONFIRMACAO",
+    "PASSIVEL DE ABSORCAO",
+    "TEMA",
+    "SUBTEMA",
+    "PEDIDO INICIAL",
+    "LIMITE MAXIMO DO OBJETO",
+    "OBSERVACAO ORIGINAL",
+    "ABA ORIGEM",
+    "LINHA ORIGEM",
+}
+
+
+def _normalizar_texto(valor: str | None) -> str:
+    if not valor:
+        return ""
+    txt = unicodedata.normalize("NFKD", str(valor).strip())
+    txt = "".join(ch for ch in txt if not unicodedata.combining(ch))
+    return " ".join(txt.upper().split())
+
+
+def _extrair_campos_gestao_objetos(observacoes: str | None) -> dict[str, str]:
+    """
+    Extrai campos estruturados apenas quando o texto segue o padrao da importacao.
+    Nao tenta inferir formato livre para evitar parser fragil.
+    """
+    if not observacoes:
+        return {}
+
+    texto = observacoes.strip()
+    if not texto.startswith(GESTAO_OBJETOS_OBS_PREFIX):
+        return {}
+
+    campos: dict[str, str] = {}
+    for linha in texto.splitlines():
+        linha = linha.strip()
+        if not linha.startswith("- ") or ":" not in linha:
+            continue
+        chave, valor = linha[2:].split(":", 1)
+        chave_norm = _normalizar_texto(chave)
+        if chave_norm not in GESTAO_OBJETOS_OBS_FIELDS:
+            continue
+        campos[chave_norm] = valor.strip()
+    return campos
 
 
 class MonitoramentoHubView(LoginRequiredMixin, TemplateView):
@@ -221,8 +277,134 @@ class CorretivaListView(DemandaListView):
     tipo_fixo = TipoDemanda.CORRETIVA
 
 
-class GestaoObjetosListView(DemandaListView):
-    tipo_fixo = TipoDemanda.GESTAO_OBJETOS
+class GestaoObjetosListView(LoginRequiredMixin, ListView):
+    model = ObjetoGestao
+    template_name = "monitoramento/gestao_objetos.html"
+    context_object_name = "objetos"
+    paginate_by = 40
+
+    @staticmethod
+    def _fluxo_categoria(valor: str | None) -> str:
+        normalizado = _normalizar_texto(valor)
+        if not normalizado:
+            return ""
+        if "DESCENTRALIZADO" in normalizado:
+            return "descentralizado"
+        if "CENTRALIZADO" in normalizado:
+            return "centralizado"
+        return ""
+
+    def get_queryset(self):
+        qs = ObjetoGestao.objects.all().order_by("grupo", "nome")
+
+        q = self.request.GET.get("q", "").strip()
+        if q:
+            qs = qs.filter(
+                Q(nome__icontains=q)
+                | Q(descricao__icontains=q)
+                | Q(grupo__icontains=q)
+                | Q(processo_sei__icontains=q)
+                | Q(tema__icontains=q)
+                | Q(subtema__icontains=q)
+                | Q(pedido_inicial__icontains=q)
+                | Q(observacao__icontains=q)
+            )
+
+        grupo_param = self.request.GET.get("grupo", "").strip()
+        if grupo_param:
+            qs = qs.filter(grupo=grupo_param)
+
+        ativo_param = self.request.GET.get("ativo", "").strip().lower()
+        if ativo_param == "sim":
+            qs = qs.filter(ativo=True)
+        elif ativo_param == "nao":
+            qs = qs.filter(ativo=False)
+        elif ativo_param == "sem":
+            qs = qs.filter(ativo__isnull=True)
+
+        carater_param = self.request.GET.get("carater", "").strip()
+        if carater_param:
+            qs = qs.filter(carater=carater_param)
+
+        fluxo_param = self.request.GET.get("fluxo", "").strip()
+        if fluxo_param:
+            qs = qs.filter(fluxo_confirmacao=fluxo_param)
+
+        tema_param = self.request.GET.get("tema", "").strip()
+        if tema_param:
+            qs = qs.filter(tema=tema_param)
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        filtros = {
+            "q": self.request.GET.get("q", "").strip(),
+            "grupo": self.request.GET.get("grupo", "").strip(),
+            "ativo": self.request.GET.get("ativo", "").strip().lower(),
+            "carater": self.request.GET.get("carater", "").strip(),
+            "fluxo": self.request.GET.get("fluxo", "").strip(),
+            "tema": self.request.GET.get("tema", "").strip(),
+        }
+
+        base_qs = ObjetoGestao.objects.all()
+        objetos_base = list(base_qs.only("ativo", "carater", "fluxo_confirmacao", "grupo", "tema"))
+
+        total_objetos = len(objetos_base)
+        ativos = sum(1 for obj in objetos_base if obj.ativo is True)
+        inativos = sum(1 for obj in objetos_base if obj.ativo is False)
+        sem_ativo = sum(1 for obj in objetos_base if obj.ativo is None)
+        financeiros = sum(1 for obj in objetos_base if "FINANCEIRO" in _normalizar_texto(obj.carater))
+        cadastrais = sum(1 for obj in objetos_base if "CADASTRAL" in _normalizar_texto(obj.carater))
+        fluxo_centralizado = sum(
+            1 for obj in objetos_base if self._fluxo_categoria(obj.fluxo_confirmacao) == "centralizado"
+        )
+        fluxo_descentralizado = sum(
+            1 for obj in objetos_base if self._fluxo_categoria(obj.fluxo_confirmacao) == "descentralizado"
+        )
+
+        filtros_ativos_labels = [label for label, value in filtros.items() if value]
+
+        ctx.update(
+            {
+                "tipo_fixo": TipoDemanda.GESTAO_OBJETOS,
+                "tipo_display": "Gestao de Objetos",
+                "q": filtros["q"],
+                "filtro_grupo": filtros["grupo"],
+                "filtro_ativo": filtros["ativo"],
+                "filtro_carater": filtros["carater"],
+                "filtro_fluxo": filtros["fluxo"],
+                "filtro_tema": filtros["tema"],
+                "total": self.get_queryset().count(),
+                "total_catalogo": total_objetos,
+                "kpi_ativos": ativos,
+                "kpi_inativos": inativos,
+                "kpi_sem_ativo": sem_ativo,
+                "kpi_financeiros": financeiros,
+                "kpi_cadastrais": cadastrais,
+                "kpi_fluxo_centralizado": fluxo_centralizado,
+                "kpi_fluxo_descentralizado": fluxo_descentralizado,
+                "grupos_disponiveis": sorted(base_qs.exclude(grupo="").values_list("grupo", flat=True).distinct()),
+                "carateres_disponiveis": sorted(base_qs.exclude(carater="").values_list("carater", flat=True).distinct()),
+                "fluxos_disponiveis": sorted(
+                    base_qs.exclude(fluxo_confirmacao="").values_list("fluxo_confirmacao", flat=True).distinct()
+                ),
+                "temas_disponiveis": sorted(base_qs.exclude(tema="").values_list("tema", flat=True).distinct()),
+                "filtros_ativos": filtros_ativos_labels,
+                "contadores": {
+                    TipoDemanda.EVOLUTIVA: Demanda.objects.filter(tipo=TipoDemanda.EVOLUTIVA)
+                    .exclude(status=StatusDemanda.CONCLUIDA)
+                    .count(),
+                    TipoDemanda.CORRETIVA: Demanda.objects.filter(tipo=TipoDemanda.CORRETIVA)
+                    .exclude(status=StatusDemanda.CONCLUIDA)
+                    .count(),
+                    TipoDemanda.GESTAO_OBJETOS: total_objetos,
+                    "concluidas": Demanda.objects.filter(status=StatusDemanda.CONCLUIDA).count(),
+                },
+            }
+        )
+        return ctx
 
 
 class IndicacaoRubricaListView(GestaoObjetosListView):
@@ -231,6 +413,38 @@ class IndicacaoRubricaListView(GestaoObjetosListView):
 
 class CriacaoObjetoListView(GestaoObjetosListView):
     pass
+
+
+class ObjetoGestaoCreateView(LoginRequiredMixin, CreateView):
+    model = ObjetoGestao
+    form_class = ObjetoGestaoForm
+    template_name = "monitoramento/gestao_objeto_form.html"
+    success_url = reverse_lazy("monitoramento:gestao_objetos")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Objeto cadastrado com sucesso.")
+        return super().form_valid(form)
+
+
+class ObjetoGestaoUpdateView(LoginRequiredMixin, UpdateView):
+    model = ObjetoGestao
+    form_class = ObjetoGestaoForm
+    template_name = "monitoramento/gestao_objeto_form.html"
+    success_url = reverse_lazy("monitoramento:gestao_objetos")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Objeto atualizado com sucesso.")
+        return super().form_valid(form)
+
+
+class ObjetoGestaoDeleteView(LoginRequiredMixin, DeleteView):
+    model = ObjetoGestao
+    template_name = "monitoramento/gestao_objeto_confirmar_exclusao.html"
+    success_url = reverse_lazy("monitoramento:gestao_objetos")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Objeto removido com sucesso.")
+        return super().form_valid(form)
 
 
 class ConcluídasListView(DemandaListView):

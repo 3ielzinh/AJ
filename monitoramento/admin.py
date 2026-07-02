@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Demanda, ProcessoSEI, DocumentoSEI, TipoDemanda
+from .models import Demanda, ObjetoGestao, ProcessoSEI, DocumentoSEI, TipoDemanda
 
 
 @admin.register(Demanda)
@@ -13,6 +13,15 @@ class DemandaAdmin(admin.ModelAdmin):
     @admin.display(description="Dias")
     def dias_espera_display(self, obj):
         return obj.dias_espera_display
+
+
+@admin.register(ObjetoGestao)
+class ObjetoGestaoAdmin(admin.ModelAdmin):
+    list_display = ("nome", "grupo", "ativo", "carater", "fluxo_confirmacao", "processo_sei", "atualizado_em")
+    list_filter = ("ativo", "grupo", "carater", "fluxo_confirmacao", "tema")
+    search_fields = ("nome", "descricao", "grupo", "processo_sei", "tema", "subtema", "pedido_inicial")
+    readonly_fields = ("criado_em", "atualizado_em")
+    date_hierarchy = "atualizado_em"
 
 
 @admin.register(ProcessoSEI)

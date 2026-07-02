@@ -1,0 +1,144 @@
+{% extends "layouts/app.html" %}
+
+{% block title %}{% if object %}Editar objeto{% else %}Novo objeto{% endif %} - Monitoramento{% endblock %}
+
+{% block content %}
+<div class="catalogo-form-page">
+  <div class="page-header">
+    <div class="page-header__content">
+      <div>
+        <p class="page-header__eyebrow">Monitoramento - Gestao de Objetos</p>
+        <h1 class="page-header__title">{% if object %}Editar objeto{% else %}Novo objeto{% endif %}</h1>
+        <p class="page-header__subtitle">Cadastro operacional com campos proprios do catalogo de objetos.</p>
+      </div>
+      <div class="monitoramento-header__actions">
+        <a href="{% url 'monitoramento:gestao_objetos' %}" class="btn btn--ghost btn-sm">Voltar ao catalogo</a>
+        {% if object %}
+        <a href="{% url 'monitoramento:gestao_objeto_excluir' object.pk %}" class="btn btn--danger btn-sm">Excluir</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <form method="post" class="catalogo-form">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="alert alert--danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <section class="catalogo-form__section">
+      <h2 class="catalogo-form__section-title">Identificacao</h2>
+      <div class="form-grid form-grid--2">
+        <div class="form-field form-field--full">
+          <label class="form-label" for="{{ form.nome.id_for_label }}">Nome do objeto</label>
+          {{ form.nome }}
+          {{ form.nome.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.id_objeto.id_for_label }}">ID do objeto</label>
+          {{ form.id_objeto }}
+          {{ form.id_objeto.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.grupo.id_for_label }}">Grupo</label>
+          {{ form.grupo }}
+          {{ form.grupo.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.ativo.id_for_label }}">Ativo</label>
+          {{ form.ativo }}
+          {{ form.ativo.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.tipo_objeto.id_for_label }}">Tipo de objeto</label>
+          {{ form.tipo_objeto }}
+          {{ form.tipo_objeto.errors }}
+        </div>
+      </div>
+    </section>
+
+    <section class="catalogo-form__section">
+      <h2 class="catalogo-form__section-title">Classificacao</h2>
+      <div class="form-grid form-grid--3">
+        <div class="form-field">
+          <label class="form-label" for="{{ form.carater.id_for_label }}">Carater</label>
+          {{ form.carater }}
+          {{ form.carater.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.fluxo_confirmacao.id_for_label }}">Fluxo de confirmacao</label>
+          {{ form.fluxo_confirmacao }}
+          {{ form.fluxo_confirmacao.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.passivel_absorcao.id_for_label }}">Passivel de absorcao</label>
+          {{ form.passivel_absorcao }}
+          {{ form.passivel_absorcao.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.tema.id_for_label }}">Tema</label>
+          {{ form.tema }}
+          {{ form.tema.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.subtema.id_for_label }}">Subtema</label>
+          {{ form.subtema }}
+          {{ form.subtema.errors }}
+        </div>
+      </div>
+    </section>
+
+    <section class="catalogo-form__section">
+      <h2 class="catalogo-form__section-title">Referencias</h2>
+      <div class="form-grid form-grid--2">
+        <div class="form-field">
+          <label class="form-label" for="{{ form.processo_sei.id_for_label }}">Processo SEI</label>
+          {{ form.processo_sei }}
+          {{ form.processo_sei.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.data_encerramento.id_for_label }}">Data de encerramento</label>
+          {{ form.data_encerramento }}
+          {{ form.data_encerramento.errors }}
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="{{ form.limite_maximo_objeto.id_for_label }}">Limite maximo do objeto</label>
+          {{ form.limite_maximo_objeto }}
+          {{ form.limite_maximo_objeto.errors }}
+        </div>
+        <div class="form-field form-field--full">
+          <label class="form-label" for="{{ form.ajs_ativas.id_for_label }}">AJs ativas</label>
+          {{ form.ajs_ativas }}
+          {{ form.ajs_ativas.errors }}
+        </div>
+      </div>
+    </section>
+
+    <section class="catalogo-form__section">
+      <h2 class="catalogo-form__section-title">Conteudo</h2>
+      <div class="form-grid form-grid--2">
+        <div class="form-field form-field--full">
+          <label class="form-label" for="{{ form.descricao.id_for_label }}">Descricao</label>
+          {{ form.descricao }}
+          {{ form.descricao.errors }}
+        </div>
+        <div class="form-field form-field--full">
+          <label class="form-label" for="{{ form.pedido_inicial.id_for_label }}">Pedido inicial</label>
+          {{ form.pedido_inicial }}
+          {{ form.pedido_inicial.errors }}
+        </div>
+        <div class="form-field form-field--full">
+          <label class="form-label" for="{{ form.observacao.id_for_label }}">Observacao</label>
+          {{ form.observacao }}
+          {{ form.observacao.errors }}
+        </div>
+      </div>
+    </section>
+
+    <div class="catalogo-form__actions">
+      <a href="{% url 'monitoramento:gestao_objetos' %}" class="btn btn--ghost">Cancelar</a>
+      <button type="submit" class="btn btn--primary">Salvar objeto</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

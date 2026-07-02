@@ -318,6 +318,33 @@ docker compose -f docker-compose.prod.yml ps
 docker compose -f docker-compose.prod.yml logs -f web
 ```
 
+### Produção no Windows com inicialização automática
+
+Se o ambiente de produção roda no Windows com o fluxo atual de `INICIAR SERVIDOR.bat`, você pode automatizar a subida no logon:
+
+```powershell
+# 1. No PowerShell (Administrador), dentro da raiz do projeto
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\install_autostart_task.ps1
+
+# 2. (Opcional) iniciar imediatamente sem reiniciar
+Start-ScheduledTask -TaskName "AJ-Servidor-Autostart"
+```
+
+Com isso, a tarefa agendada executa `scripts/start_server_autostart.bat` a cada logon e mantém o servidor de pé com reinício automático em caso de falha.
+
+Logs de execução:
+
+```text
+logs/autostart-servidor.log
+```
+
+Para desativar:
+
+```powershell
+Unregister-ScheduledTask -TaskName "AJ-Servidor-Autostart" -Confirm:$false
+```
+
 ---
 
 ## Criar Superusuário

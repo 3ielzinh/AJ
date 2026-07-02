@@ -11,7 +11,7 @@ from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 import unicodedata
 
-from monitoramento.models import Demanda, DocumentoSEI, StatusDemanda, TipoDemanda
+from monitoramento.models import Demanda, DocumentoSEI, ObjetoGestao, StatusDemanda, TipoDemanda
 from .forms import SignUpForm
 
 
@@ -39,7 +39,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
                 "total_documentos_sei": DocumentoSEI.objects.count(),
                 "total_corretivas": Demanda.objects.filter(tipo=TipoDemanda.CORRETIVA).count(),
                 "total_evolutivas": Demanda.objects.filter(tipo=TipoDemanda.EVOLUTIVA).count(),
-                "total_gestao_objetos": Demanda.objects.filter(tipo=TipoDemanda.GESTAO_OBJETOS).count(),
+                "total_gestao_objetos": ObjetoGestao.objects.count(),
             }
         )
         return ctx

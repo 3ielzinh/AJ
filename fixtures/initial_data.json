@@ -2117,7 +2117,7 @@
   "pk": 5,
   "fields": {
     "numero_processo": "Não identificado",
-    "assunto_principal": "// Copyright 2014 The Chromium Authors",
+    "assunto_principal": "Não identificado",
     "unidade_principal": "MGI-SRT-DIPAS-CGPJU-DISEJ",
     "primeira_data_assinatura": null,
     "total_documentos": 7,
@@ -15981,11 +15981,11 @@
   "fields": {
     "processo": 5,
     "numero_documento": "61496647",
-    "assunto": "// Copyright 2014 The Chromium Authors",
+    "assunto": "Não identificado",
     "tipo": "Relatório",
     "data_assinatura": null,
     "unidade": "MGI-SRT-DIPAS-CGPJU-DISEJ",
-    "resumo": "O documento trata de: // Copyright 2014 The Chromium Authors",
+    "resumo": "O documento trata de: Não identificado",
     "assinantes": "Não identificado",
     "criado_por": "Não identificado",
     "versao_por": "",

@@ -27,3 +27,11 @@ Memoria curta de decisoes do projeto. Decisoes duradouras devem ter ADR em `docs
 - Decisao: registrar regras de negocio, arquitetura, estilo, problemas conhecidos e FAQ em arquivos estaveis.
 - Motivo: reduzir repeticao de contexto e evitar que agentes resolvam novamente problemas ja tratados.
 - Status: aceita.
+
+### Gestao de Objetos como catalogo operacional
+
+- Decisao: usar model dedicado `ObjetoGestao` para o catalogo em `/monitoramento/gestao-objetos/`.
+- Motivo: os registros importados possuem campos proprios de objeto (ativo, carater, fluxo, tema, limite, processo SEI, etc.) que exigem cadastro e edicao diferentes da fila comum de demandas.
+- Consequencia: `Demanda(tipo=gestao_objetos)` fica como legado/origem historica; novos cadastros e importacoes devem usar `ObjetoGestao`.
+- Evolucao: revisar campos obrigatorios e validacoes quando as regras oficiais do catalogo amadurecerem.
+- ADR: `docs/adr/006-gestao-objetos-catalogo.md`.
